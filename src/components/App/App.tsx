@@ -1,5 +1,5 @@
-import {AppHeader} from "./components/AppHeader/AppHeader";
-import {BurgerMaker} from "./components/BurgerMaker/BurgerMaker";
+import {AppHeader} from "../AppHeader/AppHeader";
+import {BurgerMaker} from "../BurgerMaker/BurgerMaker";
 
 function App() {
     return (
