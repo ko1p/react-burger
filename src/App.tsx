@@ -1,14 +1,11 @@
-import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
-import './App.css';
+import {AppHeader} from "./components/AppHeader/AppHeader";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Logo />
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <AppHeader/>
+        </>
+    );
 }
 
 export default App;
