@@ -7,8 +7,8 @@ import {data} from "../../utils/data";
 export const BurgerMaker = () => {
     return (
         <main className={styles.container}>
-            <BurgerIngredients data={data} />
-            <BurgerConstructor data={data} />
+            <BurgerIngredients data={data}/>
+            <BurgerConstructor data={data}/>
         </main>
     )
 }
