@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./BurgerIngredients.module.css"
+import styles from "./burger-ingredients.module.css"
 import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
 export const BurgerIngredients = () => {
