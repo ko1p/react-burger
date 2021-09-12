@@ -5,7 +5,7 @@ import imgBun from '@ya.praktikum/react-developer-burger-ui-components/dist/imag
 import PropTypes from "prop-types";
 import {cardPropTypes} from "../types/types";
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor = ({ data }) => {
     return (
         <div className={`${styles.container} mt-25`}>
             <ul className={`${styles.items} pb-10`}>
