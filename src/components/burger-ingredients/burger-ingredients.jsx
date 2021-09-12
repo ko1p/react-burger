@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./burger-ingredients.module.css"
 import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
+import {cardPropTypes} from "../types/types";
 
 export const BurgerIngredients = () => {
     const [current, setCurrent] = React.useState('Булки')
@@ -108,3 +110,7 @@ export const BurgerIngredients = () => {
         </div>
     )
 }
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired
+};
