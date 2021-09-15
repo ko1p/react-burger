@@ -1,0 +1,47 @@
+.box {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 600px;
+    max-height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    overflow: auto;
+    list-style: none;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.info button {
+    margin-left: 41px;
+}
+
+.card {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.card svg {
+    margin-right: 12px;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}

@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 88px;
+    background-color: #1C1C21;
+}
+
+.container {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    display: flex;
+    cursor: pointer;
+}
