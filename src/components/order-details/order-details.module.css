@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 720px;
+    height: 718px;
+    border: 2px solid #4C4CFF;
+    border-radius: 20px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    background: none;
+    border: none;
+}
+
+.title {
+
+}
+
+.text {
+    color: #8585AD;
+}
+
+.image {
+    width: 120px;
+    height: 120px;
+    margin: 60px 0;
+}

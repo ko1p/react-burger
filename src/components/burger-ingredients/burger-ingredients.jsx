@@ -41,8 +41,8 @@ export const BurgerIngredients = ({data}) => {
                     {current && info(current).map((card, index) =>
                         <li className={`${styles.item}`} key={index}>
                             <Counter count={1} size="default"/>
-                            <img className="pl-4 pr-4" src="https://code.s3.yandex.net/react/code/bun-02.png"
-                                 alt="булка"/>
+                            <img className="pl-4 pr-4" src={card.image}
+                                 alt={card.name}/>
                             <div className={`${styles.price} mt-1 mb-1`}>
                                 <p className="text text_type_digits-default text_color_primary mr-2">
                                     {card.price}
