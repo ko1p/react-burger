@@ -1,33 +1,13 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 720px;
-    height: 718px;
-    border: 2px solid #4C4CFF;
-    border-radius: 20px;
-    position: relative;
 }
 
-.close {
-    position: absolute;
-    top: 60px;
-    right: 40px;
-    background: none;
-    border: none;
-}
-
-.title {
-
-}
-
-.text {
-    color: #8585AD;
+.shadow {
+    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
 }
 
 .image {
     width: 120px;
-    height: 120px;
-    margin: 60px 0;
 }

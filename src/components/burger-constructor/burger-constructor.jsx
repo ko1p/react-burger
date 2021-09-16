@@ -6,7 +6,7 @@ import { cardPropTypes } from '../types/types';
 import imgBun from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
 
 
-export const BurgerConstructor = ({ data }) => {
+export const BurgerConstructor = ({ data, openModal }) => {
 
     const cardsData = data.filter(ing => ing.type !== 'bun');
 

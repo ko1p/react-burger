@@ -4,7 +4,7 @@ import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-u
 import PropTypes from "prop-types";
 import {cardPropTypes} from "../types/types";
 
-export const BurgerIngredients = ({data}) => {
+export const BurgerIngredients = ({ data, openModal, setIngredients }) => {
     const [current, setCurrent] = React.useState('Булки')
 
     const buns = data.filter(item => item.type === 'bun')
@@ -15,6 +15,11 @@ export const BurgerIngredients = ({data}) => {
         if (type === "Булки") return buns
         if (type === "Начинки") return mains
         if (type === "Соусы") return sauses
+    }
+
+    const dataToModal = info => {
+        openModal()
+        setIngredients(info)
     }
 
     return (
@@ -39,7 +44,7 @@ export const BurgerIngredients = ({data}) => {
                 </p>
                 <ul className={`${styles.items} pt-6 pb-10 pr-4 pl-4`}>
                     {current && info(current).map((card, index) =>
-                        <li className={`${styles.item}`} key={index}>
+                        <li className={`${styles.item}`} key={index} onClick={() => dataToModal(card)}>
                             <Counter count={1} size="default"/>
                             <img className="pl-4 pr-4" src={card.image}
                                  alt={card.name}/>
