@@ -9,12 +9,11 @@ import {OrderDetails} from "../order-details/order-detaild";
 export const BurgerMaker = ({ data }) => {
     const [showIngredientsDetails, setShowIngredientsDetails] = useState(false)
     const [showOrderDetails, setShowOrderDetails] = useState(false)
-    const [ingredients, setIngredients] = useState({})
+    const [modalData, setModalData] = useState(null);
 
     const closeModalHandler = () => {
         setShowIngredientsDetails(false)
         setShowOrderDetails(false)
-        console.log('close')
     }
 
     const escButtonHandler = (e) => {
@@ -36,17 +35,17 @@ export const BurgerMaker = ({ data }) => {
             {
                 showIngredientsDetails &&
                     <Modal closeModal={closeModalHandler} escButtonHandler={escButtonHandler}>
-                        <IngredientDetails ingredients={ingredients} />
+                        <IngredientDetails modalData={modalData} />
                     </Modal>
             }
             {
                 showOrderDetails &&
-                <Modal closeModal={closeModalHandler} >
-                    <OrderDetails />
+                <Modal closeModal={closeModalHandler} escButtonHandler={escButtonHandler}>
+                    <OrderDetails modalData={modalData} />
                 </Modal>
             }
-            <BurgerIngredients data={data} openModal={ingredientDetailsHandler} setIngredients={setIngredients} />
-            <BurgerConstructor data={data} openModal={orderDetailsHandler} />
+            <BurgerIngredients data={data} openModal={ingredientDetailsHandler} setModalData={setModalData} />
+            <BurgerConstructor data={data} openModal={orderDetailsHandler} setModalData={setModalData} />
         </main>
     )
 }

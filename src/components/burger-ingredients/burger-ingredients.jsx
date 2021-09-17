@@ -4,7 +4,7 @@ import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-u
 import PropTypes from "prop-types";
 import {cardPropTypes} from "../types/types";
 
-export const BurgerIngredients = ({ data, openModal, setIngredients }) => {
+export const BurgerIngredients = ({ data, openModal, setModalData }) => {
     const [current, setCurrent] = React.useState('Булки')
 
     const buns = data.filter(item => item.type === 'bun')
@@ -19,7 +19,7 @@ export const BurgerIngredients = ({ data, openModal, setIngredients }) => {
 
     const dataToModal = info => {
         openModal()
-        setIngredients(info)
+        setModalData(info)
     }
 
     return (
@@ -66,5 +66,7 @@ export const BurgerIngredients = ({ data, openModal, setIngredients }) => {
 }
 
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired
+    data: PropTypes.shape(cardPropTypes.isRequired).isRequired,
+    openModal: PropTypes.func.isRequired,
+    setModalData: PropTypes.func.isRequired,
 };

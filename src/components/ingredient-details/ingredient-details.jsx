@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
 
-export const IngredientDetails = ({ ingredients }) => {
-    console.log(ingredients)
+export const IngredientDetails = ({ modalData }) => {
     return (
         <div className={`${styles.container} pt-10 pr-10 pb-15 pl-10`}>
             <p className="text text_type_main-medium">
@@ -10,7 +9,7 @@ export const IngredientDetails = ({ ingredients }) => {
             </p>
             <img src="https://code.s3.yandex.net/react/code/meat-01.png" alt='ingredient'/>
             <p className="text text_type_main-default mt-4">
-                {ingredients.name}
+                {modalData.name}
             </p>
             <div className={`${styles.info} mt-8`}>
                 <div>
@@ -18,7 +17,7 @@ export const IngredientDetails = ({ ingredients }) => {
                         Калории, ккал
                     </p>
                     <p className="text text_type_main-default text_color_inactive">
-                        {ingredients.calories}
+                        {modalData.calories}
                     </p>
                 </div>
                 <div>
@@ -26,7 +25,7 @@ export const IngredientDetails = ({ ingredients }) => {
                         Белки, г
                     </p>
                     <p className="text text_type_main-default text_color_inactive">
-                        {ingredients.proteins}
+                        {modalData.proteins}
                     </p>
                 </div>
                 <div>
@@ -34,7 +33,7 @@ export const IngredientDetails = ({ ingredients }) => {
                         Жиры, г
                     </p>
                     <p className="text text_type_main-default text_color_inactive">
-                        {ingredients.fat}
+                        {modalData.fat}
                     </p>
                 </div>
                 <div>
@@ -42,7 +41,7 @@ export const IngredientDetails = ({ ingredients }) => {
                         Углеводы, г
                     </p>
                     <p className="text text_type_main-default text_color_inactive">
-                        {ingredients.carbohydrates}
+                        {modalData.carbohydrates}
                     </p>
                 </div>
             </div>

@@ -4,11 +4,17 @@ import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktiku
 import PropTypes from 'prop-types';
 import { cardPropTypes } from '../types/types';
 import imgBun from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
+import {orderData} from "../../utils/orderData";
 
 
-export const BurgerConstructor = ({ data, openModal }) => {
+export const BurgerConstructor = ({ data, openModal, setModalData }) => {
 
     const cardsData = data.filter(ing => ing.type !== 'bun');
+
+    const setDataAndOpenModal = (cardData) => {
+        openModal();
+        setModalData(cardData);
+    }
 
     return (
         <div className={`${styles.box} mt-25`}>
@@ -52,7 +58,7 @@ export const BurgerConstructor = ({ data, openModal }) => {
             <div className={`${styles.info} mt-10`}>
                 <p className="text text_type_digits-medium mr-2">610</p>
                 <CurrencyIcon type="primary"/>
-                <Button type="primary" size="medium">
+                <Button type="primary" size="medium" onClick={() => setDataAndOpenModal(orderData)}>
                     Оформить заказ
                 </Button>
             </div>

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import {ModalOverlay} from '../modal-overlay/modal-overlay'
+import PropTypes from 'prop-types';
 
 export const Modal = ({ closeModal, children, escButtonHandler }) => {
     useEffect(() => {
@@ -13,7 +14,7 @@ export const Modal = ({ closeModal, children, escButtonHandler }) => {
     })
     return ReactDOM.createPortal(
         <>
-            <ModalOverlay onClick={closeModal} />
+            <ModalOverlay closeModal={closeModal} />
             <section className={styles.modal}>
                 <div className={styles.icon} onClick={closeModal}>
                     <CloseIcon type="primary" />
@@ -24,3 +25,8 @@ export const Modal = ({ closeModal, children, escButtonHandler }) => {
         document.getElementById("modal")
     )
 }
+
+Modal.propTypes = {
+    children: PropTypes.object.isRequired,
+    closeModal: PropTypes.func.isRequired
+};
