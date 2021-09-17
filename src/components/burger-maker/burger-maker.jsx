@@ -17,6 +17,12 @@ export const BurgerMaker = ({ data }) => {
         console.log('close')
     }
 
+    const escButtonHandler = (e) => {
+        if(e.key === 'Escape') {
+            closeModalHandler()
+        }
+    }
+
     const ingredientDetailsHandler = () => {
         setShowIngredientsDetails(true)
     }
@@ -29,7 +35,7 @@ export const BurgerMaker = ({ data }) => {
         <main className={styles.container}>
             {
                 showIngredientsDetails &&
-                    <Modal closeModal={closeModalHandler}>
+                    <Modal closeModal={closeModalHandler} escButtonHandler={escButtonHandler}>
                         <IngredientDetails ingredients={ingredients} />
                     </Modal>
             }
