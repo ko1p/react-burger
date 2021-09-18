@@ -68,5 +68,7 @@ export const BurgerConstructor = ({ data, openModal, setModalData }) => {
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired
+    data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
+    openModal: PropTypes.func.isRequired,
+    setModalData: PropTypes.func.isRequired,
 };

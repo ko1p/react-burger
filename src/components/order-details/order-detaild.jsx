@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './order-details.module.css';
 import orderAccepted from '../../images/order-accepted.gif'
 import PropTypes from 'prop-types';
+import {cardPropTypes} from "../types/types";
 
 export const OrderDetails = ({ modalData }) => {
     return (
@@ -22,9 +23,5 @@ export const OrderDetails = ({ modalData }) => {
 }
 
 OrderDetails.propTypes = {
-    data: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        order: PropTypes.object.isRequired,
-        success: PropTypes.bool.isRequired
-    }).isRequired
+    modalData: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
 };

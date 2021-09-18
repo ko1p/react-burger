@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
+import PropTypes from "prop-types";
+import {cardPropTypes} from "../types/types";
 
 export const IngredientDetails = ({ modalData }) => {
     return (
@@ -48,3 +50,7 @@ export const IngredientDetails = ({ modalData }) => {
         </div>
     )
 }
+
+IngredientDetails.propTypes = {
+    modalData: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
+};
