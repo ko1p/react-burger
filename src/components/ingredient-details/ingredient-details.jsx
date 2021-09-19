@@ -9,7 +9,7 @@ export const IngredientDetails = ({ modalData }) => {
             <p className="text text_type_main-medium">
                 Детали ингредиента
             </p>
-            <img src="https://code.s3.yandex.net/react/code/meat-01.png" alt='ingredient'/>
+            <img src={modalData.image} alt='ingredient'/>
             <p className="text text_type_main-default mt-4">
                 {modalData.name}
             </p>

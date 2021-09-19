@@ -25,3 +25,13 @@
     display: flex;
     cursor: pointer;
 }
+
+.link {
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+}
+
+.link:hover {
+    opacity: .7;
+}

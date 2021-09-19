@@ -1,20 +1,21 @@
 import React from "react";
 import styles from "./burger-ingredients.module.css"
-import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import {cardPropTypes} from "../types/types";
+import {IngredientCard} from "../ingredient-card/ingredient-card";
 
-export const BurgerIngredients = ({ data, openModal, setModalData }) => {
-    const [current, setCurrent] = React.useState('Булки')
+export const BurgerIngredients = ({data, openModal, setModalData}) => {
+    const [current, setCurrent] = React.useState('bun')
 
-    const buns = data.filter(item => item.type === 'bun')
-    const mains = data.filter(item => item.type === 'main')
-    const sauses = data.filter(item => item.type === 'sauce')
+    const ingredientTypes = [
+        {type: 'bun', title: 'Булки'},
+        {type: 'sauce', title: 'Соусы'},
+        {type: 'main', title: 'Начинки'}
+    ]
 
-    const info = type => {
-        if (type === "Булки") return buns
-        if (type === "Начинки") return mains
-        if (type === "Соусы") return sauses
+    const ingredientFilter = type => {
+        return data.filter(item => item.type === type)
     }
 
     const dataToModal = info => {
@@ -22,51 +23,53 @@ export const BurgerIngredients = ({ data, openModal, setModalData }) => {
         setModalData(info)
     }
 
+    const setTab = (tab) => {
+        setCurrent(tab);
+        const element = document.getElementById(tab);
+        if (element) element.scrollIntoView({behavior: "smooth"});
+    };
+
     return (
         <div className={styles.ingredients}>
             <p className="text text_type_main-large text_color_primary mt-10">
                 Соберите бургер
             </p>
             <div style={{display: 'flex'}} className='mt-5'>
-                <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
+                <Tab value="bun" active={current === 'bun'} onClick={setTab}>
                     Булки
                 </Tab>
-                <Tab value="Соусы" active={current === 'Соусы'} onClick={setCurrent}>
+                <Tab value="sauce" active={current === 'sauce'} onClick={setTab}>
                     Соусы
                 </Tab>
-                <Tab value="Начинки" active={current === 'Начинки'} onClick={setCurrent}>
+                <Tab value="main" active={current === 'main'} onClick={setTab}>
                     Начинки
                 </Tab>
             </div>
             <div className={styles.container}>
-                <p className="text text_type_main-medium text_color_primary mt-10">
-                    Булки
-                </p>
-                <ul className={`${styles.items} pt-6 pb-10 pr-4 pl-4`}>
-                    {current && info(current).map((card, index) =>
-                        <li className={`${styles.item}`} key={index} onClick={() => dataToModal(card)}>
-                            <Counter count={1} size="default"/>
-                            <img className="pl-4 pr-4" src={card.image}
-                                 alt={card.name}/>
-                            <div className={`${styles.price} mt-1 mb-1`}>
-                                <p className="text text_type_digits-default text_color_primary mr-2">
-                                    {card.price}
-                                </p>
-                                <CurrencyIcon type="primary"/>
-                            </div>
-                            <p className="text text_type_main-default pb-6">
-                                {card.name}
+
+                {ingredientTypes.map((item, index) => {
+                    return (
+                        <div key={index}>
+                            <p className="text text_type_main-medium text_color_primary" id={item.type}>
+                                {item.title}
                             </p>
-                        </li>
-                    )}
-                </ul>
+                            <ul className={`${styles.items} pt-6 pb-10 pr-4 pl-4`}>
+                                {ingredientFilter((item.type)).map(card =>
+                                    <IngredientCard
+                                        key={card.id}
+                                        card={card}
+                                        dataToModal={dataToModal}
+                                    />)}
+                            </ul>
+                        </div>)
+                })}
             </div>
         </div>
     )
 }
 
 BurgerIngredients.propTypes = {
-    data: PropTypes.shape(cardPropTypes.isRequired).isRequired,
+    data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
     openModal: PropTypes.func.isRequired,
     setModalData: PropTypes.func.isRequired,
 };

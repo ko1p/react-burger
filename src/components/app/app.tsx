@@ -1,7 +1,8 @@
 import {AppHeader} from "../app-header/app-header";
 import {BurgerMaker} from "../burger-maker/burger-maker";
 import {useEffect, useState} from "react";
-import {URL} from '../../utils/constants'
+import {URL} from '../../utils/constants';
+import {Loader} from "../loader/loader";
 
 function App() {
     const [data, setData] = useState()
@@ -15,7 +16,7 @@ function App() {
     return (
         <>
             <AppHeader/>
-            { data && <BurgerMaker data={data} /> }
+            { data ? <BurgerMaker data={data}/> : <Loader /> }
         </>
     );
 }
