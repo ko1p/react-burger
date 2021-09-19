@@ -52,5 +52,5 @@ export const IngredientDetails = ({ modalData }) => {
 }
 
 IngredientDetails.propTypes = {
-    modalData: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
+    modalData: PropTypes.shape(cardPropTypes.isRequired).isRequired,
 };
