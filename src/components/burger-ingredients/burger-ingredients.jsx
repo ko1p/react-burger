@@ -56,7 +56,7 @@ export const BurgerIngredients = ({data, openModal, setModalData}) => {
                             <ul className={`${styles.items} pt-6 pb-10 pr-4 pl-4`}>
                                 {ingredientFilter((item.type)).map(card =>
                                     <IngredientCard
-                                        key={card.id}
+                                        key={card._id}
                                         card={card}
                                         dataToModal={dataToModal}
                                     />)}
