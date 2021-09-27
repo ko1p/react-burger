@@ -2,16 +2,18 @@ import React from 'react';
 import styles from './ingredient-details.module.css';
 import PropTypes from "prop-types";
 import {cardPropTypes} from "../types/types";
+import {useSelector} from "react-redux";
 
-export const IngredientDetails = ({ modalData }) => {
+export const IngredientDetails = () => {
+    const data = useSelector(store => store.modal.data)
     return (
         <div className={`${styles.container} pt-10 pr-10 pb-15 pl-10`}>
             <p className="text text_type_main-medium">
                 Детали ингредиента
             </p>
-            <img src={modalData.image} alt='ingredient'/>
+            <img src={data.image} alt='ingredient'/>
             <p className="text text_type_main-default mt-4">
-                {modalData.name}
+                {data.name}
             </p>
             <div className={`${styles.info} mt-8`}>
                 <div>
@@ -19,7 +21,7 @@ export const IngredientDetails = ({ modalData }) => {
                         Калории, ккал
                     </p>
                     <p className="text text_type_main-default text_color_inactive">
-                        {modalData.calories}
+                        {data.calories}
                     </p>
                 </div>
                 <div>
@@ -27,7 +29,7 @@ export const IngredientDetails = ({ modalData }) => {
                         Белки, г
                     </p>
                     <p className="text text_type_main-default text_color_inactive">
-                        {modalData.proteins}
+                        {data.proteins}
                     </p>
                 </div>
                 <div>
@@ -35,7 +37,7 @@ export const IngredientDetails = ({ modalData }) => {
                         Жиры, г
                     </p>
                     <p className="text text_type_main-default text_color_inactive">
-                        {modalData.fat}
+                        {data.fat}
                     </p>
                 </div>
                 <div>
@@ -43,7 +45,7 @@ export const IngredientDetails = ({ modalData }) => {
                         Углеводы, г
                     </p>
                     <p className="text text_type_main-default text_color_inactive">
-                        {modalData.carbohydrates}
+                        {data.carbohydrates}
                     </p>
                 </div>
             </div>

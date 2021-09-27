@@ -7,15 +7,20 @@ import {BurgerConstructor} from "../burger-constructor/burger-constructor";
 import {Modal} from "../modal/modal";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import {OrderDetails} from "../order-details/order-detaild";
+import {useDispatch, useSelector} from "react-redux";
+import {closeModal, resetModalData} from "../../services/actions";
 
-export const BurgerMaker = ({ data }) => {
-    const [showIngredientsDetails, setShowIngredientsDetails] = useState(false)
-    const [showOrderDetails, setShowOrderDetails] = useState(false)
-    const [modalData, setModalData] = useState(null);
+export const BurgerMaker = () => {
+    const dispatch = useDispatch()
+    const { isModalOpen, isModalTypeOrder, isModalTypeIngredients } = useSelector(store => ({
+        isModalOpen: store.modal.isOpen,
+        isModalTypeOrder: store.modal.type.order,
+        isModalTypeIngredients: store.modal.type.ingredients
+    }))
 
     const closeModalHandler = () => {
-        setShowIngredientsDetails(false)
-        setShowOrderDetails(false)
+        dispatch(closeModal())
+        dispatch(resetModalData())
     }
 
     const escButtonHandler = (e) => {
@@ -24,30 +29,22 @@ export const BurgerMaker = ({ data }) => {
         }
     }
 
-    const ingredientDetailsHandler = () => {
-        setShowIngredientsDetails(true)
-    }
-
-    const orderDetailsHandler = () => {
-        setShowOrderDetails(true)
-    }
-
     return (
         <main className={styles.container}>
             {
-                showIngredientsDetails &&
+                isModalOpen && isModalTypeIngredients &&
                     <Modal closeModal={closeModalHandler} escButtonHandler={escButtonHandler}>
-                        <IngredientDetails modalData={modalData} />
+                        <IngredientDetails />
                     </Modal>
             }
             {
-                showOrderDetails &&
+                isModalOpen && isModalTypeOrder &&
                 <Modal closeModal={closeModalHandler} escButtonHandler={escButtonHandler}>
-                    <OrderDetails modalData={modalData} />
+                    <OrderDetails />
                 </Modal>
             }
-            <BurgerIngredients data={data} openModal={ingredientDetailsHandler} setModalData={setModalData} />
-            <BurgerConstructor data={data} openModal={orderDetailsHandler} setModalData={setModalData} />
+            <BurgerIngredients />
+            <BurgerConstructor />
         </main>
     )
 }
