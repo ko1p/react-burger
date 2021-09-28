@@ -3,10 +3,10 @@ import styles from './burger-constructor.module.css';
 import {ConstructorElement, CurrencyIcon, Button, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
 import {cardPropTypes} from '../types/types';
-import imgBun from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
+import {URL} from "../../utils/constants";
 import {orderData} from "../../utils/orderData";
 import {useDispatch, useSelector} from "react-redux";
-import {openOrderModal, setModalData, removeConstructorIngredient} from "../../services/actions";
+import {openOrderModal, setModalData, removeConstructorIngredient, fetchOrderData} from "../../services/actions";
 
 
 export const BurgerConstructor = ({openModal}) => {
@@ -17,10 +17,24 @@ export const BurgerConstructor = ({openModal}) => {
         ingredients: store.burgerConstructor.ingredients
     }))
 
+    const totalOrderPrice = () => {
+        const bunsPrice = bun.price * 2
+        const ingredientsPrice = ingredients.reduce((sum, item) => sum + item.price, 0)
+        return bunsPrice + ingredientsPrice
+    }
+
+    const orderIngredients = () => {
+        const allIngredients = [
+            ...Array(2).fill(bun._id),
+            ...ingredients.map(item => item._id)
+        ]
+        return allIngredients
+    }
 
     const cardsData = data.filter(ing => ing.type !== 'bun');
 
     const setDataAndOpenModal = (cardData) => {
+        dispatch(fetchOrderData(URL, orderIngredients()))
         dispatch(openOrderModal())
         dispatch(setModalData(cardData))
     }
@@ -68,8 +82,8 @@ export const BurgerConstructor = ({openModal}) => {
                     />}
                 </div>
 
-                {!!bun.length && ingredients && <div className={`${styles.info} mt-10`}>
-                    <p className="text text_type_digits-medium mr-2">610</p>
+                {(bun._id || ingredients.lenght >= 1) && <div className={`${styles.info} mt-10`}>
+                    <p className="text text_type_digits-medium mr-2">{totalOrderPrice()}</p>
                     <CurrencyIcon type="primary"/>
                     <Button type="primary" size="medium" onClick={() => setDataAndOpenModal(orderData)}>
                         Оформить заказ

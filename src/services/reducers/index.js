@@ -10,8 +10,8 @@ import {
     ADD_CONSTRUCTOR_INGREDIENT,
     REMOVE_CONSTRUCTOR_INGREDIENT,
     SET_CONSTRUCTOR_BUN,
-    // ADD_INGREDIENT,
-    // ADD_BUN,
+    SET_ORDER_INFO,
+    SET_ORDER_FETCH_ERROR
     // ADD_CART_MODAL,
     // DELETE_CART_MODAL,
     // GET_ORDER_REQUEST,
@@ -121,7 +121,6 @@ const initialStateConstructor = {
 export const burgerConstructor = (state = initialStateConstructor, action) => {
     switch (action.type) {
         case ADD_CONSTRUCTOR_INGREDIENT: {
-            console.log(action.ingredient)
             return {
                 ...state,
                 ingredients: [
@@ -131,19 +130,35 @@ export const burgerConstructor = (state = initialStateConstructor, action) => {
             }
         }
         case REMOVE_CONSTRUCTOR_INGREDIENT: {
-            console.log(action.ingredient)
             return {
                 ...state,
                 ingredients: [
-                    ...state.ingredients.filter(ingredient => ingredient._id !== action.ingredient._id)
+                    ...state.ingredients.filter(ingredient => ingredient.uuid !== action.ingredient.uuid)
                 ]
             }
         }
         case SET_CONSTRUCTOR_BUN: {
-            console.log(action.ingredient)
             return {
                 ...state,
                 bun: action.bun
+            }
+        }
+        default:
+            return state
+    }
+}
+
+const initialStateOrder = {
+    isRequesting: false,
+    hasError: false
+};
+
+export const order = (state = initialStateOrder, action) => {
+    switch (action.type) {
+        case SET_ORDER_FETCH_ERROR: {
+            return {
+                ...state,
+                hasError: action.hasError
             }
         }
         default:
@@ -155,5 +170,6 @@ export const burgerConstructor = (state = initialStateConstructor, action) => {
 export const rootReducer = combineReducers({
     ingredients,
     modal,
-    burgerConstructor
+    burgerConstructor,
+    order
 });
