@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import {log} from "util";
 export const SET_INGREDIENTS_SUCCESS = 'SET_INGREDIENTS_SUCCESS';
 export const SET_INGREDIENTS_ERROR = 'SET_INGREDIENTS_ERROR';
 export const SET_MODAL_DATA = 'SET_MODAL_DATA';
@@ -12,7 +11,7 @@ export const REMOVE_CONSTRUCTOR_INGREDIENT = 'REMOVE_CONSTRUCTOR_INGREDIENT';
 export const SET_CONSTRUCTOR_BUN = 'SET_CONSTRUCTOR_BUN';
 export const SET_ORDER_INFO = 'SET_ORDER_INFO';
 export const SET_ORDER_FETCH_ERROR = 'SET_ORDER_FETCH_ERROR';
-export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
+export const UPDATE_INGREDIENTS = 'UPDATE_INGREDIENTS';
 export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
 export const DELETE_ORDER_MODAL = 'DELETE_ORDER_MODAL';
 
@@ -86,6 +85,13 @@ export const addConstructorIngredient = ingredient => {
             ...ingredient,
             uuid: uuidv4()
         }
+    }
+}
+
+export const updateIngredients = indredients => {
+    return {
+        type: UPDATE_INGREDIENTS,
+        indredients
     }
 }
 

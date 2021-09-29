@@ -10,14 +10,8 @@ import {
     ADD_CONSTRUCTOR_INGREDIENT,
     REMOVE_CONSTRUCTOR_INGREDIENT,
     SET_CONSTRUCTOR_BUN,
-    SET_ORDER_INFO,
-    SET_ORDER_FETCH_ERROR
-    // ADD_CART_MODAL,
-    // DELETE_CART_MODAL,
-    // GET_ORDER_REQUEST,
-    // GET_ORDER_SUCCESS,
-    // GET_ORDER_ERROR,
-    // DELETE_ORDER_MODAL
+    SET_ORDER_FETCH_ERROR,
+    UPDATE_INGREDIENTS
 } from '../actions';
 
 const initialStateIngredients = {
@@ -44,6 +38,14 @@ export const ingredients = (state = initialStateIngredients, action) => {
                 isRequesting: false,
                 hasRequestError: true,
                 list: initialStateIngredients.list
+            };
+        }
+        case UPDATE_INGREDIENTS: {
+            return {
+                ...state,
+                isRequesting: false,
+                hasRequestError: false,
+                list: [...action.ingredients]
             };
         }
         default:

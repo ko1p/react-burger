@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import styles from './burger-constructor.module.css';
 import {ConstructorElement, CurrencyIcon, Button, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
@@ -6,12 +6,19 @@ import {cardPropTypes} from '../types/types';
 import {URL} from "../../utils/constants";
 import {orderData} from "../../utils/orderData";
 import {useDispatch, useSelector} from "react-redux";
-import {openOrderModal, setModalData, removeConstructorIngredient, fetchOrderData} from "../../services/actions";
+import { useDrop } from "react-dnd";
+import {
+    openOrderModal,
+    setModalData,
+    removeConstructorIngredient,
+    fetchOrderData,
+    addConstructorIngredient, setConstructorBun, updateIngredients
+} from "../../services/actions";
+import update from 'immutability-helper';
 
 
 export const BurgerConstructor = ({openModal}) => {
     const dispatch = useDispatch()
-    const data = useSelector(store => store.ingredients.list)
     const {bun, ingredients} = useSelector(store => ({
         bun: store.burgerConstructor.bun,
         ingredients: store.burgerConstructor.ingredients
@@ -31,18 +38,40 @@ export const BurgerConstructor = ({openModal}) => {
         return allIngredients
     }
 
-    const cardsData = data.filter(ing => ing.type !== 'bun');
+    const [, dropTarget] = useDrop({
+        accept: "ingredient",
+        drop({ card }) {
+            if(card.type === 'bun') {
+                dispatch(setConstructorBun(card))
+            } else {
+                dispatch(addConstructorIngredient(card));
+            }
+        },
+    });
 
     const setDataAndOpenModal = (cardData) => {
         dispatch(fetchOrderData(URL, orderIngredients()))
         dispatch(openOrderModal())
         dispatch(setModalData(cardData))
     }
+
+    const moveCard = useCallback((dragIndex, hoverIndex) => {
+        const dragCard = ingredients[dragIndex];
+        dispatch(updateIngredients(
+            update(ingredients, {
+                $splice: [
+                    [dragIndex, 1],
+                    [hoverIndex, 0, dragCard],
+                ],
+            })
+        ))
+
+    }, [ingredients, dispatch]);
     // TODO REFACTOR
-    console.log(!!bun._id && Boolean(ingredients.length))
-    return ((bun._id && ingredients.lenght >= 1)) ? <h2>Добавьте ингридиенты</h2> :
-        (
-            <div className={`${styles.box} mt-25`}>
+    // console.log(!!bun._id && Boolean(ingredients.length))
+    // <div ref={dropTarget} style={{"width": "100%","height": "100vh"}}></div>
+    return (
+            <div ref={dropTarget} className={`${styles.box} mt-25`}>
                 <div className="ml-10 pl-9">
                     {bun._id &&
                     <ConstructorElement

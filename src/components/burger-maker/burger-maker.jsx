@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./burger-maker.module.css";
 import PropTypes from "prop-types";
 import {cardPropTypes} from "../types/types";
@@ -9,6 +9,8 @@ import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import {OrderDetails} from "../order-details/order-detaild";
 import {useDispatch, useSelector} from "react-redux";
 import {closeModal, resetModalData} from "../../services/actions";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export const BurgerMaker = () => {
     const dispatch = useDispatch()
@@ -43,8 +45,10 @@ export const BurgerMaker = () => {
                     <OrderDetails />
                 </Modal>
             }
-            <BurgerIngredients />
-            <BurgerConstructor />
+            <DndProvider backend={HTML5Backend}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+            </DndProvider>
         </main>
     )
 }

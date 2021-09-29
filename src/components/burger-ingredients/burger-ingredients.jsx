@@ -4,12 +4,10 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import {cardPropTypes} from "../types/types";
 import {IngredientCard} from "../ingredient-card/ingredient-card";
-import {useDispatch, useSelector} from "react-redux";
-import {setModalData, openModal} from "../../services/actions";
+import {useSelector} from "react-redux";
 
 export const BurgerIngredients = () => {
     const [current, setCurrent] = React.useState('bun')
-    const dispatch = useDispatch()
     const data = useSelector(store => store.ingredients.list)
 
     const ingredientTypes = [
@@ -21,8 +19,6 @@ export const BurgerIngredients = () => {
     const ingredientFilter = type => {
         return data.filter(item => item.type === type)
     }
-
-
 
     const setTab = (tab) => {
         setCurrent(tab);
