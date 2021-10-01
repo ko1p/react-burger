@@ -40,14 +40,6 @@ export const ingredients = (state = initialStateIngredients, action) => {
                 list: initialStateIngredients.list
             };
         }
-        case UPDATE_INGREDIENTS: {
-            return {
-                ...state,
-                isRequesting: false,
-                hasRequestError: false,
-                list: [...action.ingredients]
-            };
-        }
         default:
             return state
     }
@@ -104,7 +96,6 @@ export const modal = (state = initialStateModal, action) => {
             };
         }
         case SET_MODAL_DATA: {
-            console.log(action.data)
             return {
                 ...state,
                 data: action.data
@@ -145,8 +136,22 @@ export const burgerConstructor = (state = initialStateConstructor, action) => {
                 bun: action.bun
             }
         }
-        default:
-            return state
+        // case UPDATE_INGREDIENTS: {
+        //     return {
+        //         ...state,
+        //         isRequesting: false,
+        //         hasRequestError: false,
+        //         list: [action.ingredients]
+        //     };
+        // }
+        case UPDATE_INGREDIENTS: 
+            return {
+                ...state, 
+                ingredients: action.ingredients
+            };
+        
+        default: 
+            return state;
     }
 }
 

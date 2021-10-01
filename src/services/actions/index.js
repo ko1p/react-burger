@@ -12,8 +12,6 @@ export const SET_CONSTRUCTOR_BUN = 'SET_CONSTRUCTOR_BUN';
 export const SET_ORDER_INFO = 'SET_ORDER_INFO';
 export const SET_ORDER_FETCH_ERROR = 'SET_ORDER_FETCH_ERROR';
 export const UPDATE_INGREDIENTS = 'UPDATE_INGREDIENTS';
-export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
-export const DELETE_ORDER_MODAL = 'DELETE_ORDER_MODAL';
 
 const successFetchIngredients = ingredients => (
     {
@@ -88,10 +86,10 @@ export const addConstructorIngredient = ingredient => {
     }
 }
 
-export const updateIngredients = indredients => {
+export const updateIngredients = ingredients => {
     return {
         type: UPDATE_INGREDIENTS,
-        indredients
+        ingredients: ingredients
     }
 }
 
@@ -139,7 +137,6 @@ export const fetchOrderData = (url, orderIds) => {
                 return res.json()
             })
             .then(info => {
-                console.log(`WE GET INFO`, info)
                 dispatch(setOrderFetchError(false))
                 dispatch(setModalData(info))
             })

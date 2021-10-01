@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import orderAccepted from '../../images/order-accepted.gif'
-import PropTypes from 'prop-types';
-import {cardPropTypes} from "../types/types";
 import {useSelector} from "react-redux";
 
 export const OrderDetails = () => {
@@ -23,7 +21,3 @@ export const OrderDetails = () => {
         </div>
     )
 }
-
-OrderDetails.propTypes = {
-    modalData: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
-};

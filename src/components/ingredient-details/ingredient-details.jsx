@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
-import PropTypes from "prop-types";
-import {cardPropTypes} from "../types/types";
 import {useSelector} from "react-redux";
 
 export const IngredientDetails = () => {
@@ -52,7 +50,3 @@ export const IngredientDetails = () => {
         </div>
     )
 }
-
-IngredientDetails.propTypes = {
-    modalData: PropTypes.shape(cardPropTypes.isRequired).isRequired,
-};

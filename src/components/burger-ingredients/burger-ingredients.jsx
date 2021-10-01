@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./burger-ingredients.module.css"
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import {cardPropTypes} from "../types/types";
 import {IngredientCard} from "../ingredient-card/ingredient-card";
 import {useSelector} from "react-redux";
 
@@ -63,9 +61,3 @@ export const BurgerIngredients = () => {
         </div>
     )
 }
-
-BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
-    openModal: PropTypes.func.isRequired,
-    setModalData: PropTypes.func.isRequired,
-};
