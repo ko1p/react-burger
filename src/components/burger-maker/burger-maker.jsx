@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./burger-maker.module.css";
-import PropTypes from "prop-types";
-import {cardPropTypes} from "../types/types";
 import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
 import {BurgerConstructor} from "../burger-constructor/burger-constructor";
 import {Modal} from "../modal/modal";
@@ -52,7 +50,3 @@ export const BurgerMaker = () => {
         </main>
     )
 }
-
-BurgerMaker.propTypes = {
-    data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired
-};

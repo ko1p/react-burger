@@ -1,8 +1,6 @@
 import React, {useCallback} from 'react';
 import styles from './burger-constructor.module.css';
 import {ConstructorElement, CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
-// import PropTypes from 'prop-types';
-// import {cardPropTypes} from '../types/types';
 import {URL} from "../../utils/constants";
 import {orderData} from "../../utils/orderData";
 import {useDispatch, useSelector} from "react-redux";
@@ -18,7 +16,7 @@ import {ConstructorItem} from "../constructor-item/constructor-item";
 
 
 export const BurgerConstructor = () => {
-    
+
     const dispatch = useDispatch()
     const {bun, ingredients} = useSelector(store => ({
         bun: store.burgerConstructor.bun,
@@ -42,7 +40,6 @@ export const BurgerConstructor = () => {
     const [, dropTarget] = useDrop({
         accept: "ingredient",
         drop(card) {
-            //console.log(card, card.card)
             if (card.type === 'bun') {
                 dispatch(setConstructorBun(card))
             } else {
@@ -70,10 +67,6 @@ export const BurgerConstructor = () => {
 
     }, [ingredients, dispatch]);
 
-    // TODO REFACTOR
-    // console.log(!!bun._id && Boolean(ingredients.length))
-    // <div ref={dropTarget} style={{"width": "100%","height": "100vh"}}></div>
-    
     return (
         <div ref={dropTarget} className={`${styles.box} mt-25`}>
             <div className="ml-10 pl-9">
@@ -103,7 +96,7 @@ export const BurgerConstructor = () => {
                Добавьте ингредиенты
              </p>
             }
-            
+
             <div className="ml-10 pl-9">
                 {bun._id && <ConstructorElement
                     type="bottom"
@@ -125,9 +118,3 @@ export const BurgerConstructor = () => {
         </div>
     )
 }
-
-// BurgerConstructor.propTypes = {
-//     data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
-//     openModal: PropTypes.func.isRequired,
-//     setModalData: PropTypes.func.isRequired,
-// };
