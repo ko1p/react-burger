@@ -7,7 +7,6 @@ import {useDrag} from "react-dnd";
 
 export const IngredientCard = ({card}) => {
     const ingredients = useSelector(store => store.burgerConstructor.ingredients)
-    console.log(card)
     const [{opacity}, dragRef] = useDrag({
         type: "ingredient",
         item: card,
