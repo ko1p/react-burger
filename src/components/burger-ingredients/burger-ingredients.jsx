@@ -24,6 +24,20 @@ export const BurgerIngredients = () => {
         if (element) element.scrollIntoView({behavior: "smooth"});
     };
 
+    const updateTabs = () => {
+        const containerTop = document.getElementById('container').getBoundingClientRect().top;
+        const bunTop = document.getElementById('bun').getBoundingClientRect().top;
+        const sauceTop = document.getElementById('sauce').getBoundingClientRect().top;
+        const mainTop = document.getElementById('main').getBoundingClientRect().top;
+        if (bunTop >= containerTop && containerTop < sauceTop) {
+            setCurrent('bun')
+        } else if (sauceTop <= containerTop && containerTop < mainTop) {
+            setCurrent('sauce')
+        } else if (mainTop <= containerTop) {
+            setCurrent('main')
+        }
+    }
+
     return (
         <div className={styles.ingredients}>
             <p className="text text_type_main-large text_color_primary mt-10">
@@ -40,7 +54,7 @@ export const BurgerIngredients = () => {
                     Начинки
                 </Tab>
             </div>
-            <div className={styles.container}>
+            <div className={styles.container} onScroll={updateTabs} id='container'>
 
                 {ingredientTypes.map((item, index) => {
                     return (

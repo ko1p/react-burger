@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../burger-ingredients/burger-ingredients.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import { cardPropTypes } from '../types/types';
 import {openIngredientsModal, setModalData} from "../../services/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag} from "react-dnd";
@@ -48,3 +49,6 @@ export const IngredientCard = ({card}) => {
     </li>
 }
 
+IngredientCard.propTypes = {
+    card: cardPropTypes
+};
