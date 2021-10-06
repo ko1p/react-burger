@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import orderAccepted from '../../images/order-accepted.gif'
-import PropTypes from 'prop-types';
-import {cardPropTypes} from "../types/types";
+import {useSelector} from "react-redux";
 
-export const OrderDetails = ({ modalData }) => {
+export const OrderDetails = () => {
+    const info = useSelector(store => store.modal.data)
     return (
         <div className={`${styles.container} pt-30 pr-25 pb-30 pl-25`}>
-            <p className={`${styles.shadow} text text_type_digits-large`}>{modalData.order.number}</p>
+            <p className={`${styles.shadow} text text_type_digits-large`}>{info.order.number}</p>
             <p className="text text_type_main-medium mt-8">
                 идентификатор заказа
             </p>
@@ -21,7 +21,3 @@ export const OrderDetails = ({ modalData }) => {
         </div>
     )
 }
-
-OrderDetails.propTypes = {
-    modalData: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
-};

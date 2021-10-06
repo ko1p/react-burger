@@ -1,17 +1,18 @@
 import {AppHeader} from "../app-header/app-header";
 import {BurgerMaker} from "../burger-maker/burger-maker";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {URL} from '../../utils/constants';
 import {Loader} from "../loader/loader";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchIngredients} from "../../services/actions";
 
 function App() {
-    const [data, setData] = useState()
+    const dispatch = useDispatch()
+    const data = useSelector(store => store.ingredients.list)
+
     useEffect(() => {
-        fetch(URL)
-            .then(res => res.json())
-            .then(res => setData(res.data))
-            .catch(e => console.log(e))
-    }, [])
+        dispatch(fetchIngredients(URL))
+    }, [dispatch])
 
     return (
         <>

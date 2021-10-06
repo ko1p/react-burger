@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./burger-ingredients.module.css"
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import {cardPropTypes} from "../types/types";
 import {IngredientCard} from "../ingredient-card/ingredient-card";
+import {useSelector} from "react-redux";
 
-export const BurgerIngredients = ({data, openModal, setModalData}) => {
+export const BurgerIngredients = () => {
     const [current, setCurrent] = React.useState('bun')
+    const data = useSelector(store => store.ingredients.list)
 
     const ingredientTypes = [
         {type: 'bun', title: 'Булки'},
@@ -18,16 +18,25 @@ export const BurgerIngredients = ({data, openModal, setModalData}) => {
         return data.filter(item => item.type === type)
     }
 
-    const dataToModal = info => {
-        openModal()
-        setModalData(info)
-    }
-
     const setTab = (tab) => {
         setCurrent(tab);
         const element = document.getElementById(tab);
         if (element) element.scrollIntoView({behavior: "smooth"});
     };
+
+    const updateTabs = () => {
+        const containerTop = document.getElementById('container').getBoundingClientRect().top;
+        const bunTop = document.getElementById('bun').getBoundingClientRect().top;
+        const sauceTop = document.getElementById('sauce').getBoundingClientRect().top;
+        const mainTop = document.getElementById('main').getBoundingClientRect().top;
+        if (bunTop >= containerTop && containerTop < sauceTop) {
+            setCurrent('bun')
+        } else if (sauceTop <= containerTop && containerTop < mainTop) {
+            setCurrent('sauce')
+        } else if (mainTop <= containerTop) {
+            setCurrent('main')
+        }
+    }
 
     return (
         <div className={styles.ingredients}>
@@ -45,7 +54,7 @@ export const BurgerIngredients = ({data, openModal, setModalData}) => {
                     Начинки
                 </Tab>
             </div>
-            <div className={styles.container}>
+            <div className={styles.container} onScroll={updateTabs} id='container'>
 
                 {ingredientTypes.map((item, index) => {
                     return (
@@ -58,7 +67,6 @@ export const BurgerIngredients = ({data, openModal, setModalData}) => {
                                     <IngredientCard
                                         key={card._id}
                                         card={card}
-                                        dataToModal={dataToModal}
                                     />)}
                             </ul>
                         </div>)
@@ -67,9 +75,3 @@ export const BurgerIngredients = ({data, openModal, setModalData}) => {
         </div>
     )
 }
-
-BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
-    openModal: PropTypes.func.isRequired,
-    setModalData: PropTypes.func.isRequired,
-};
