@@ -12,6 +12,7 @@
     gap: 16px;
     overflow: auto;
     list-style: none;
+    padding-left: 55px;
 }
 
 .info {
