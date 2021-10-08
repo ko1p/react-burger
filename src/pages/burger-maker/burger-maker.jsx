@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./burger-maker.module.css";
-import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
-import {BurgerConstructor} from "../burger-constructor/burger-constructor";
-import {Modal} from "../modal/modal";
-import {IngredientDetails} from "../ingredient-details/ingredient-details";
-import {OrderDetails} from "../order-details/order-detaild";
+import {BurgerIngredients} from "../../components/burger-ingredients/burger-ingredients";
+import {BurgerConstructor} from "../../components/burger-constructor/burger-constructor";
+import {Modal} from "../../components/modal/modal";
+import {IngredientDetails} from "../../components/ingredient-details/ingredient-details";
+import {OrderDetails} from "../../components/order-details/order-detaild";
 import {useDispatch, useSelector} from "react-redux";
 import {closeModal, resetModalData} from "../../services/actions";
 import { DndProvider } from "react-dnd";
