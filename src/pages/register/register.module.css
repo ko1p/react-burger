@@ -1,0 +1,36 @@
+.page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 480px;
+}
+
+.heading {
+    margin: 0 0 24px 0;
+    width: 100%;
+    text-align: center;
+    font-family: JetBrains Mono, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    color: #F2F2F3;
+}
+
+.register {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    row-gap: 24px;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 16px;
+    color: #4c4cff;
+}

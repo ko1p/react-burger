@@ -7,6 +7,7 @@ import {Loader} from "../loader/loader";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchIngredients} from "../../services/actions";
 import {PageNotFound} from "../page-not-found/page-not-found";
+import {Register} from "../../pages/register/register";
 
 function App() {
     const dispatch = useDispatch()
@@ -28,7 +29,7 @@ function App() {
                         <p>Здесь будет страница для входа</p>
                     </Route>
                     <Route path='/register' exact>
-                        <p>Здесь будет страница для регистрации</p>
+                        <Register />
                     </Route>
                     <Route path='/forgot-password' exact>
                         <p>Здесь будет страница для восстановления пароля</p>
