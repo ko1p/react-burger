@@ -21,7 +21,7 @@ export const Login = () => {
 
     const formSubmitHandler = e => {
         e.preventDefault()
-        console.log(e)
+        console.log(email, password)
         //dispatch(loginUser(email, password));
     }
 

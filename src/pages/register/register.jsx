@@ -20,7 +20,7 @@ export const Register = () => {
 
     const formSubmitHandler = e => {
         e.preventDefault()
-        console.log(e)
+        console.log(userName, email, password)
         //dispatch(registerUser(email, userName, password));
     }
 

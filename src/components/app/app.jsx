@@ -10,6 +10,7 @@ import {PageNotFound} from "../page-not-found/page-not-found";
 import {Register} from "../../pages/register/register";
 import {Login} from "../../pages/login/login";
 import {ForgotPassword} from "../../pages/forgot-password/forgot-password";
+import {ResetPassword} from "../../pages/reset-password/reset-password";
 
 function App() {
     const dispatch = useDispatch()
@@ -37,7 +38,7 @@ function App() {
                         <ForgotPassword />
                     </Route>
                     <Route path='/reset-password' exact>
-                        <p>Здесь будет страница для сброса пароля</p>
+                        <ResetPassword />
                     </Route>
                     <Route path='/profile' exact>
                         <p>Здесь будет страница профиля</p>
