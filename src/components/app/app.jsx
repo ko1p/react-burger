@@ -8,6 +8,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchIngredients} from "../../services/actions";
 import {PageNotFound} from "../page-not-found/page-not-found";
 import {Register} from "../../pages/register/register";
+import {Login} from "../../pages/login/login";
+import {ForgotPassword} from "../../pages/forgot-password/forgot-password";
 
 function App() {
     const dispatch = useDispatch()
@@ -26,13 +28,13 @@ function App() {
                         { data ? <BurgerMaker data={data}/> : <Loader /> }
                     </Route>
                     <Route path='/login' exact>
-                        <p>Здесь будет страница для входа</p>
+                        <Login />
                     </Route>
                     <Route path='/register' exact>
                         <Register />
                     </Route>
                     <Route path='/forgot-password' exact>
-                        <p>Здесь будет страница для восстановления пароля</p>
+                        <ForgotPassword />
                     </Route>
                     <Route path='/reset-password' exact>
                         <p>Здесь будет страница для сброса пароля</p>

@@ -1,10 +1,10 @@
+import styles from './login.module.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './register.module.css'
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export const Register = () => {
-    const [userName, setUserName] = useState('');
+
+export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,29 +15,20 @@ export const Register = () => {
     const formSubmitHandler = e => {
         e.preventDefault()
         console.log(e)
-        //dispatch(registerUser(email, userName, password));
+        //dispatch(loginUser(email, password));
     }
 
     return (
         <div className={styles.page}>
             <div className={styles.container}>
-                <h2 className={styles.heading}>Регистрация</h2>
+                <h2 className={styles.heading}>Вход</h2>
                 <form name='register' className={styles.register} onSubmit={formSubmitHandler}>
-                    <Input
-                        type={'text'}
-                        placeholder={'Имя'}
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
-                        name={'name'}
-                        errorText={'Ошибка'}
-                        size={'default'}
-                    />
                     <Input
                         type={'email'}
                         placeholder={'E-mail'}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        name={'email'}
+                        name={'name'}
                         errorText={'Ошибка'}
                         size={'default'}
                     />
@@ -53,16 +44,20 @@ export const Register = () => {
                         size={'default'}
                     />
 
+
                     <Button type="primary" size="medium">
-                        Зарегистрироваться
+                        Войти
                     </Button>
                 </form>
 
                     <p className={'text text_type_main-default text_color_inactive mt-20'}>
-                        Уже зарегистрированны?&nbsp;
-                        <Link to='/login' className={styles.link}>Войти</Link>
+                        Вы - новый пользователь?&nbsp;
+                        <Link to='/register' className={styles.link}>Зарегистрироваться</Link>
                     </p>
-
+                    <p className={'text text_type_main-default text_color_inactive mt-4'}>
+                        Забыли пароль?&nbsp;
+                        <Link to='/forgot-password' className={styles.link}>Восстановить пароль</Link>
+                    </p>
             </div>
         </div>
     )
