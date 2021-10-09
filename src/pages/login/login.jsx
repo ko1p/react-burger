@@ -9,12 +9,15 @@ export const Login = () => {
     const passwordRef = useRef(null)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isPassHide, setIsPassHide] = useState(true);
 
     const passwordHider = (e) => {
         let input = passwordRef.current
         if (input.type === 'password') {
+            setIsPassHide(false)
             input.setAttribute('type', 'text')
         } else {
+            setIsPassHide(true)
             input.setAttribute('type', 'password')
         }
     }
@@ -44,7 +47,7 @@ export const Login = () => {
                         placeholder={'Пароль'}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        icon={'HideIcon'}
+                        icon={isPassHide ? 'ShowIcon' : 'HideIcon'}
                         name={'password'}
                         onIconClick={passwordHider}
                         errorText={'Ошибка'}

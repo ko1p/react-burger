@@ -7,16 +7,18 @@ export const ResetPassword = () => {
     const passwordRef = useRef(null)
     const [newPassword, setNewPassword] = useState('');
     const [code, setCode] = useState('');
+    const [isPassHide, setIsPassHide] = useState(true);
 
     const passwordHider = (e) => {
         let input = passwordRef.current
         if (input.type === 'password') {
+            setIsPassHide(false)
             input.setAttribute('type', 'text')
         } else {
+            setIsPassHide(true)
             input.setAttribute('type', 'password')
         }
     }
-
     const formSubmitHandler = e => {
         e.preventDefault()
         console.log(newPassword, code)
@@ -32,7 +34,7 @@ export const ResetPassword = () => {
                         placeholder={'Пароль'}
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        icon={'HideIcon'}
+                        icon={isPassHide ? 'ShowIcon' : 'HideIcon'}
                         name={'password'}
                         onIconClick={passwordHider}
                         errorText={'Ошибка'}
