@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import {useRef, useState} from 'react'
 import { Link } from 'react-router-dom'
 import styles from './register.module.css'
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export const Register = () => {
+    const passwordRef = useRef(null)
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const passwordHider = (e) => {
-        alert(123)
+        let input = passwordRef.current
+        if (input.type === 'password') {
+            input.setAttribute('type', 'text')
+        } else {
+            input.setAttribute('type', 'password')
+        }
     }
 
     const formSubmitHandler = e => {
@@ -51,6 +57,7 @@ export const Register = () => {
                         onIconClick={passwordHider}
                         errorText={'Ошибка'}
                         size={'default'}
+                        ref={passwordRef}
                     />
 
                     <Button type="primary" size="medium">
