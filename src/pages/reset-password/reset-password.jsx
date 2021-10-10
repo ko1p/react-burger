@@ -1,9 +1,11 @@
 import styles from "../login/login.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import React, {useRef, useState} from "react";
+import {checkResetedPassword} from "../../utils/api";
 
 export const ResetPassword = () => {
+    const history = useHistory()
     const passwordRef = useRef(null)
     const [newPassword, setNewPassword] = useState('');
     const [code, setCode] = useState('');
@@ -21,7 +23,17 @@ export const ResetPassword = () => {
     }
     const formSubmitHandler = e => {
         e.preventDefault()
-        console.log(newPassword, code)
+        checkResetedPassword(newPassword, code)
+            .then((res) => {
+                if (res && res.success) {
+                    history.replace('/login');
+                } else {
+                    throw new Error('При сбросе пароля произошла ошибка');
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         //dispatch(loginUser(email, password));
     }
     return (

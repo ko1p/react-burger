@@ -1,14 +1,27 @@
 import styles from "./forgot-password.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useHistory } from 'react-router-dom'
 import {Link} from "react-router-dom";
 import {useState} from "react";
+import {resetPassword} from "../../utils/api";
 
 export const ForgotPassword = () => {
+    const history = useHistory()
     const [email, setEmail] = useState('');
 
-    const formSubmitHandler = e => {
+    const formSubmitHandler = async e => {
         e.preventDefault()
-        console.log(email)
+        resetPassword(email)
+            .then((res) => {
+                if (res && res.success) {
+                    history.replace('/reset-password');
+                } else {
+                    throw new Error('При сбросе пароля произошла ошибка');
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     return (
