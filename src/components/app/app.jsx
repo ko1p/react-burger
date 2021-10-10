@@ -11,6 +11,7 @@ import {Register} from "../../pages/register/register";
 import {Login} from "../../pages/login/login";
 import {ForgotPassword} from "../../pages/forgot-password/forgot-password";
 import {ResetPassword} from "../../pages/reset-password/reset-password";
+import {Profile} from "../../pages/profile/profile";
 
 function App() {
     const dispatch = useDispatch()
@@ -41,7 +42,7 @@ function App() {
                         <ResetPassword />
                     </Route>
                     <Route path='/profile' exact>
-                        <p>Здесь будет страница профиля</p>
+                        <Profile />
                     </Route>
                     <Route path='/ingredients/:id' exact>
                         <p>Здесь будет страница ингридиента</p>
