@@ -1,4 +1,6 @@
+import { setCookie, getCookie } from '../../utils/cookie';
 import { v4 as uuidv4 } from 'uuid';
+import { URL } from "../../utils/constants";
 export const SET_INGREDIENTS_SUCCESS = 'SET_INGREDIENTS_SUCCESS';
 export const SET_INGREDIENTS_ERROR = 'SET_INGREDIENTS_ERROR';
 export const SET_MODAL_DATA = 'SET_MODAL_DATA';
@@ -12,6 +14,11 @@ export const SET_CONSTRUCTOR_BUN = 'SET_CONSTRUCTOR_BUN';
 export const SET_ORDER_INFO = 'SET_ORDER_INFO';
 export const SET_ORDER_FETCH_ERROR = 'SET_ORDER_FETCH_ERROR';
 export const UPDATE_INGREDIENTS = 'UPDATE_INGREDIENTS';
+export const SET_REGISTER_IS_FETCHING = 'SET_REGISTER_IS_FETCHING'
+export const SET_REGISTER_IS_SUCCESS = 'SET_REGISTER_IS_SUCCESS'
+export const SET_REGISTER_ERROR = 'SET_REGISTER_ERROR'
+export const SET_REGISTER_USER_DATA = 'SET_REGISTER_USER_DATA'
+
 
 const successFetchIngredients = ingredients => (
     {
@@ -144,5 +151,66 @@ export const fetchOrderData = (url, orderIds) => {
                 dispatch(setOrderFetchError(true))
                 console.log(`При отправке заказа на сервер произошла ошибка ${err}`)
             });
+    }
+}
+
+export const setRegisterIsFetching = isRegisterFetching => (
+    {
+        type: SET_REGISTER_IS_FETCHING,
+        isRegisterFetching
+    }
+)
+
+export const setRegisterIsSuccess = isRegisterSuccess => (
+    {
+        type: SET_REGISTER_IS_SUCCESS,
+        isRegisterSuccess
+    }
+)
+
+export const setRegisterError = registerError => (
+    {
+        type: SET_REGISTER_ERROR,
+        registerError
+    }
+)
+
+export const setRegisterUserdata = user => (
+    {
+        type: SET_REGISTER_USER_DATA,
+        user
+    }
+)
+
+export const fetchRegister = (name, email, password) => {
+    return dispatch => {
+        dispatch(setRegisterIsFetching(true))
+        fetch(`${URL}/auth/register `, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: name, email: email, password: password }),
+        })
+            .then(res => {
+                dispatch(setRegisterIsFetching(false))
+                if (res.ok) {
+                    dispatch(setRegisterIsSuccess(true))
+                    return res.json()
+                } else {
+                    throw new Error(`Произошла ошибка`)
+                }
+            })
+            .then(res => {
+                console.log(res)
+                dispatch(setRegisterUserdata(res.user))
+                setCookie('accessToken', res.accessToken);
+                setCookie('refreshToken', res.refreshToken);
+            })
+            .catch(e => {
+                dispatch(setRegisterIsSuccess(false))
+                dispatch(setRegisterError(e))
+                console.log(e)
+            })
     }
 }

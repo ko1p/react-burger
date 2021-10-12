@@ -1,6 +1,7 @@
 import React from "react";
 import styles from './app-header.module.css'
-import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import { BurgerIcon, ListIcon, Logo, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link } from 'react-router-dom'
 
 export const AppHeader = () => {
     return (
@@ -8,32 +9,32 @@ export const AppHeader = () => {
             <div className={styles.container}>
                 <nav className={styles.nav}>
                     <ul className={styles.buttons}>
-                        <a className={styles.link} href="##">
+                        <Link className={styles.link} to='/'>
                             <li className={`${styles.button} p-5 mr-2`}>
                                 <BurgerIcon type="primary"/>
                                 <p className="text text_type_main-default ml-4">
                                     Конструктор
                                 </p>
                             </li>
-                        </a>
-                        <a className={styles.link} href="##">
+                        </Link>
+                        <Link className={styles.link} to='/lenta-zacazov'>
                             <li className={`${styles.button} p-5 mr-2`}>
                                 <ListIcon type="secondary"/>
                                 <p className="text text_type_main-default text_color_inactive ml-4">
                                     Лента заказов
                                 </p>
                             </li>
-                        </a>
+                        </Link>
                     </ul>
                 </nav>
                 <Logo/>
                 <div className={`${styles.button} p-5 mr-2`}>
-                    <a className={styles.link} href="##">
+                    <Link className={styles.link} to='/profile'>
                         <ProfileIcon type="secondary"/>
                         <p className="text text_type_main-default text_color_inactive ml-4">
                             Личный кабинет
                         </p>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </header>

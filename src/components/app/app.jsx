@@ -23,8 +23,8 @@ function App() {
 
     return (
         <>
-            <AppHeader/>
             <Router>
+                <AppHeader/>
                 <Switch>
                     <Route path='/' exact>
                         { data ? <BurgerMaker data={data}/> : <Loader /> }
