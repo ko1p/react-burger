@@ -3,6 +3,9 @@ import {
     SET_REGISTER_IS_SUCCESS,
     SET_REGISTER_ERROR,
     SET_REGISTER_USER_DATA,
+    SET_RECOVER_PASS_IS_FETCHING,
+    SET_RECOVER_PASS_IS_SUCCESS,
+    SET_RECOVER_PASS_ERROR,
 
 } from '../actions'
 
@@ -13,7 +16,10 @@ const initialStateProfile = {
     },
     isRegisterFetching: false,
     isRegisterSuccess: false,
-    registerError: ''
+    registerError: '',
+    isRecoverPassFetching: false,
+    isRecoverPassSuccess: false,
+    recoverPassError: ''
 };
 
 export const profile = (state = initialStateProfile, action) => {
@@ -40,6 +46,24 @@ export const profile = (state = initialStateProfile, action) => {
             return {
                 ...state,
                 user: action.user
+            }
+        }
+        case SET_RECOVER_PASS_IS_FETCHING: {
+            return {
+                ...state,
+                isRecoverPassFetching: action.isRecoverPassFetching
+            }
+        }
+        case SET_RECOVER_PASS_IS_SUCCESS: {
+            return {
+                ...state,
+                isRecoverPassSuccess: action.isRecoverPassSuccess
+            }
+        }
+        case SET_RECOVER_PASS_ERROR: {
+            return {
+                ...state,
+                recoverPassError: action.recoverPassError
             }
         }
         default:

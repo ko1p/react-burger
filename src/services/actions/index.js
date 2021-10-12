@@ -18,6 +18,10 @@ export const SET_REGISTER_IS_FETCHING = 'SET_REGISTER_IS_FETCHING'
 export const SET_REGISTER_IS_SUCCESS = 'SET_REGISTER_IS_SUCCESS'
 export const SET_REGISTER_ERROR = 'SET_REGISTER_ERROR'
 export const SET_REGISTER_USER_DATA = 'SET_REGISTER_USER_DATA'
+export const SET_RECOVER_PASS_IS_FETCHING = 'SET_RECOVER_PASS_IS_FETCHING'
+export const SET_RECOVER_PASS_IS_SUCCESS = 'SET_RECOVER_PASS_IS_SUCCESS'
+export const SET_RECOVER_PASS_ERROR = 'SET_RECOVER_PASS_ERROR'
+
 
 
 const successFetchIngredients = ingredients => (
@@ -210,6 +214,57 @@ export const fetchRegister = (name, email, password) => {
             .catch(e => {
                 dispatch(setRegisterIsSuccess(false))
                 dispatch(setRegisterError(e))
+                console.log(e)
+            })
+    }
+}
+
+export const setRecoverPassIsFetching = isRecoverPassFetching => (
+    {
+        type: SET_RECOVER_PASS_IS_FETCHING,
+        isRecoverPassFetching
+    }
+)
+
+export const setRecoverPassIsSuccess = isRecoverPassSuccess => (
+    {
+        type: SET_RECOVER_PASS_IS_SUCCESS,
+        isRecoverPassSuccess
+    }
+)
+
+export const setRoverPassError = recoverPassError => (
+    {
+        type: SET_RECOVER_PASS_ERROR,
+        recoverPassError
+    }
+)
+
+export const fetchRecoverPass = email => {
+    return dispatch => {
+        dispatch(setRecoverPassIsFetching(true))
+        fetch(`${URL}/password-reset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email }),
+        })
+            .then(res => {
+                dispatch(setRecoverPassIsFetching(false))
+                if (res.ok) {
+                    dispatch(setRecoverPassIsSuccess(true))
+                    return res.json()
+                } else {
+                    throw new Error(`Произошла ошибка`)
+                }
+            })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(e => {
+                dispatch(setRecoverPassIsSuccess(false))
+                dispatch(setRoverPassError(e))
                 console.log(e)
             })
     }

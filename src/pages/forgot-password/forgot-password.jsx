@@ -2,26 +2,25 @@ import styles from "./forgot-password.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useHistory } from 'react-router-dom'
 import {Link} from "react-router-dom";
-import {useState} from "react";
-import {resetPassword} from "../../utils/api";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchRecoverPass} from "../../services/actions";
 
 export const ForgotPassword = () => {
+    const dispatch = useDispatch()
+    const isPasswordRecoverySuccessfull = useSelector(store => store.profile.isRecoverPassSuccess)
     const history = useHistory()
     const [email, setEmail] = useState('');
 
-    const formSubmitHandler = async e => {
+    useEffect(() => {
+        if (isPasswordRecoverySuccessfull) {
+            history.replace('/reset-password');
+        }
+    }, [history, isPasswordRecoverySuccessfull])
+
+    const formSubmitHandler = e => {
         e.preventDefault()
-        resetPassword(email)
-            .then((res) => {
-                if (res && res.success) {
-                    history.replace('/reset-password');
-                } else {
-                    throw new Error('При сбросе пароля произошла ошибка');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        dispatch(fetchRecoverPass(email))
     }
 
     return (
