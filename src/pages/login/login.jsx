@@ -1,15 +1,26 @@
-import React, { useRef } from 'react'
+import React, {useEffect, useRef} from 'react'
 import styles from './login.module.css'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import {fetchLoginUser} from "../../services/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 
 export const Login = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
     const passwordRef = useRef(null)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPassHide, setIsPassHide] = useState(true);
+    const name = useSelector(store => store.profile.user.name)
+
+    useEffect(() => {
+        if (name) {
+            history.replace({ pathname: '/' });
+        }
+    }, [history, name])
 
     const passwordHider = (e) => {
         let input = passwordRef.current
@@ -25,7 +36,7 @@ export const Login = () => {
     const formSubmitHandler = e => {
         e.preventDefault()
         console.log(email, password)
-        //dispatch(loginUser(email, password));
+        dispatch(fetchLoginUser(email, password))
     }
 
     return (

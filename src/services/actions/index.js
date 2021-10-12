@@ -17,14 +17,16 @@ export const UPDATE_INGREDIENTS = 'UPDATE_INGREDIENTS';
 export const SET_REGISTER_IS_FETCHING = 'SET_REGISTER_IS_FETCHING'
 export const SET_REGISTER_IS_SUCCESS = 'SET_REGISTER_IS_SUCCESS'
 export const SET_REGISTER_ERROR = 'SET_REGISTER_ERROR'
-export const SET_REGISTER_USER_DATA = 'SET_REGISTER_USER_DATA'
+export const SET_USER_DATA = 'SET_USER_DATA'
 export const SET_RECOVER_PASS_IS_FETCHING = 'SET_RECOVER_PASS_IS_FETCHING'
 export const SET_RECOVER_PASS_IS_SUCCESS = 'SET_RECOVER_PASS_IS_SUCCESS'
 export const SET_RECOVER_PASS_ERROR = 'SET_RECOVER_PASS_ERROR'
 export const SET_RESET_PASS_IS_FETCHING = 'SET_RESET_PASS_IS_FETCHING'
 export const SET_RESET_PASS_IS_SUCCESS = 'SET_RESET_PASS_IS_SUCCESS'
 export const SET_RESET_PASS_ERROR = 'SET_RESET_PASS_ERROR'
-
+export const SET_USER_LOGIN_IS_FETCHING = 'SET_USER_LOGIN_IS_FETCHING'
+export const SET_USER_LOGIN_IS_SUCCESS = 'SET_USER_LOGIN_IS_SUCCESS'
+export const SET_USER_LOGIN_ERROR = 'SET_USER_LOGIN_ERROR'
 
 
 const successFetchIngredients = ingredients => (
@@ -182,9 +184,9 @@ export const setRegisterError = registerError => (
     }
 )
 
-export const setRegisterUserdata = user => (
+export const setUserData = user => (
     {
-        type: SET_REGISTER_USER_DATA,
+        type: SET_USER_DATA,
         user
     }
 )
@@ -210,7 +212,7 @@ export const fetchRegister = (name, email, password) => {
             })
             .then(res => {
                 console.log(res)
-                dispatch(setRegisterUserdata(res.user))
+                dispatch(setUserData(res.user))
                 setCookie('accessToken', res.accessToken);
                 setCookie('refreshToken', res.refreshToken);
             })
@@ -319,6 +321,60 @@ export const fetchResetPass = (password, token) => {
             .catch(e => {
                 dispatch(setResetPassIsSuccess(false))
                 dispatch(setResetPassError(e))
+                console.log(e)
+            })
+    }
+}
+
+export const setLoginUserIsFetching = isUserLoginFetching => (
+    {
+        type: SET_USER_LOGIN_IS_FETCHING,
+        isUserLoginFetching
+    }
+)
+
+export const setLoginUserIsSuccess = isUserLoginSuccess => (
+    {
+        type: SET_USER_LOGIN_IS_SUCCESS,
+        isUserLoginSuccess
+    }
+)
+
+export const setLoginUserError = userLoginError => (
+    {
+        type: SET_USER_LOGIN_ERROR,
+        userLoginError
+    }
+)
+
+export const fetchLoginUser = (email, password) => {
+    return dispatch => {
+        dispatch(setLoginUserIsFetching(true))
+        fetch(`${URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: password }),
+        })
+            .then(res => {
+                dispatch(setLoginUserIsFetching(false))
+                if (res.ok) {
+                    dispatch(setLoginUserIsSuccess(true))
+                    return res.json()
+                } else {
+                    throw new Error(`Произошла ошибка`)
+                }
+            })
+            .then(res => {
+                console.log(res)
+                dispatch(setUserData(res.user))
+                setCookie('accessToken', res.accessToken);
+                setCookie('refreshToken', res.refreshToken);
+            })
+            .catch(e => {
+                dispatch(setLoginUserIsSuccess(false))
+                dispatch(setLoginUserError(e))
                 console.log(e)
             })
     }
