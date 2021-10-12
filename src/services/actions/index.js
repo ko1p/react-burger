@@ -21,6 +21,9 @@ export const SET_REGISTER_USER_DATA = 'SET_REGISTER_USER_DATA'
 export const SET_RECOVER_PASS_IS_FETCHING = 'SET_RECOVER_PASS_IS_FETCHING'
 export const SET_RECOVER_PASS_IS_SUCCESS = 'SET_RECOVER_PASS_IS_SUCCESS'
 export const SET_RECOVER_PASS_ERROR = 'SET_RECOVER_PASS_ERROR'
+export const SET_RESET_PASS_IS_FETCHING = 'SET_RESET_PASS_IS_FETCHING'
+export const SET_RESET_PASS_IS_SUCCESS = 'SET_RESET_PASS_IS_SUCCESS'
+export const SET_RESET_PASS_ERROR = 'SET_RESET_PASS_ERROR'
 
 
 
@@ -233,7 +236,7 @@ export const setRecoverPassIsSuccess = isRecoverPassSuccess => (
     }
 )
 
-export const setRoverPassError = recoverPassError => (
+export const setRecoverPassError = recoverPassError => (
     {
         type: SET_RECOVER_PASS_ERROR,
         recoverPassError
@@ -264,7 +267,58 @@ export const fetchRecoverPass = email => {
             })
             .catch(e => {
                 dispatch(setRecoverPassIsSuccess(false))
-                dispatch(setRoverPassError(e))
+                dispatch(setRecoverPassError(e))
+                console.log(e)
+            })
+    }
+}
+
+export const setResetPassIsFetching = isResetPassFetching => (
+    {
+        type: SET_RESET_PASS_IS_FETCHING,
+        isResetPassFetching
+    }
+)
+
+export const setResetPassIsSuccess = isResetPassSuccess => (
+    {
+        type: SET_RESET_PASS_IS_SUCCESS,
+        isResetPassSuccess
+    }
+)
+
+export const setResetPassError = resetPassError => (
+    {
+        type: SET_RESET_PASS_ERROR,
+        resetPassError
+    }
+)
+
+export const fetchResetPass = (password, token) => {
+    return dispatch => {
+        dispatch(setResetPassIsFetching(true))
+        fetch(`${URL}/password-reset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ password: password, token: token }),
+        })
+            .then(res => {
+                dispatch(setResetPassIsFetching(false))
+                if (res.ok) {
+                    dispatch(setResetPassIsSuccess(true))
+                    return res.json()
+                } else {
+                    throw new Error(`Произошла ошибка`)
+                }
+            })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(e => {
+                dispatch(setResetPassIsSuccess(false))
+                dispatch(setResetPassError(e))
                 console.log(e)
             })
     }

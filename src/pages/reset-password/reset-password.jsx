@@ -1,15 +1,24 @@
 import styles from "../login/login.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useHistory} from "react-router-dom";
-import React, {useRef, useState} from "react";
-import {checkResetedPassword} from "../../utils/api";
+import React, {useEffect, useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchResetPass} from "../../services/actions";
 
 export const ResetPassword = () => {
+    const dispatch = useDispatch()
     const history = useHistory()
     const passwordRef = useRef(null)
     const [newPassword, setNewPassword] = useState('');
     const [code, setCode] = useState('');
     const [isPassHide, setIsPassHide] = useState(true);
+    const isPasswordResetingSuccessful = useSelector(store => store.profile.isResetPassSuccess)
+
+    useEffect(() => {
+        if (isPasswordResetingSuccessful) {
+            history.replace({ pathname: '/login' });
+        }
+    }, [history, isPasswordResetingSuccessful])
 
     const passwordHider = (e) => {
         let input = passwordRef.current
@@ -23,18 +32,7 @@ export const ResetPassword = () => {
     }
     const formSubmitHandler = e => {
         e.preventDefault()
-        checkResetedPassword(newPassword, code)
-            .then((res) => {
-                if (res && res.success) {
-                    history.replace('/login');
-                } else {
-                    throw new Error('При сбросе пароля произошла ошибка');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        //dispatch(loginUser(email, password));
+        dispatch(fetchResetPass(newPassword, code))
     }
     return (
         <div className={styles.page}>
