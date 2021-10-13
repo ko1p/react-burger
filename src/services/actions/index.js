@@ -27,6 +27,7 @@ export const SET_RESET_PASS_ERROR = 'SET_RESET_PASS_ERROR'
 export const SET_USER_LOGIN_IS_FETCHING = 'SET_USER_LOGIN_IS_FETCHING'
 export const SET_USER_LOGIN_IS_SUCCESS = 'SET_USER_LOGIN_IS_SUCCESS'
 export const SET_USER_LOGIN_ERROR = 'SET_USER_LOGIN_ERROR'
+export const SET_USER = 'SET_USER'
 
 
 const successFetchIngredients = ingredients => (
@@ -42,9 +43,9 @@ const failedFetchIngredients = () => (
     }
 )
 
-export const fetchIngredients = url => {
+export const fetchIngredients = () => {
     return dispatch => {
-        fetch(`${url}/ingredients`)
+        fetch(`${URL}/ingredients`)
             .then(res => {
                 if (res.status !== 200) {
                     throw new Error(res.status)
@@ -375,6 +376,32 @@ export const fetchLoginUser = (email, password) => {
             .catch(e => {
                 dispatch(setLoginUserIsSuccess(false))
                 dispatch(setLoginUserError(e))
+                console.log(e)
+            })
+    }
+}
+
+export const fetchUserInfo = () => {
+    return dispatch => {
+        fetch(`${URL}/auth/user`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: getCookie('accessToken')
+            },
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    throw new Error(`Произошла ошибка`)
+                }
+            })
+            .then(res => {
+                console.log(res)
+                dispatch(setUserData(res.user))
+            })
+            .catch(e => {
                 console.log(e)
             })
     }

@@ -2,10 +2,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import {AppHeader} from "../app-header/app-header";
 import {BurgerMaker} from "../../pages/burger-maker/burger-maker";
 import {useEffect} from "react";
-import {URL} from '../../utils/constants';
 import {Loader} from "../loader/loader";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchIngredients} from "../../services/actions";
+import {fetchIngredients, fetchUserInfo} from "../../services/actions";
 import {PageNotFound} from "../page-not-found/page-not-found";
 import {Register} from "../../pages/register/register";
 import {Login} from "../../pages/login/login";
@@ -18,7 +17,8 @@ function App() {
     const data = useSelector(store => store.ingredients.list)
 
     useEffect(() => {
-        dispatch(fetchIngredients(URL))
+        dispatch(fetchUserInfo())
+        dispatch(fetchIngredients())
     }, [dispatch])
 
     return (
