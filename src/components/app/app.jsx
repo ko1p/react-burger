@@ -47,8 +47,20 @@ function App() {
                     <RouteProtectedAuthorized path='/profile' exact>
                         <Profile />
                     </RouteProtectedAuthorized>
+                    <RouteProtectedAuthorized path='/profile/orders' exact>
+                        {/*<ProfileOrders />*/}
+                    </RouteProtectedAuthorized>
+                    <RouteProtectedAuthorized path='/profile/orders/:order' exact>
+                        {/*<Order />*/}
+                    </RouteProtectedAuthorized>
                     <Route path='/ingredients/:id' exact>
                         <p>Здесь будет страница ингридиента</p>
+                    </Route>
+                    <Route path='/feed' exact>
+                        <p>Здесь будет страница с фидами</p>
+                    </Route>
+                    <Route path='/feed/:id' exact>
+                        <p>Здесь будет страница фида</p>
                     </Route>
                     <Route path='*'>
                         <PageNotFound />
