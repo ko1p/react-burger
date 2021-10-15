@@ -1,9 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './profile.module.css';
 import { NavLink } from 'react-router-dom';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import {useDispatch} from "react-redux";
+import {fetchLogoutUser, fetchUserInfo} from "../../services/actions";
 
 export const Profile = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchUserInfo())
+    }, [dispatch])
+
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -11,6 +19,10 @@ export const Profile = () => {
     const inputNameRef = useRef(null)
     const inputLoginRef = useRef(null)
     const inputPasswordRef = useRef(null)
+
+    const userLogout = () => {
+        dispatch(fetchLogoutUser())
+    }
 
     const onIconClickName = () => {
         inputNameRef.current.disabled = !inputNameRef.current.disabled
@@ -23,6 +35,7 @@ export const Profile = () => {
     const onIconClickPassword = () => {
         inputPasswordRef.current.disabled = !inputPasswordRef.current.disabled
     }
+
 
     return (
         <div className={styles.container}>
@@ -39,15 +52,14 @@ export const Profile = () => {
                             История заказов
                         </p>
                     </NavLink>
-                    <NavLink
-                        to='/profile'
+                    <div
+                        onClick={userLogout}
                         className={`${styles.link}`}
-                        activeClassName={styles.active}
                     >
                         <p className={`${styles.text}text text_type_main-medium text_color_inactive`}>
                             Выход
                         </p>
-                    </NavLink>
+                    </div>
                 </nav>
 
                 <form className={`${styles.form} mt-20`}>

@@ -27,7 +27,7 @@ export const SET_RESET_PASS_ERROR = 'SET_RESET_PASS_ERROR'
 export const SET_USER_LOGIN_IS_FETCHING = 'SET_USER_LOGIN_IS_FETCHING'
 export const SET_USER_LOGIN_IS_SUCCESS = 'SET_USER_LOGIN_IS_SUCCESS'
 export const SET_USER_LOGIN_ERROR = 'SET_USER_LOGIN_ERROR'
-export const SET_USER = 'SET_USER'
+export const RESET_USER_DATA = 'RESET_USER_DATA'
 
 
 const successFetchIngredients = ingredients => (
@@ -398,8 +398,53 @@ export const fetchUserInfo = () => {
                 }
             })
             .then(res => {
-                console.log(res)
+                console.log(res, 'c сервера')
                 dispatch(setUserData(res.user))
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+}
+
+// export const setLogoutUserIsFetching = isUserLogoutFetching => (
+//     {
+//         type: SET_USER_LOGOUT_IS_FETCHING,
+//         isUserLogoutFetching
+//     }
+// )
+//
+// export const setLogoutUserIsSuccess = isUserLogoutSuccess => (
+//     {
+//         type: SET_USER_LOGOUT_IS_SUCCESS,
+//         isUserLogoutSuccess
+//     }
+// )
+//
+export const resetUserName = () => (
+    {
+        type: RESET_USER_DATA
+    }
+)
+
+export const fetchLogoutUser = () => {
+    return dispatch => {
+        fetch(`${URL}/auth/logout`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: getCookie('refreshToken') }),
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res && res.success) {
+                    setCookie('accessToken', '');
+                    setCookie('refreshToken', '');
+                    dispatch(resetUserName())
+                } else {
+                    throw new Error(`Произошла ошибка`)
+                }
             })
             .catch(e => {
                 console.log(e)

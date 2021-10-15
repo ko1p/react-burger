@@ -1,7 +1,7 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useRef} from 'react'
 import styles from './login.module.css'
 import { useState } from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useHistory, Redirect} from 'react-router-dom'
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import {fetchLoginUser} from "../../services/actions";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,11 +16,11 @@ export const Login = () => {
     const [isPassHide, setIsPassHide] = useState(true);
     const name = useSelector(store => store.profile.user.name)
 
-    useEffect(() => {
-        if (name) {
-            history.replace({ pathname: '/' });
-        }
-    }, [history, name])
+    // useEffect(() => {
+    //     if (name) {
+    //         history.replace({ pathname: '/' });
+    //     }
+    // }, [history, name])
 
     const passwordHider = (e) => {
         let input = passwordRef.current
@@ -38,39 +38,49 @@ export const Login = () => {
         console.log(email, password)
         dispatch(fetchLoginUser(email, password))
     }
+    console.log(history)
+    if (name) {
+        return (
+            <Redirect
+                to={{
+                    pathname: '/'
+                }}
+            />
+        );
+    } else {
 
-    return (
-        <div className={styles.page}>
-            <div className={styles.container}>
-                <h2 className={styles.heading}>Вход</h2>
-                <form name='register' className={styles.register} onSubmit={formSubmitHandler}>
-                    <Input
-                        type={'email'}
-                        placeholder={'E-mail'}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        name={'name'}
-                        errorText={'Ошибка'}
-                        size={'default'}
-                    />
-                    <Input
-                        type={'password'}
-                        placeholder={'Пароль'}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        icon={isPassHide ? 'ShowIcon' : 'HideIcon'}
-                        name={'password'}
-                        onIconClick={passwordHider}
-                        errorText={'Ошибка'}
-                        size={'default'}
-                        ref={passwordRef}
-                    />
+        return (
+            <div className={styles.page}>
+                <div className={styles.container}>
+                    <h2 className={styles.heading}>Вход</h2>
+                    <form name='register' className={styles.register} onSubmit={formSubmitHandler}>
+                        <Input
+                            type={'email'}
+                            placeholder={'E-mail'}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            name={'name'}
+                            errorText={'Ошибка'}
+                            size={'default'}
+                        />
+                        <Input
+                            type={'password'}
+                            placeholder={'Пароль'}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            icon={isPassHide ? 'ShowIcon' : 'HideIcon'}
+                            name={'password'}
+                            onIconClick={passwordHider}
+                            errorText={'Ошибка'}
+                            size={'default'}
+                            ref={passwordRef}
+                        />
 
 
-                    <Button type="primary" size="medium">
-                        Войти
-                    </Button>
-                </form>
+                        <Button type="primary" size="medium">
+                            Войти
+                        </Button>
+                    </form>
 
                     <p className={'text text_type_main-default text_color_inactive mt-20'}>
                         Вы - новый пользователь?&nbsp;
@@ -80,7 +90,8 @@ export const Login = () => {
                         Забыли пароль?&nbsp;
                         <Link to='/forgot-password' className={styles.link}>Восстановить пароль</Link>
                     </p>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }

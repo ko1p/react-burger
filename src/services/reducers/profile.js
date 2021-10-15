@@ -12,6 +12,7 @@ import {
     SET_RESET_PASS_IS_FETCHING,
     SET_RESET_PASS_IS_SUCCESS,
     SET_RESET_PASS_ERROR,
+    RESET_USER_DATA,
 
 } from '../actions'
 
@@ -58,6 +59,12 @@ export const profile = (state = initialStateProfile, action) => {
             return {
                 ...state,
                 user: action.user
+            }
+        }
+        case RESET_USER_DATA: {
+            return {
+                ...state,
+                user: initialStateProfile.user
             }
         }
         case SET_RECOVER_PASS_IS_FETCHING: {

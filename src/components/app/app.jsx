@@ -11,6 +11,9 @@ import {Login} from "../../pages/login/login";
 import {ForgotPassword} from "../../pages/forgot-password/forgot-password";
 import {ResetPassword} from "../../pages/reset-password/reset-password";
 import {Profile} from "../../pages/profile/profile";
+import {RouteProtectedUnauthorized} from "../route-protected-unauthorized/route-protected-unauthorized";
+import {RouteProtectedReset} from "../route-protected-reset/route-protected-reset";
+import {RouteProtectedAuthorized} from "../route-protected-authorized/route-protected-authorized";
 
 function App() {
     const dispatch = useDispatch()
@@ -29,21 +32,21 @@ function App() {
                     <Route path='/' exact>
                         { data ? <BurgerMaker data={data}/> : <Loader /> }
                     </Route>
-                    <Route path='/login' exact>
+                    <RouteProtectedUnauthorized path='/login' exact>
                         <Login />
-                    </Route>
-                    <Route path='/register' exact>
+                    </RouteProtectedUnauthorized>
+                    <RouteProtectedUnauthorized path='/register' exact>
                         <Register />
-                    </Route>
-                    <Route path='/forgot-password' exact>
+                    </RouteProtectedUnauthorized>
+                    <RouteProtectedUnauthorized path='/forgot-password' exact>
                         <ForgotPassword />
-                    </Route>
-                    <Route path='/reset-password' exact>
+                    </RouteProtectedUnauthorized>
+                    <RouteProtectedReset path='/reset-password' exact>
                         <ResetPassword />
-                    </Route>
-                    <Route path='/profile' exact>
+                    </RouteProtectedReset>
+                    <RouteProtectedAuthorized path='/profile' exact>
                         <Profile />
-                    </Route>
+                    </RouteProtectedAuthorized>
                     <Route path='/ingredients/:id' exact>
                         <p>Здесь будет страница ингридиента</p>
                     </Route>

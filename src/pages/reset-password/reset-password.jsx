@@ -1,24 +1,24 @@
 import styles from "../login/login.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, useHistory} from "react-router-dom";
-import React, {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {Link, } from "react-router-dom";
+import React, {useRef, useState} from "react";
+import {useDispatch} from "react-redux";
 import {fetchResetPass} from "../../services/actions";
 
 export const ResetPassword = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
+    // const history = useHistory()
     const passwordRef = useRef(null)
     const [newPassword, setNewPassword] = useState('');
     const [code, setCode] = useState('');
     const [isPassHide, setIsPassHide] = useState(true);
-    const isPasswordResetingSuccessful = useSelector(store => store.profile.isResetPassSuccess)
-
-    useEffect(() => {
-        if (isPasswordResetingSuccessful) {
-            history.replace({ pathname: '/login' });
-        }
-    }, [history, isPasswordResetingSuccessful])
+    // const isPasswordResetingSuccessful = useSelector(store => store.profile.isResetPassSuccess)
+    //
+    // useEffect(() => {
+    //     if (isPasswordResetingSuccessful) {
+    //         history.replace({ pathname: '/login' });
+    //     }
+    // }, [history, isPasswordResetingSuccessful])
 
     const passwordHider = (e) => {
         let input = passwordRef.current
