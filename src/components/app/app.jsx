@@ -14,6 +14,7 @@ import {Profile} from "../../pages/profile/profile";
 import {RouteProtectedUnauthorized} from "../route-protected-unauthorized/route-protected-unauthorized";
 import {RouteProtectedReset} from "../route-protected-reset/route-protected-reset";
 import {RouteProtectedAuthorized} from "../route-protected-authorized/route-protected-authorized";
+import {ProfileOrders} from "../../pages/profile-orders/profile-orders";
 
 function App() {
     const dispatch = useDispatch()
@@ -48,7 +49,7 @@ function App() {
                         <Profile />
                     </RouteProtectedAuthorized>
                     <RouteProtectedAuthorized path='/profile/orders' exact>
-                        {/*<ProfileOrders />*/}
+                        <ProfileOrders />
                     </RouteProtectedAuthorized>
                     <RouteProtectedAuthorized path='/profile/orders/:order' exact>
                         {/*<Order />*/}

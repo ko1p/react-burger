@@ -29,6 +29,36 @@ export const SET_USER_LOGIN_IS_SUCCESS = 'SET_USER_LOGIN_IS_SUCCESS'
 export const SET_USER_LOGIN_ERROR = 'SET_USER_LOGIN_ERROR'
 export const RESET_USER_DATA = 'RESET_USER_DATA'
 
+export const fetchRefreshToken = () => {
+    return dispatch => {
+        fetch(`${URL}/auth/token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: getCookie('refreshToken') }),
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    throw new Error('Произошла ошибка')
+                }
+            })
+            .then(res => {
+                if (res && res.success) {
+                    setCookie('accessToken', res.accessToken);
+                    setCookie('refreshToken', res.refreshToken);
+                    dispatch(setUserData(res.user))
+                } else {
+                    throw new Error(`Произошла ошибка`)
+                }
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+}
 
 const successFetchIngredients = ingredients => (
     {
@@ -369,9 +399,9 @@ export const fetchLoginUser = (email, password) => {
             })
             .then(res => {
                 console.log(res)
-                dispatch(setUserData(res.user))
                 setCookie('accessToken', res.accessToken);
                 setCookie('refreshToken', res.refreshToken);
+                dispatch(setUserData(res.user))
             })
             .catch(e => {
                 dispatch(setLoginUserIsSuccess(false))
@@ -390,19 +420,20 @@ export const fetchUserInfo = () => {
                 Authorization: getCookie('accessToken')
             },
         })
+            .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                } else {
-                    throw new Error(`Произошла ошибка`)
-                }
-            })
-            .then(res => {
-                console.log(res, 'c сервера')
+                console.log('токен ещё свежий')
                 dispatch(setUserData(res.user))
             })
             .catch(e => {
                 console.log(e)
+                if (e.message === 'jwt expired') {
+                    console.log('токен просрочился, обновляю')
+                    dispatch(fetchRefreshToken())
+                } else {
+                    return Promise.reject(e);
+                }
+
             })
     }
 }

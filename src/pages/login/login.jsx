@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import styles from './login.module.css'
 import { useState } from 'react'
-import {Link, useHistory, Redirect} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import {fetchLoginUser} from "../../services/actions";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 export const Login = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
+    // const history = useHistory()
     const passwordRef = useRef(null)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -38,7 +38,7 @@ export const Login = () => {
         console.log(email, password)
         dispatch(fetchLoginUser(email, password))
     }
-    console.log(history)
+
     if (name) {
         return (
             <Redirect

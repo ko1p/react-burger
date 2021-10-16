@@ -7,13 +7,13 @@ export const AppHeader = () => {
     const isMainPage = !!useRouteMatch({ path: '/', exact: true});
     const isFeedPage = !!useRouteMatch('/feed');
     const isProfilePage = !!useRouteMatch('/profile')
-    console.log(isMainPage, 'isMainPage', 'isFeed', isProfilePage, 'isProfilePage')
+
     return (
         <header className={styles.header}>
             <div className={styles.container}>
                 <nav className={styles.nav}>
                     <ul className={styles.buttons}>
-                        <Link className={styles.link} isMainPage to='/'>
+                        <Link className={styles.link} to='/'>
                             <li className={`${styles.button} p-5 mr-2`}>
                                 <BurgerIcon type={`${isMainPage ? 'primary' : 'secondary'}`} />
                                 <p className={`text text_type_main-default ${!isMainPage && 'text_color_inactive'} ml-4`} >

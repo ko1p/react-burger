@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './profile.module.css';
-import { NavLink } from 'react-router-dom';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch} from "react-redux";
-import {fetchLogoutUser, fetchUserInfo} from "../../services/actions";
+import {fetchUserInfo} from "../../services/actions";
+import {ProfileNav} from "../../components/profile-nav/profile-nav";
 
 export const Profile = () => {
     const dispatch = useDispatch()
@@ -20,10 +20,6 @@ export const Profile = () => {
     const inputLoginRef = useRef(null)
     const inputPasswordRef = useRef(null)
 
-    const userLogout = () => {
-        dispatch(fetchLogoutUser())
-    }
-
     const onIconClickName = () => {
         inputNameRef.current.disabled = !inputNameRef.current.disabled
     }
@@ -36,31 +32,11 @@ export const Profile = () => {
         inputPasswordRef.current.disabled = !inputPasswordRef.current.disabled
     }
 
-
     return (
         <div className={styles.container}>
 
             <div className={styles.box}>
-                <nav className={`${styles.nav} mr-15 mt-20`}>
-                    <NavLink to='/profile' className={`${styles.link} text_color_inactive`} activeClassName={styles.active}>
-                        <p className={`${styles.text}text text_type_main-medium`}>
-                            Профиль
-                        </p>
-                    </NavLink>
-                    <NavLink to='/profile/orders' className={`${styles.link}`} activeClassName={styles.active}>
-                        <p className={`${styles.text}text text_type_main-medium text_color_inactive`}>
-                            История заказов
-                        </p>
-                    </NavLink>
-                    <div
-                        onClick={userLogout}
-                        className={`${styles.link}`}
-                    >
-                        <p className={`${styles.text}text text_type_main-medium text_color_inactive`}>
-                            Выход
-                        </p>
-                    </div>
-                </nav>
+                <ProfileNav />
 
                 <form className={`${styles.form} mt-20`}>
                     <Input
@@ -106,10 +82,9 @@ export const Profile = () => {
                         size={'default'}
                     />
                 </form>
+
             </div>
-            <p className={`${styles.description} text text_type_main-default text_color_inactive mt-20`}>
-                В этом разделе вы можете изменить свои персональные данные
-            </p>
+
         </div>
 
     );
