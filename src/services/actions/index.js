@@ -49,7 +49,7 @@ export const fetchRefreshToken = () => {
                 if (res && res.success) {
                     setCookie('accessToken', res.accessToken);
                     setCookie('refreshToken', res.refreshToken);
-                    dispatch(setUserData(res.user))
+                    dispatch(fetchUserInfo())
                 } else {
                     throw new Error(`Произошла ошибка`)
                 }
