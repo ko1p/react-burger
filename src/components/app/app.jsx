@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import {AppHeader} from "../app-header/app-header";
 import {BurgerMaker} from "../../pages/burger-maker/burger-maker";
 import {useEffect} from "react";
@@ -15,10 +15,23 @@ import {RouteProtectedUnauthorized} from "../route-protected-unauthorized/route-
 import {RouteProtectedReset} from "../route-protected-reset/route-protected-reset";
 import {RouteProtectedAuthorized} from "../route-protected-authorized/route-protected-authorized";
 import {ProfileOrders} from "../../pages/profile-orders/profile-orders";
+import {IngredientDetails} from "../ingredient-details/ingredient-details";
+import {Modal} from "../modal/modal";
+import {Ingredient} from "../../pages/ingredient/ingredient";
 
 function App() {
     const dispatch = useDispatch()
+    let location = useLocation();
+    let history = useHistory();
     const data = useSelector(store => store.ingredients.list)
+
+    const action = history.action ==='PUSH' || history.action ==='REPLACE';
+    const isModalIngredientOpen = action && location.state && location.state.ingredientModal;
+
+    const closeModal = () => {
+        console.log('Модалка закрылась')
+        history.goBack();
+    }
 
     useEffect(() => {
         dispatch(fetchUserInfo())
@@ -27,9 +40,8 @@ function App() {
 
     return (
         <>
-            <Router>
                 <AppHeader/>
-                <Switch>
+                <Switch location={isModalIngredientOpen || location}>
                     <Route path='/' exact>
                         { data ? <BurgerMaker data={data}/> : <Loader /> }
                     </Route>
@@ -55,7 +67,7 @@ function App() {
                         {/*<Order />*/}
                     </RouteProtectedAuthorized>
                     <Route path='/ingredients/:id' exact>
-                        <p>Здесь будет страница ингридиента</p>
+                        <Ingredient />
                     </Route>
                     <Route path='/feed' exact>
                         <p>Здесь будет страница с фидами</p>
@@ -67,7 +79,15 @@ function App() {
                         <PageNotFound />
                     </Route>
                 </Switch>
-            </Router>
+                {
+                    isModalIngredientOpen && (
+                        <Route path='/ingredients/:id' exact>
+                            <Modal closeModal={closeModal}>
+                                <IngredientDetails />
+                            </Modal>
+                        </Route>
+                    )
+                }
         </>
     );
 }

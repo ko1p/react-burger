@@ -1,10 +1,12 @@
 import React from "react";
+import {Link, useLocation} from 'react-router-dom'
 import styles from "./burger-ingredients.module.css"
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {IngredientCard} from "../ingredient-card/ingredient-card";
 import {useSelector} from "react-redux";
 
 export const BurgerIngredients = () => {
+    const location = useLocation()
     const [current, setCurrent] = React.useState('bun')
     const data = useSelector(store => store.ingredients.list)
 
@@ -64,10 +66,20 @@ export const BurgerIngredients = () => {
                             </p>
                             <ul className={`${styles.items} pt-6 pb-10 pr-4 pl-4`}>
                                 {ingredientFilter((item.type)).map(card =>
-                                    <IngredientCard
+                                    <Link
+                                        className={styles.link}
                                         key={card._id}
-                                        card={card}
-                                    />)}
+                                        to={{
+                                            pathname: `/ingredients/${card._id}`,
+                                            state: {ingredientModal: location}
+                                        }}
+                                    >
+                                        <IngredientCard
+                                            key={card._id}
+                                            card={card}
+                                        />
+                                    </Link>
+                                )}
                             </ul>
                         </div>)
                 })}
