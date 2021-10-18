@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './profile.module.css';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ProfileNav} from "../../components/profile-nav/profile-nav";
 import {fetchUserInfo} from "../../services/actions/profile";
 
@@ -12,8 +12,13 @@ export const Profile = () => {
         dispatch(fetchUserInfo())
     }, [dispatch])
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
+    const {userName, userEmail} = useSelector(store => ({
+        userName: store.profile.user.name,
+        userEmail: store.profile.user.email,
+    }))
+
+    const [name, setName] = useState(userName || '')
+    const [email, setEmail] = useState(userEmail || '')
     const [password, setPassword] = useState('')
 
     const inputNameRef = useRef(null)
