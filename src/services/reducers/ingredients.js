@@ -1,4 +1,4 @@
-import {SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS} from "../actions";
+import {SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS} from "../actions/ingredients";
 
 const initialStateIngredients = {
     isRequesting: false,

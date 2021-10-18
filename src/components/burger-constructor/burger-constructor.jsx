@@ -5,16 +5,13 @@ import {URL} from "../../utils/constants";
 import {orderData} from "../../utils/orderData";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
-import {
-    openOrderModal,
-    setModalData,
-    fetchOrderData,
-    addConstructorIngredient, setConstructorBun, updateIngredients
-} from "../../services/actions";
 import update from 'immutability-helper';
 import {ConstructorItem} from "../constructor-item/constructor-item";
 import {useHistory} from "react-router-dom";
 import {getCookie} from "../../utils/cookie";
+import {addConstructorIngredient, setConstructorBun, updateIngredients} from "../../services/actions/burgerConstructor";
+import {fetchOrderData} from "../../services/actions/order";
+import {openOrderModal, setModalData} from "../../services/actions/modal";
 
 
 export const BurgerConstructor = () => {

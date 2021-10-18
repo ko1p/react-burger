@@ -4,8 +4,6 @@ import {useSelector} from "react-redux";
 import {useLocation, useParams} from "react-router-dom";
 
 export const IngredientDetails = () => {
-    // const data = useSelector(store => store.modal.data)
-
     const [data, setData] = useState('');
     const location = useLocation()
     const params = useParams()

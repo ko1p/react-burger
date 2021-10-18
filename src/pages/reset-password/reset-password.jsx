@@ -3,7 +3,7 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {Link, } from "react-router-dom";
 import React, {useRef, useState} from "react";
 import {useDispatch} from "react-redux";
-import {fetchResetPass} from "../../services/actions";
+import {fetchResetPass} from "../../services/actions/profile";
 
 export const ResetPassword = () => {
     const dispatch = useDispatch()
@@ -12,13 +12,6 @@ export const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState('');
     const [code, setCode] = useState('');
     const [isPassHide, setIsPassHide] = useState(true);
-    // const isPasswordResetingSuccessful = useSelector(store => store.profile.isResetPassSuccess)
-    //
-    // useEffect(() => {
-    //     if (isPasswordResetingSuccessful) {
-    //         history.replace({ pathname: '/login' });
-    //     }
-    // }, [history, isPasswordResetingSuccessful])
 
     const passwordHider = (e) => {
         let input = passwordRef.current

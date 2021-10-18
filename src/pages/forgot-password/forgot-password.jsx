@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchRecoverPass} from "../../services/actions";
+import {fetchRecoverPass} from "../../services/actions/profile";
 
 export const ForgotPassword = () => {
     const dispatch = useDispatch()

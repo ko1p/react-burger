@@ -1,4 +1,4 @@
-import {SET_ORDER_FETCH_ERROR} from "../actions";
+import {SET_ORDER_FETCH_ERROR} from "../actions/order";
 
 const initialStateOrder = {
     isRequesting: false,

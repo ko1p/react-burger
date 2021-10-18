@@ -3,8 +3,9 @@ import styles from './login.module.css'
 import { useState } from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import {fetchLoginUser} from "../../services/actions";
+
 import {useDispatch, useSelector} from "react-redux";
+import {fetchLoginUser} from "../../services/actions/profile";
 
 
 export const Login = () => {
@@ -15,12 +16,6 @@ export const Login = () => {
     const [password, setPassword] = useState('');
     const [isPassHide, setIsPassHide] = useState(true);
     const name = useSelector(store => store.profile.user.name)
-
-    // useEffect(() => {
-    //     if (name) {
-    //         history.replace({ pathname: '/' });
-    //     }
-    // }, [history, name])
 
     const passwordHider = (e) => {
         let input = passwordRef.current

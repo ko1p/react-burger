@@ -3,19 +3,9 @@ import { Link  } from 'react-router-dom'
 import styles from './register.module.css'
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
-import { fetchRegister } from "../../services/actions";
+import {fetchRegister} from "../../services/actions/profile";
 
 export const Register = () => {
-    // const history = useHistory()
-    // const name = useSelector(store => store.profile.user.name)
-
-    // useEffect(() => {
-    //     if (name) {
-    //         history.replace({ pathname: '/' });
-    //     }
-    // }, [name, history]);
-
-
     const dispatch = useDispatch()
     const passwordRef = useRef(null)
     const [userName, setUserName] = useState('');

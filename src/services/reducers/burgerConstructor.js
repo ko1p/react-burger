@@ -1,9 +1,8 @@
 import {
     ADD_CONSTRUCTOR_INGREDIENT,
     REMOVE_CONSTRUCTOR_INGREDIENT,
-    SET_CONSTRUCTOR_BUN,
-    UPDATE_INGREDIENTS
-} from "../actions";
+    SET_CONSTRUCTOR_BUN, UPDATE_INGREDIENTS
+} from "../actions/burgerConstructor";
 
 const initialStateConstructor = {
     bun: {},

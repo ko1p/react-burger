@@ -4,7 +4,6 @@ import {BurgerMaker} from "../../pages/burger-maker/burger-maker";
 import {useEffect} from "react";
 import {Loader} from "../loader/loader";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchIngredients, fetchUserInfo} from "../../services/actions";
 import {PageNotFound} from "../page-not-found/page-not-found";
 import {Register} from "../../pages/register/register";
 import {Login} from "../../pages/login/login";
@@ -18,6 +17,8 @@ import {ProfileOrders} from "../../pages/profile-orders/profile-orders";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import {Modal} from "../modal/modal";
 import {Ingredient} from "../../pages/ingredient/ingredient";
+import {fetchUserInfo} from "../../services/actions/profile";
+import {fetchIngredients} from "../../services/actions/ingredients";
 
 function App() {
     const dispatch = useDispatch()

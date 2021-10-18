@@ -4,7 +4,7 @@ import {
     SET_MODAL_CLOSE,
     SET_MODAL_DATA,
     SET_ORDER_MODAL_OPEN
-} from "../actions";
+} from "../actions/modal";
 
 const initialStateModal = {
     isOpen: false,
