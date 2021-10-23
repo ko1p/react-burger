@@ -1,0 +1,56 @@
+.container {
+    width: 885px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    color: #fff;
+}
+
+.box {
+    display: flex;
+}
+
+.nav {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+.text {
+    line-height: 30px;
+}
+
+.link {
+    width: 320px;
+    text-decoration: none;
+}
+
+
+.link:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+}
+
+.form div {
+    width: 100%;
+    text-align: right;
+}
+
+.info {
+    display: flex;
+}
+
+.description {
+    width: 320px;
+}

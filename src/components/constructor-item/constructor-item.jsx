@@ -2,9 +2,9 @@ import React, { useRef } from 'react';
 import styles from './constructor-item.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
-import {removeConstructorIngredient, UPDATE_INGREDIENTS} from '../../services/actions';
 import { useDrag, useDrop } from "react-dnd";
 import PropTypes from 'prop-types';
+import {removeConstructorIngredient, UPDATE_INGREDIENTS} from "../../services/actions/burgerConstructor";
 
 export const ConstructorItem = ({ id, index, moveCard, card }) => {
     const dispatch = useDispatch()

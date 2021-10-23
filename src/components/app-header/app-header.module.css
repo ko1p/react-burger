@@ -35,3 +35,7 @@
 .link:hover {
     opacity: .7;
 }
+
+.active {
+    color: white;
+}

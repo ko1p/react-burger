@@ -2,8 +2,7 @@ import React from "react";
 import styles from "../burger-ingredients/burger-ingredients.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import { cardPropTypes } from '../types/types';
-import {openIngredientsModal, setModalData} from "../../services/actions";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import {useDrag} from "react-dnd";
 
 export const IngredientCard = ({card}) => {
@@ -26,13 +25,7 @@ export const IngredientCard = ({card}) => {
         return count;
     }
 
-    const dispatch = useDispatch()
-    const dataToModal = info => {
-        dispatch(openIngredientsModal())
-        dispatch(setModalData(info))
-    }
-
-    return <li className={`${styles.item}`} onClick={() => dataToModal(card)} ref={dragRef}
+    return <li className={`${styles.item}`}  ref={dragRef}
                style={{opacity: `${opacity}`}}>
         {counter() > 0 && <Counter count={counter()} size="default"/>}
         <img className="pl-4 pr-4" src={card.image}

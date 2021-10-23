@@ -5,22 +5,21 @@ import {URL} from "../../utils/constants";
 import {orderData} from "../../utils/orderData";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
-import {
-    openOrderModal,
-    setModalData,
-    fetchOrderData,
-    addConstructorIngredient, setConstructorBun, updateIngredients
-} from "../../services/actions";
 import update from 'immutability-helper';
 import {ConstructorItem} from "../constructor-item/constructor-item";
+import {useHistory} from "react-router-dom";
+import {getCookie} from "../../utils/cookie";
+import {addConstructorIngredient, setConstructorBun, updateIngredients} from "../../services/actions/burgerConstructor";
+import {fetchOrderData} from "../../services/actions/order";
+import {openOrderModal, setModalData} from "../../services/actions/modal";
 
 
 export const BurgerConstructor = () => {
-
+    const history = useHistory()
     const dispatch = useDispatch()
-    const {bun, ingredients} = useSelector(store => ({
+    const { bun, ingredients } = useSelector(store => ({
         bun: store.burgerConstructor.bun,
-        ingredients: store.burgerConstructor.ingredients
+        ingredients: store.burgerConstructor.ingredients,
     }))
 
     const totalOrderPrice = () => {
@@ -49,9 +48,13 @@ export const BurgerConstructor = () => {
     });
 
     const setDataAndOpenModal = (cardData) => {
-        dispatch(fetchOrderData(URL, orderIngredients()))
-        dispatch(openOrderModal())
-        dispatch(setModalData(cardData))
+        if (getCookie('accessToken')) {
+            dispatch(fetchOrderData(URL, orderIngredients()))
+            dispatch(openOrderModal())
+            dispatch(setModalData(cardData))
+        } else {
+            history.push('/login')
+        }
     }
 
     const moveCard = useCallback((dragIndex, hoverIndex) => {
