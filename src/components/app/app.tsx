@@ -1,36 +1,36 @@
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
-import {AppHeader} from "../app-header/app-header";
-import {BurgerMaker} from "../../pages/burger-maker/burger-maker";
-import {useEffect} from "react";
-import {Loader} from "../loader/loader";
-import {useDispatch, useSelector} from "react-redux";
-import {PageNotFound} from "../page-not-found/page-not-found";
-import {Register} from "../../pages/register/register";
-import {Login} from "../../pages/login/login";
-import {ForgotPassword} from "../../pages/forgot-password/forgot-password";
-import {ResetPassword} from "../../pages/reset-password/reset-password";
-import {Profile} from "../../pages/profile/profile";
-import {RouteProtectedUnauthorized} from "../route-protected-unauthorized/route-protected-unauthorized";
-import {RouteProtectedReset} from "../route-protected-reset/route-protected-reset";
-import {RouteProtectedAuthorized} from "../route-protected-authorized/route-protected-authorized";
-import {ProfileOrders} from "../../pages/profile-orders/profile-orders";
-import {IngredientDetails} from "../ingredient-details/ingredient-details";
-import {Modal} from "../modal/modal";
-import {Ingredient} from "../../pages/ingredient/ingredient";
-import {fetchUserInfo} from "../../services/actions/profile";
-import {fetchIngredients} from "../../services/actions/ingredients";
+import { AppHeader } from "../app-header/app-header";
+import { BurgerMaker } from "../../pages/burger-maker/burger-maker";
+import { useEffect, FC } from "react";
+import { Loader } from "../loader/loader";
+import { useDispatch, useSelector } from "react-redux";
+import { PageNotFound } from "../page-not-found/page-not-found";
+import { Register } from "../../pages/register/register";
+import { Login } from "../../pages/login/login";
+import { ForgotPassword } from "../../pages/forgot-password/forgot-password";
+import { ResetPassword } from "../../pages/reset-password/reset-password";
+import { Profile } from "../../pages/profile/profile";
+import { RouteProtectedUnauthorized } from "../route-protected-unauthorized/route-protected-unauthorized";
+import { RouteProtectedReset } from "../route-protected-reset/route-protected-reset";
+import { RouteProtectedAuthorized } from "../route-protected-authorized/route-protected-authorized";
+import { ProfileOrders } from "../../pages/profile-orders/profile-orders";
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { Modal } from "../modal/modal";
+import { Ingredient } from "../../pages/ingredient/ingredient";
+import { fetchUserInfo } from "../../services/actions/profile";
+import { fetchIngredients } from "../../services/actions/ingredients";
+import {ILocation, IStore} from "../../types";
 
-function App() {
+export const App: FC = () => {
     const dispatch = useDispatch()
-    let location = useLocation();
+    let location = useLocation<ILocation>();
     let history = useHistory();
-    const data = useSelector(store => store.ingredients.list)
+    const data = useSelector((store: IStore) => store.ingredients.list)
 
     const action = history.action ==='PUSH' || history.action ==='REPLACE';
     const isModalIngredientOpen = action && location.state && location.state.ingredientModal;
 
     const closeModal = () => {
-        console.log('Модалка закрылась')
         history.goBack();
     }
 
@@ -44,7 +44,7 @@ function App() {
                 <AppHeader/>
                 <Switch location={isModalIngredientOpen || location}>
                     <Route path='/' exact>
-                        { data ? <BurgerMaker data={data}/> : <Loader /> }
+                        { data ? <BurgerMaker/> : <Loader /> }
                     </Route>
                     <RouteProtectedUnauthorized path='/login' exact>
                         <Login />
