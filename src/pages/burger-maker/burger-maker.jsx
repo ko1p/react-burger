@@ -4,7 +4,7 @@ import {BurgerIngredients} from "../../components/burger-ingredients/burger-ingr
 import {BurgerConstructor} from "../../components/burger-constructor/burger-constructor";
 import {Modal} from "../../components/modal/modal";
 import {IngredientDetails} from "../../components/ingredient-details/ingredient-details";
-import {OrderDetails} from "../../components/order-details/order-detaild";
+import {OrderDetails} from "../../components/order-details/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";

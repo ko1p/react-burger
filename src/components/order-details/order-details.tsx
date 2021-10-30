@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './order-details.module.css';
 import orderAccepted from '../../images/order-accepted.gif'
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
-export const OrderDetails = () => {
+export const OrderDetails: FC = () => {
     const info = useSelector(store => store.modal.data)
     return (
         <div className={`${styles.container} pt-30 pr-25 pb-30 pl-25`}>
