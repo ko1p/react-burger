@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from './app-header.module.css'
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useRouteMatch } from 'react-router-dom'
 
-export const AppHeader = () => {
+export const AppHeader: FC = () => {
     const isMainPage = !!useRouteMatch({ path: '/', exact: true});
     const isFeedPage = !!useRouteMatch('/feed');
     const isProfilePage = !!useRouteMatch('/profile')
