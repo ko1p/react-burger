@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ModalOverlay } from '../modal-overlay/modal-overlay'
-import PropTypes from 'prop-types';
+import { IModalProps } from "../../types";
 
-export const Modal: FC = ({ closeModal, children, escButtonHandler }) => {
+export const Modal: FC<IModalProps> = ({ closeModal, children }) => {
     useEffect(() => {
-        document.addEventListener('keydown', escButtonHandler)
+        document.addEventListener('keydown', closeModal)
         return () => {
-            document.removeEventListener('keydown', escButtonHandler)
+            document.removeEventListener('keydown', closeModal)
         }
     })
     return ReactDOM.createPortal(
@@ -22,12 +22,6 @@ export const Modal: FC = ({ closeModal, children, escButtonHandler }) => {
                 {children}
             </section>
         </>,
-        document.getElementById("modal")
+        document.getElementById("modal") as HTMLElement
     )
 }
-
-Modal.propTypes = {
-    children: PropTypes.object.isRequired,
-    closeModal: PropTypes.func.isRequired,
-    escButtonHandler: PropTypes.func.isRequired
-};
