@@ -1,21 +1,21 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import styles from './ingredient-details.module.css';
-import {useSelector} from "react-redux";
-import {useLocation, useParams} from "react-router-dom";
+import React, { FC, useCallback, useEffect, useState } from 'react'
+import styles from './ingredient-details.module.css'
+import { useSelector } from "react-redux"
+import { useLocation, useParams } from "react-router-dom"
+import { IStore, IIngredient } from "../../types";
 
-export const IngredientDetails = () => {
-    const [data, setData] = useState('');
+export const IngredientDetails: FC = () => {
+    const [data, setData] = useState<IIngredient>();
     const location = useLocation()
     const params = useParams()
-    const {id} = useParams()
+    const { id } = useParams<{ id: string}>()
     console.log(params, 'params', location, 'location', id, 'id')
 
-    const cards = useSelector(store => store.ingredients.list)
+    const cards = useSelector((store: IStore) => store.ingredients.list)
 
     const loadIndredient = useCallback(
         () => {
-            console.log(cards, 'cards')
-            const card = (cards ? cards.find(item => item._id === id) : {});
+            const card = (cards ? cards.find((item: IIngredient) => item._id === id) : {});
             setData(card);
         },
         [id, cards]
