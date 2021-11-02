@@ -1,3 +1,26 @@
+import { store } from "./services/store";
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export interface IIngredient {
+    _id: string,
+    name: string,
+    type: string,
+    proteins: number,
+    fat: number,
+    carbohydrates: number,
+    calories: number,
+    price: number,
+    image: string,
+    image_mobile: string,
+    image_large: string,
+    __v: number,
+}
+
+export interface IIngredientWithUuid extends IIngredient {
+    uuid: string,
+}
+
 export interface IStore {
     ingredients: any,
     modal: {
@@ -11,7 +34,10 @@ export interface IStore {
             }
         }
     },
-    burgerConstructor: any,
+    burgerConstructor: {
+        ingredients: IIngredientWithUuid[],
+        bun: IIngredient,
+    }
     order: any,
     profile: any,
 }
@@ -40,5 +66,13 @@ export interface ILocation {
 export type Info = {
     order?: {
         number?: number | string
+    }
+}
+
+export type TOrder = {
+    "success": boolean,
+    "name": string,
+    "order": {
+        "number": number
     }
 }
