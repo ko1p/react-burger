@@ -22,7 +22,9 @@ export interface IIngredientWithUuid extends IIngredient {
 }
 
 export interface IStore {
-    ingredients: any,
+    ingredients: {
+        list: IIngredient[],
+    },
     modal: {
         isOpen: boolean,
         type: any,
