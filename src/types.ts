@@ -60,6 +60,11 @@ export interface IConstructorItemProps {
     card: IIngredientWithUuid
 }
 
+export interface IIngredientCardProps {
+    key: string,
+    card: IIngredient
+}
+
 export interface ILocation {
     from: {
         pathname: string;
