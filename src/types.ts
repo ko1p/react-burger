@@ -1,3 +1,5 @@
+import {ModalOverlay} from "./components/modal-overlay/modal-overlay";
+
 export interface IIngredient {
     _id: string,
     name: string,
@@ -63,6 +65,10 @@ export interface IConstructorItemProps {
 export interface IIngredientCardProps {
     key: string,
     card: IIngredient
+}
+
+export interface IModalOverlayProps {
+    closeModal: () => void,
 }
 
 export interface ILocation {
