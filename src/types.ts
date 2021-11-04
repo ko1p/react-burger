@@ -1,7 +1,3 @@
-import { store } from "./services/store";
-
-export type RootState = ReturnType<typeof store.getState>;
-
 export interface IIngredient {
     _id: string,
     name: string,
@@ -55,6 +51,13 @@ export interface ILocation {
 
 export interface IModalProps {
     closeModal: () => void,
+}
+
+export interface IConstructorItemProps {
+    id: string,
+    index: number,
+    moveCard: (dragIndex: number, hoverIndex: number) => void,
+    card: IIngredientWithUuid
 }
 
 export interface ILocation {

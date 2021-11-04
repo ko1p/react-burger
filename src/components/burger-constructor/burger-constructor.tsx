@@ -61,7 +61,7 @@ export const BurgerConstructor: FC = () => {
         }
     }
 
-    const moveCard = useCallback((dragIndex, hoverIndex) => {
+    const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
         const dragCard = ingredients[dragIndex];
         dispatch(updateIngredients(
             update(ingredients, {
