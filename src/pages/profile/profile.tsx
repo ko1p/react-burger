@@ -1,18 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styles from './profile.module.css';
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from "react-redux";
-import { ProfileNav } from "../../components/profile-nav/profile-nav";
-import { fetchUserInfo } from "../../services/actions/profile";
+import React, { FC, useEffect, useRef, useState } from 'react'
+import styles from './profile.module.css'
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useDispatch, useSelector } from "react-redux"
+import { ProfileNav } from "../../components/profile-nav/profile-nav"
+import { fetchUserInfo } from "../../services/actions/profile"
+import { IStore } from "../../types"
 
-export const Profile = () => {
+export const Profile: FC = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchUserInfo())
     }, [dispatch])
 
-    const {userName, userEmail} = useSelector(store => ({
+    const { userName, userEmail } = useSelector((store: IStore) => ({
         userName: store.profile.user.name,
         userEmail: store.profile.user.email,
     }))
@@ -21,20 +22,26 @@ export const Profile = () => {
     const [email, setEmail] = useState(userEmail || '')
     const [password, setPassword] = useState('')
 
-    const inputNameRef = useRef(null)
-    const inputLoginRef = useRef(null)
-    const inputPasswordRef = useRef(null)
+    const inputNameRef = useRef<HTMLInputElement>(null)
+    const inputLoginRef = useRef<HTMLInputElement>(null)
+    const inputPasswordRef = useRef<HTMLInputElement>(null)
 
     const onIconClickName = () => {
-        inputNameRef.current.disabled = !inputNameRef.current.disabled
+        if (inputNameRef.current) {
+            inputNameRef.current.disabled = !inputNameRef.current.disabled
+        }
     }
 
     const onIconClickLogin = () => {
-        inputLoginRef.current.disabled = !inputLoginRef.current.disabled
+        if (inputLoginRef.current) {
+            inputLoginRef.current.disabled = !inputLoginRef.current.disabled
+        }
     }
 
     const onIconClickPassword = () => {
-        inputPasswordRef.current.disabled = !inputPasswordRef.current.disabled
+        if (inputPasswordRef.current) {
+            inputPasswordRef.current.disabled = !inputPasswordRef.current.disabled
+        }
     }
 
     return (
