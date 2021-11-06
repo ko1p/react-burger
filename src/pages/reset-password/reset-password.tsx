@@ -1,29 +1,28 @@
-import styles from "../login/login.module.css";
-import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, } from "react-router-dom";
-import React, {useRef, useState} from "react";
-import {useDispatch} from "react-redux";
-import {fetchResetPass} from "../../services/actions/profile";
+import styles from "../login/login.module.css"
+import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components"
+import { Link } from "react-router-dom"
+import React, { FC, SyntheticEvent, useRef, useState } from "react"
+import { useDispatch } from "react-redux"
+import { fetchResetPass } from "../../services/actions/profile"
 
-export const ResetPassword = () => {
+export const ResetPassword: FC = () => {
     const dispatch = useDispatch()
-    // const history = useHistory()
-    const passwordRef = useRef(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
     const [newPassword, setNewPassword] = useState('');
     const [code, setCode] = useState('');
     const [isPassHide, setIsPassHide] = useState(true);
 
-    const passwordHider = (e) => {
+    const passwordHider = () => {
         let input = passwordRef.current
-        if (input.type === 'password') {
+        if (input!.type === 'password') {
             setIsPassHide(false)
-            input.setAttribute('type', 'text')
+            input!.setAttribute('type', 'text')
         } else {
             setIsPassHide(true)
-            input.setAttribute('type', 'password')
+            input!.setAttribute('type', 'password')
         }
     }
-    const formSubmitHandler = e => {
+    const formSubmitHandler = (e: SyntheticEvent) => {
         e.preventDefault()
         dispatch(fetchResetPass(newPassword, code))
     }
