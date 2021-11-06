@@ -79,6 +79,27 @@ export interface ILocation {
 }
 //TODO: Убрать временные any
 
+export interface IRouteProps {
+    path: string,
+    exact?: boolean,
+    rest?: {
+        path: string;
+        exact: boolean,
+        location: {
+            pathname: string;
+            search: string;
+            hash: string;
+            key: string;
+        },
+        computedMatch: {
+            path: string;
+            url: string;
+            isExact: true,
+            params: any
+        }
+    }
+}
+
 export type Info = {
     order?: {
         number?: number | string

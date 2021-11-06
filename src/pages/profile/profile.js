@@ -1,9 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './profile.module.css';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from "react-redux";
-import {ProfileNav} from "../../components/profile-nav/profile-nav";
-import {fetchUserInfo} from "../../services/actions/profile";
+import { useDispatch, useSelector } from "react-redux";
+import { ProfileNav } from "../../components/profile-nav/profile-nav";
+import { fetchUserInfo } from "../../services/actions/profile";
 
 export const Profile = () => {
     const dispatch = useDispatch()

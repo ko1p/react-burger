@@ -19,7 +19,7 @@ import { Modal } from "../modal/modal";
 import { Ingredient } from "../../pages/ingredient/ingredient";
 import { fetchUserInfo } from "../../services/actions/profile";
 import { fetchIngredients } from "../../services/actions/ingredients";
-import {ILocation, IStore} from "../../types";
+import { ILocation, IStore } from "../../types";
 
 export const App: FC = () => {
     const dispatch = useDispatch()
