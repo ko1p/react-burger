@@ -29,7 +29,7 @@ export const App: FC = () => {
 
     const action = history.action ==='PUSH' || history.action ==='REPLACE';
     const isModalIngredientOpen = action && location.state && location.state.ingredientModal;
-
+    console.log(location.state, `location`)
     const closeModal = () => {
         history.goBack();
     }

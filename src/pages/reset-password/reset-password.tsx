@@ -8,9 +8,9 @@ import { fetchResetPass } from "../../services/actions/profile"
 export const ResetPassword: FC = () => {
     const dispatch = useDispatch()
     const passwordRef = useRef<HTMLInputElement>(null)
-    const [newPassword, setNewPassword] = useState('');
-    const [code, setCode] = useState('');
-    const [isPassHide, setIsPassHide] = useState(true);
+    const [newPassword, setNewPassword] = useState<string>('');
+    const [code, setCode] = useState<string>('');
+    const [isPassHide, setIsPassHide] = useState<boolean>(true);
 
     const passwordHider = () => {
         let input = passwordRef.current

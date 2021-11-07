@@ -11,7 +11,7 @@ export const RouteProtectedReset: FC<IRouteProps> = ({ children, ...rest }) => {
         <Route
             { ...rest }
             render={() =>
-                !name && (isPasswordResetingSuccessful === 'true') ? (
+                !name && (isPasswordResetingSuccessful) ? (
                     children
                 ) : (
                     <Redirect to='/'/>

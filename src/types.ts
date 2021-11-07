@@ -1,5 +1,3 @@
-import {ModalOverlay} from "./components/modal-overlay/modal-overlay";
-
 export interface IIngredient {
     _id: string,
     name: string,
@@ -17,6 +15,11 @@ export interface IIngredient {
 
 export interface IIngredientWithUuid extends IIngredient {
     uuid: string,
+}
+
+export interface IUserInfo {
+    email: string,
+    name: string,
 }
 
 export interface IStore {
@@ -38,18 +41,33 @@ export interface IStore {
         ingredients: IIngredientWithUuid[],
         bun: IIngredient,
     }
-    order: any,
-    profile: any,
+    order: {
+        isRequesting: boolean,
+        hasError: boolean,
+    }
+    profile: {
+        user: IUserInfo,
+        isRegisterFetching: boolean,
+        isRegisterSuccess: boolean,
+        registerError: string,
+        isRecoverPassFetching: boolean,
+        isRecoverPassSuccess: boolean,
+        recoverPassError: string,
+        isResetPassFetching: boolean,
+        isResetPassSuccess: boolean,
+        resetPassError: string,
+        isUserLoginFetching: boolean,
+        isUserLoginSuccess: boolean,
+        userLoginError: string,
+    }
 }
-//TODO: Убрать временные any
 
 export interface ILocation {
     from: {
         pathname: string;
     },
-    ingredientModal: any;
+    ingredientModal: any
 }
-//TODO: Убрать временные any
 
 export interface IModalProps {
     closeModal: () => void,
@@ -70,14 +88,6 @@ export interface IIngredientCardProps {
 export interface IModalOverlayProps {
     closeModal: () => void,
 }
-
-export interface ILocation {
-    from: {
-        pathname: string;
-    },
-    ingredientModal: any;
-}
-//TODO: Убрать временные any
 
 export interface IRouteProps {
     path: string,
