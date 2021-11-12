@@ -1,15 +1,15 @@
-import React, { useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import styles from './constructor-item.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from "react-dnd";
-import PropTypes from 'prop-types';
-import {removeConstructorIngredient, UPDATE_INGREDIENTS} from "../../services/actions/burgerConstructor";
+import { removeConstructorIngredient, UPDATE_INGREDIENTS } from "../../services/actions/burgerConstructor";
+import { IConstructorItemProps } from "../../types";
 
-export const ConstructorItem = ({ id, index, moveCard, card }) => {
+export const ConstructorItem: FC<IConstructorItemProps> = ({ id, index, moveCard, card }) => {
     const dispatch = useDispatch()
 
-    const ref = useRef(null);
+    const ref = useRef<HTMLLIElement>(null);
     const [{ handlerId }, drop] = useDrop({
         accept: UPDATE_INGREDIENTS,
         collect(monitor) {
@@ -17,7 +17,7 @@ export const ConstructorItem = ({ id, index, moveCard, card }) => {
                 handlerId: monitor.getHandlerId(),
             };
         },
-        hover(item, monitor) {
+        hover(item: {index: number}, monitor: any) {
             if (!ref.current) {
                 return;
             }
@@ -72,24 +72,3 @@ export const ConstructorItem = ({ id, index, moveCard, card }) => {
     )
 
 }
-
-ConstructorItem.propTypes = {
-    id: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
-    moveCard: PropTypes.func.isRequired,
-    card: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        calories: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        __v: PropTypes.number.isRequired,
-        uuid: PropTypes.string.isRequired
-    }).isRequired
-};

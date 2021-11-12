@@ -1,10 +1,10 @@
 import styles from "./profile-nav.module.css";
-import {NavLink} from "react-router-dom";
-import React from "react";
-import {useDispatch} from "react-redux";
-import {fetchLogoutUser} from "../../services/actions/profile";
+import { NavLink } from "react-router-dom";
+import React, { FC } from "react";
+import { useDispatch } from "react-redux";
+import { fetchLogoutUser } from "../../services/actions/profile";
 
-export const ProfileNav = () => {
+export const ProfileNav: FC = () => {
     const dispatch = useDispatch()
 
     const userLogout = () => {

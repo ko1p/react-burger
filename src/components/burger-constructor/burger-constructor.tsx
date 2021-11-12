@@ -1,31 +1,35 @@
-import React, {useCallback} from 'react';
+import React, { useCallback, FC } from 'react';
 import styles from './burger-constructor.module.css';
-import {ConstructorElement, CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
-import {URL} from "../../utils/constants";
-import {orderData} from "../../utils/orderData";
-import {useDispatch, useSelector} from "react-redux";
-import {useDrop} from "react-dnd";
+import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { URL } from "../../utils/constants";
+import { orderData } from "../../utils/orderData";
+import { useDispatch, useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
 import update from 'immutability-helper';
-import {ConstructorItem} from "../constructor-item/constructor-item";
-import {useHistory} from "react-router-dom";
-import {getCookie} from "../../utils/cookie";
-import {addConstructorIngredient, setConstructorBun, updateIngredients} from "../../services/actions/burgerConstructor";
-import {fetchOrderData} from "../../services/actions/order";
-import {openOrderModal, setModalData} from "../../services/actions/modal";
+import { ConstructorItem } from "../constructor-item/constructor-item";
+import { useHistory } from "react-router-dom";
+import { getCookie } from "../../utils/cookie";
+import { addConstructorIngredient, setConstructorBun, updateIngredients } from "../../services/actions/burgerConstructor";
+import { fetchOrderData } from "../../services/actions/order";
+import { openOrderModal, setModalData } from "../../services/actions/modal";
+import { IIngredient, IStore, TOrder } from "../../types";
 
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor: FC = () => {
     const history = useHistory()
     const dispatch = useDispatch()
-    const { bun, ingredients } = useSelector(store => ({
+    const { bun, ingredients } = useSelector((store: IStore) => ({
         bun: store.burgerConstructor.bun,
         ingredients: store.burgerConstructor.ingredients,
     }))
 
     const totalOrderPrice = () => {
-        const bunsPrice = bun.price * 2
-        const ingredientsPrice = ingredients.reduce((sum, item) => sum + item.price, 0)
-        return bunsPrice + ingredientsPrice
+        if (bun && ingredients) {
+            const bunsPrice = bun.price * 2
+            const ingredientsPrice = ingredients.reduce((sum, item) => sum + item.price, 0)
+            return bunsPrice + ingredientsPrice
+        }
+        return 0
     }
 
     const orderIngredients = () => {
@@ -38,7 +42,7 @@ export const BurgerConstructor = () => {
 
     const [, dropTarget] = useDrop({
         accept: "ingredient",
-        drop(card) {
+        drop(card: IIngredient) {
             if (card.type === 'bun') {
                 dispatch(setConstructorBun(card))
             } else {
@@ -47,7 +51,7 @@ export const BurgerConstructor = () => {
         },
     });
 
-    const setDataAndOpenModal = (cardData) => {
+    const setDataAndOpenModal = (cardData: TOrder) => {
         if (getCookie('accessToken')) {
             dispatch(fetchOrderData(URL, orderIngredients()))
             dispatch(openOrderModal())
@@ -57,7 +61,7 @@ export const BurgerConstructor = () => {
         }
     }
 
-    const moveCard = useCallback((dragIndex, hoverIndex) => {
+    const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
         const dragCard = ingredients[dragIndex];
         dispatch(updateIngredients(
             update(ingredients, {
@@ -110,7 +114,7 @@ export const BurgerConstructor = () => {
                 />}
             </div>
 
-            {(bun._id || ingredients.lenght >= 1) && <div className={`${styles.info} mt-10`}>
+            {(bun._id || ingredients.length >= 1) && <div className={`${styles.info} mt-10`}>
                 <p className="text text_type_digits-medium mr-2">{totalOrderPrice()}</p>
                 <CurrencyIcon type="primary"/>
                 <Button type="primary" size="medium" onClick={() => setDataAndOpenModal(orderData)}>

@@ -1,14 +1,16 @@
-import styles from "./forgot-password.module.css";
-import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { FC, SyntheticEvent } from "react"
+import styles from "./forgot-password.module.css"
+import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useHistory } from 'react-router-dom'
-import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchRecoverPass} from "../../services/actions/profile";
+import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchRecoverPass } from "../../services/actions/profile"
+import { IStore } from "../../types";
 
-export const ForgotPassword = () => {
+export const ForgotPassword: FC = () => {
     const dispatch = useDispatch()
-    const isPasswordRecoverySuccessfull = useSelector(store => store.profile.isRecoverPassSuccess)
+    const isPasswordRecoverySuccessfull = useSelector((store: IStore) => store.profile.isRecoverPassSuccess)
     const history = useHistory()
     const [email, setEmail] = useState('');
 
@@ -18,7 +20,7 @@ export const ForgotPassword = () => {
         }
     }, [history, isPasswordRecoverySuccessfull])
 
-    const formSubmitHandler = e => {
+    const formSubmitHandler = (e: SyntheticEvent) => {
         e.preventDefault()
         dispatch(fetchRecoverPass(email))
     }

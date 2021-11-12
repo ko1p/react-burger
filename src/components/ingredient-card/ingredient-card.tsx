@@ -1,12 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "../burger-ingredients/burger-ingredients.module.css";
-import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import { cardPropTypes } from '../types/types';
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
-import {useDrag} from "react-dnd";
+import { useDrag } from "react-dnd";
+import { IIngredientCardProps, IStore } from "../../types";
 
-export const IngredientCard = ({card}) => {
-    const ingredients = useSelector(store => store.burgerConstructor.ingredients)
+export const IngredientCard: FC<IIngredientCardProps> = ({ card }) => {
+    const ingredients = useSelector((store: IStore) => store.burgerConstructor.ingredients)
     const [{opacity}, dragRef] = useDrag({
         type: "ingredient",
         item: card,
@@ -41,7 +41,3 @@ export const IngredientCard = ({card}) => {
         </p>
     </li>
 }
-
-IngredientCard.propTypes = {
-    card: cardPropTypes
-};

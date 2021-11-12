@@ -1,36 +1,35 @@
-import React, {useRef} from 'react'
+import React, { FC, SyntheticEvent, useRef } from 'react'
 import styles from './login.module.css'
 import { useState } from 'react'
-import {Link, Redirect} from 'react-router-dom'
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, Redirect } from 'react-router-dom'
+import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchLoginUser } from "../../services/actions/profile"
+import { IStore } from "../../types"
 
-import {useDispatch, useSelector} from "react-redux";
-import {fetchLoginUser} from "../../services/actions/profile";
-
-
-export const Login = () => {
+export const Login: FC = () => {
     const dispatch = useDispatch()
-    // const history = useHistory()
-    const passwordRef = useRef(null)
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isPassHide, setIsPassHide] = useState(true);
-    const name = useSelector(store => store.profile.user.name)
+    const passwordRef = useRef<HTMLInputElement>(null)
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [isPassHide, setIsPassHide] = useState<boolean>(true);
+    const name = useSelector((store: IStore) => store.profile.user.name)
 
-    const passwordHider = (e) => {
+    const passwordHider = () => {
         let input = passwordRef.current
-        if (input.type === 'password') {
-            setIsPassHide(false)
-            input.setAttribute('type', 'text')
-        } else {
-            setIsPassHide(true)
-            input.setAttribute('type', 'password')
+        if (input) {
+            if (input.type === 'password') {
+                setIsPassHide(false)
+                input.setAttribute('type', 'text')
+            } else {
+                setIsPassHide(true)
+                input.setAttribute('type', 'password')
+            }
         }
     }
 
-    const formSubmitHandler = e => {
+    const formSubmitHandler = (e: SyntheticEvent) => {
         e.preventDefault()
-        console.log(email, password)
         dispatch(fetchLoginUser(email, password))
     }
 

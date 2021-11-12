@@ -1,14 +1,15 @@
 import React from "react";
-import {Link, useLocation} from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styles from "./burger-ingredients.module.css"
-import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-import {IngredientCard} from "../ingredient-card/ingredient-card";
-import {useSelector} from "react-redux";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { IngredientCard } from "../ingredient-card/ingredient-card";
+import { useSelector } from "react-redux";
+import { IStore } from "../../types";
 
 export const BurgerIngredients = () => {
     const location = useLocation()
     const [current, setCurrent] = React.useState('bun')
-    const data = useSelector(store => store.ingredients.list)
+    const data = useSelector((store:IStore ) => store.ingredients.list)
 
     const ingredientTypes = [
         {type: 'bun', title: 'Булки'},
@@ -16,26 +17,26 @@ export const BurgerIngredients = () => {
         {type: 'main', title: 'Начинки'}
     ]
 
-    const ingredientFilter = type => {
+    const ingredientFilter = (type: string) => {
         return data.filter(item => item.type === type)
     }
 
-    const setTab = (tab) => {
+    const setTab = (tab: string) => {
         setCurrent(tab);
         const element = document.getElementById(tab);
         if (element) element.scrollIntoView({behavior: "smooth"});
     };
 
     const updateTabs = () => {
-        const containerTop = document.getElementById('container').getBoundingClientRect().top;
-        const bunTop = document.getElementById('bun').getBoundingClientRect().top;
-        const sauceTop = document.getElementById('sauce').getBoundingClientRect().top;
-        const mainTop = document.getElementById('main').getBoundingClientRect().top;
-        if (bunTop >= containerTop && containerTop < sauceTop) {
+        const containerTop = document.getElementById('container')?.getBoundingClientRect().top;
+        const bunTop = document.getElementById('bun')?.getBoundingClientRect().top;
+        const sauceTop = document.getElementById('sauce')?.getBoundingClientRect().top;
+        const mainTop = document.getElementById('main')?.getBoundingClientRect().top;
+        if (bunTop! >= containerTop! && containerTop! < sauceTop!) {
             setCurrent('bun')
-        } else if (sauceTop <= containerTop && containerTop < mainTop) {
+        } else if (sauceTop! <= containerTop! && containerTop! < mainTop!) {
             setCurrent('sauce')
-        } else if (mainTop <= containerTop) {
+        } else if (mainTop! <= containerTop!) {
             setCurrent('main')
         }
     }

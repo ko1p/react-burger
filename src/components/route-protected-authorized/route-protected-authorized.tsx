@@ -1,9 +1,11 @@
-import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getCookie } from "../../utils/cookie";
+import React, { FC } from 'react'
+import { Route, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { getCookie } from "../../utils/cookie"
+import { IRouteProps, IStore } from "../../types";
 
-export const RouteProtectedAuthorized = ({ children, ...rest }) => {
-    const name = useSelector((store) => store.profile.user.name);
+export const RouteProtectedAuthorized: FC<IRouteProps> = ({ children, ...rest }) => {
+    const name = useSelector((store: IStore) => store.profile.user.name);
     const cookie = getCookie('accessToken')
 
     console.log(!!cookie, getCookie('accessToken'), 'cookie', !!name, 'name')
