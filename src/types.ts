@@ -17,6 +17,14 @@ export interface IIngredientWithUuid extends IIngredient {
     uuid: string,
 }
 
+export interface IOrderList {
+    id: string,
+    date: string,
+    name: string,
+    ingredients: IIngredientWithUuid[],
+    price: number,
+}
+
 export interface IUserInfo {
     email: string,
     name: string,

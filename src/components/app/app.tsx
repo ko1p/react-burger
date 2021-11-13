@@ -10,6 +10,7 @@ import { Login } from "../../pages/login/login";
 import { ForgotPassword } from "../../pages/forgot-password/forgot-password";
 import { ResetPassword } from "../../pages/reset-password/reset-password";
 import { Profile } from "../../pages/profile/profile";
+import { Feed } from "../../pages/feed/feed";
 import { RouteProtectedUnauthorized } from "../route-protected-unauthorized/route-protected-unauthorized";
 import { RouteProtectedReset } from "../route-protected-reset/route-protected-reset";
 import { RouteProtectedAuthorized } from "../route-protected-authorized/route-protected-authorized";
@@ -71,7 +72,7 @@ export const App: FC = () => {
                         <Ingredient />
                     </Route>
                     <Route path='/feed' exact>
-                        <p>Здесь будет страница с фидами</p>
+                        <Feed />
                     </Route>
                     <Route path='/feed/:id' exact>
                         <p>Здесь будет страница фида</p>

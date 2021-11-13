@@ -1,10 +1,3 @@
-.container {
-    width: 885px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
 .active {
     color: #fff;
 }
