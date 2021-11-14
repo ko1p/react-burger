@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    max-height: 700px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+}
