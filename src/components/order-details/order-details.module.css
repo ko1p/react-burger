@@ -1,0 +1,77 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    margin: 0 auto;
+}
+
+.id {
+    text-align: center;
+}
+
+.status {
+    color: #00CCCC;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.scroll::-webkit-scrollbar {
+	width: 8px;
+    margin-left: 24px;
+}
+.scroll::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+.scroll::-webkit-scrollbar-thumb {
+	background: #8585AD;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.card {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.radius {
+    width: 64px;
+    height: 64px;
+    background-color: #131316;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    border: solid 2px transparent;
+    background-image: linear-gradient(#131316, #131316), radial-gradient(circle at bottom left, #801AB2,#4C4CFF);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+
+.image {
+    height: 100%;
+}
+
+.text {
+    width: 400px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    display: flex;
+    width: 150px;
+    justify-content: flex-end;
+}

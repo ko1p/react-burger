@@ -16,6 +16,7 @@ import { RouteProtectedReset } from "../route-protected-reset/route-protected-re
 import { RouteProtectedAuthorized } from "../route-protected-authorized/route-protected-authorized";
 import { ProfileOrders } from "../../pages/profile-orders/profile-orders";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { OrderDetails } from "../order-details/order-details";
 import { Modal } from "../modal/modal";
 import { Ingredient } from "../../pages/ingredient/ingredient";
 import { fetchUserInfo } from "../../services/actions/profile";
@@ -30,7 +31,7 @@ export const App: FC = () => {
 
     const action = history.action ==='PUSH' || history.action ==='REPLACE';
     const isModalIngredientOpen = action && location.state && location.state.ingredientModal;
-    console.log(location.state, `location`)
+
     const closeModal = () => {
         history.goBack();
     }
@@ -66,7 +67,7 @@ export const App: FC = () => {
                         <ProfileOrders />
                     </RouteProtectedAuthorized>
                     <RouteProtectedAuthorized path='/profile/orders/:order' exact>
-                        {/*<Order />*/}
+                        <OrderDetails />
                     </RouteProtectedAuthorized>
                     <Route path='/ingredients/:id' exact>
                         <Ingredient />
@@ -75,7 +76,7 @@ export const App: FC = () => {
                         <Feed />
                     </RouteProtectedAuthorized>
                     <RouteProtectedAuthorized path='/feed/:id' exact>
-                        <p>Здесь будет страница фида</p>
+                        <OrderDetails />
                     </RouteProtectedAuthorized>
                     <Route path='*'>
                         <PageNotFound />

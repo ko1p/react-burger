@@ -12,7 +12,7 @@ export const OrderList: React.FC = () => {
         <div className={`${styles.container} ${styles.scroll}`}>
             <ul className={`${styles.cards} mr-2`}>
                 {data.map((item, index) => {
-                    return <Link to={`/feed/${item.id}`} className={styles.card}>
+                    return <Link to={`/feed/${item.id}`} className={styles.card} key={`${index}-link`}>
                         <li
                             key={index}
                         >
