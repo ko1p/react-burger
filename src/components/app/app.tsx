@@ -71,12 +71,12 @@ export const App: FC = () => {
                     <Route path='/ingredients/:id' exact>
                         <Ingredient />
                     </Route>
-                    <Route path='/feed' exact>
+                    <RouteProtectedAuthorized path='/feed' exact>
                         <Feed />
-                    </Route>
-                    <Route path='/feed/:id' exact>
+                    </RouteProtectedAuthorized>
+                    <RouteProtectedAuthorized path='/feed/:id' exact>
                         <p>Здесь будет страница фида</p>
-                    </Route>
+                    </RouteProtectedAuthorized>
                     <Route path='*'>
                         <PageNotFound />
                     </Route>
