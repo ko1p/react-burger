@@ -12,6 +12,7 @@ import {
     SET_MODAL_CLOSE, SET_MODAL_DATA,
     SET_ORDER_MODAL_OPEN, setModalData
 } from "./services/actions/modal";
+import {SET_ORDER_FETCH_ERROR, setOrderFetchError} from "./services/actions/order";
 
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -172,7 +173,7 @@ export interface ISetConstructorBun {
     readonly bun: IIngredient;
 }
 
-export type TBurgerConstructor =
+export type TBurgerConstructorActions =
     | IAddConstructorIngredient
     | IUpdateIngredients
     | IRemoveConstructorIngredient
@@ -191,7 +192,7 @@ export interface IFetchIngredients {
     readonly type: typeof SET_INGREDIENTS_ERROR;
 }
 
-export type TIngredients =
+export type TIngredientsActions =
     | ISuccessFetchIngredients
     | IFailedFetchIngredients
     | IFetchIngredients;
@@ -217,7 +218,7 @@ export interface IResetModalData {
     readonly type: typeof RESET_MODAL_DATA;
 }
 
-export type TModal =
+export type TModalActions =
     | IOpenIngredientsModal
     | IOpenOrderModal
     | ICloseModal
@@ -225,8 +226,19 @@ export type TModal =
     | IResetModalData
 ;
 
+export interface ISetOrderFetchError {
+    readonly type: typeof SET_ORDER_FETCH_ERROR;
+    readonly hasError: boolean;
+}
+
+export type TOrderActions =
+    | ISetOrderFetchError
+    ;
+
 
 export type TApplicationActions =
-    | TBurgerConstructor
-    | TIngredients
-    | TModal;
+    | TBurgerConstructorActions
+    | TIngredientsActions
+    | TModalActions
+    | TOrderActions
+    ;
