@@ -1,23 +1,24 @@
-import {URL} from "../../utils/constants";
-import {getCookie, setCookie} from "../../utils/cookie";
+import { URL } from "../../utils/constants"
+import { getCookie, setCookie } from "../../utils/cookie"
+import { AppDispatch } from "../../types"
 
-export const SET_REGISTER_IS_FETCHING = 'SET_REGISTER_IS_FETCHING'
-export const SET_REGISTER_IS_SUCCESS = 'SET_REGISTER_IS_SUCCESS'
-export const SET_REGISTER_ERROR = 'SET_REGISTER_ERROR'
-export const SET_USER_DATA = 'SET_USER_DATA'
-export const SET_RECOVER_PASS_IS_FETCHING = 'SET_RECOVER_PASS_IS_FETCHING'
-export const SET_RECOVER_PASS_IS_SUCCESS = 'SET_RECOVER_PASS_IS_SUCCESS'
-export const SET_RECOVER_PASS_ERROR = 'SET_RECOVER_PASS_ERROR'
-export const SET_RESET_PASS_IS_FETCHING = 'SET_RESET_PASS_IS_FETCHING'
-export const SET_RESET_PASS_IS_SUCCESS = 'SET_RESET_PASS_IS_SUCCESS'
-export const SET_RESET_PASS_ERROR = 'SET_RESET_PASS_ERROR'
-export const SET_USER_LOGIN_IS_FETCHING = 'SET_USER_LOGIN_IS_FETCHING'
-export const SET_USER_LOGIN_IS_SUCCESS = 'SET_USER_LOGIN_IS_SUCCESS'
-export const SET_USER_LOGIN_ERROR = 'SET_USER_LOGIN_ERROR'
-export const RESET_USER_DATA = 'RESET_USER_DATA'
+export const SET_REGISTER_IS_FETCHING: 'SET_REGISTER_IS_FETCHING' = 'SET_REGISTER_IS_FETCHING'
+export const SET_REGISTER_IS_SUCCESS: 'SET_REGISTER_IS_SUCCESS' = 'SET_REGISTER_IS_SUCCESS'
+export const SET_REGISTER_ERROR: 'SET_REGISTER_ERROR' = 'SET_REGISTER_ERROR'
+export const SET_USER_DATA: 'SET_USER_DATA' = 'SET_USER_DATA'
+export const SET_RECOVER_PASS_IS_FETCHING: 'SET_RECOVER_PASS_IS_FETCHING' = 'SET_RECOVER_PASS_IS_FETCHING'
+export const SET_RECOVER_PASS_IS_SUCCESS: 'SET_RECOVER_PASS_IS_SUCCESS' = 'SET_RECOVER_PASS_IS_SUCCESS'
+export const SET_RECOVER_PASS_ERROR: 'SET_RECOVER_PASS_ERROR' = 'SET_RECOVER_PASS_ERROR'
+export const SET_RESET_PASS_IS_FETCHING: 'SET_RESET_PASS_IS_FETCHING' = 'SET_RESET_PASS_IS_FETCHING'
+export const SET_RESET_PASS_IS_SUCCESS: 'SET_RESET_PASS_IS_SUCCESS' = 'SET_RESET_PASS_IS_SUCCESS'
+export const SET_RESET_PASS_ERROR: 'SET_RESET_PASS_ERROR' = 'SET_RESET_PASS_ERROR'
+export const SET_USER_LOGIN_IS_FETCHING: 'SET_USER_LOGIN_IS_FETCHING' = 'SET_USER_LOGIN_IS_FETCHING'
+export const SET_USER_LOGIN_IS_SUCCESS: 'SET_USER_LOGIN_IS_SUCCESS' = 'SET_USER_LOGIN_IS_SUCCESS'
+export const SET_USER_LOGIN_ERROR: 'SET_USER_LOGIN_ERROR' = 'SET_USER_LOGIN_ERROR'
+export const RESET_USER_DATA: 'RESET_USER_DATA' = 'RESET_USER_DATA'
 
 export const fetchRefreshToken = () => {
-    return dispatch => {
+    return (dispatch: AppDispatch) => {
         fetch(`${URL}/auth/token`, {
             method: 'POST',
             headers: {
@@ -47,36 +48,36 @@ export const fetchRefreshToken = () => {
     }
 }
 
-export const setRegisterIsFetching = isRegisterFetching => (
+export const setRegisterIsFetching = (isRegisterFetching: boolean) => (
     {
         type: SET_REGISTER_IS_FETCHING,
         isRegisterFetching
     }
 )
 
-export const setRegisterIsSuccess = isRegisterSuccess => (
+export const setRegisterIsSuccess = (isRegisterSuccess: boolean) => (
     {
         type: SET_REGISTER_IS_SUCCESS,
         isRegisterSuccess
     }
 )
 
-export const setRegisterError = registerError => (
+export const setRegisterError = (registerError: boolean) => (
     {
         type: SET_REGISTER_ERROR,
         registerError
     }
 )
 
-export const setUserData = user => (
+export const setUserData = (user: any) => ( // TODO удрать эни
     {
         type: SET_USER_DATA,
         user
     }
 )
 
-export const fetchRegister = (name, email, password) => {
-    return dispatch => {
+export const fetchRegister = (name: string, email: string, password: string) => {
+    return (dispatch: AppDispatch) => {
         dispatch(setRegisterIsFetching(true))
         fetch(`${URL}/auth/register `, {
             method: 'POST',
@@ -108,29 +109,29 @@ export const fetchRegister = (name, email, password) => {
     }
 }
 
-export const setRecoverPassIsFetching = isRecoverPassFetching => (
+export const setRecoverPassIsFetching = (isRecoverPassFetching: boolean) => (
     {
         type: SET_RECOVER_PASS_IS_FETCHING,
         isRecoverPassFetching
     }
 )
 
-export const setRecoverPassIsSuccess = isRecoverPassSuccess => (
+export const setRecoverPassIsSuccess = (isRecoverPassSuccess: boolean) => (
     {
         type: SET_RECOVER_PASS_IS_SUCCESS,
         isRecoverPassSuccess
     }
 )
 
-export const setRecoverPassError = recoverPassError => (
+export const setRecoverPassError = (recoverPassError: boolean) => (
     {
         type: SET_RECOVER_PASS_ERROR,
         recoverPassError
     }
 )
 
-export const fetchRecoverPass = email => {
-    return dispatch => {
+export const fetchRecoverPass = (email: string) => {
+    return (dispatch: AppDispatch) => {
         dispatch(setRecoverPassIsFetching(true))
         fetch(`${URL}/password-reset`, {
             method: 'POST',
@@ -159,29 +160,29 @@ export const fetchRecoverPass = email => {
     }
 }
 
-export const setResetPassIsFetching = isResetPassFetching => (
+export const setResetPassIsFetching = (isResetPassFetching: boolean) => (
     {
         type: SET_RESET_PASS_IS_FETCHING,
         isResetPassFetching
     }
 )
 
-export const setResetPassIsSuccess = isResetPassSuccess => (
+export const setResetPassIsSuccess = (isResetPassSuccess: boolean) => (
     {
         type: SET_RESET_PASS_IS_SUCCESS,
         isResetPassSuccess
     }
 )
 
-export const setResetPassError = resetPassError => (
+export const setResetPassError = (resetPassError: boolean) => (
     {
         type: SET_RESET_PASS_ERROR,
         resetPassError
     }
 )
 
-export const fetchResetPass = (password, token) => {
-    return dispatch => {
+export const fetchResetPass = (password: string, token: string) => {
+    return (dispatch: AppDispatch) => {
         dispatch(setResetPassIsFetching(true))
         fetch(`${URL}/password-reset`, {
             method: 'POST',
@@ -210,29 +211,29 @@ export const fetchResetPass = (password, token) => {
     }
 }
 
-export const setLoginUserIsFetching = isUserLoginFetching => (
+export const setLoginUserIsFetching = (isUserLoginFetching: boolean) => (
     {
         type: SET_USER_LOGIN_IS_FETCHING,
         isUserLoginFetching
     }
 )
 
-export const setLoginUserIsSuccess = isUserLoginSuccess => (
+export const setLoginUserIsSuccess = (isUserLoginSuccess: boolean) => (
     {
         type: SET_USER_LOGIN_IS_SUCCESS,
         isUserLoginSuccess
     }
 )
 
-export const setLoginUserError = userLoginError => (
+export const setLoginUserError = (userLoginError: boolean) => (
     {
         type: SET_USER_LOGIN_ERROR,
         userLoginError
     }
 )
 
-export const fetchLoginUser = (email, password) => {
-    return dispatch => {
+export const fetchLoginUser = (email: string, password: string) => {
+    return (dispatch: AppDispatch) => {
         dispatch(setLoginUserIsFetching(true))
         fetch(`${URL}/auth/login`, {
             method: 'POST',
@@ -265,12 +266,12 @@ export const fetchLoginUser = (email, password) => {
 }
 
 export const fetchUserInfo = () => {
-    return dispatch => {
+    return (dispatch: AppDispatch) => {
         fetch(`${URL}/auth/user`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: getCookie('accessToken')
+                Authorization: `${getCookie('accessToken')}`
             },
         })
             .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
@@ -286,7 +287,6 @@ export const fetchUserInfo = () => {
                 } else {
                     return Promise.reject(e);
                 }
-
             })
     }
 }
@@ -298,7 +298,7 @@ export const resetUserName = () => (
 )
 
 export const fetchLogoutUser = () => {
-    return dispatch => {
+    return (dispatch: AppDispatch) => {
         fetch(`${URL}/auth/logout`, {
             method: 'POST',
             headers: {

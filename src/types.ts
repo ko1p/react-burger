@@ -5,14 +5,27 @@ import {
     ADD_CONSTRUCTOR_INGREDIENT, REMOVE_CONSTRUCTOR_INGREDIENT, SET_CONSTRUCTOR_BUN,
     UPDATE_INGREDIENTS
 } from "./services/actions/burgerConstructor";
-import {fetchIngredients, SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS} from "./services/actions/ingredients";
+import { SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS } from "./services/actions/ingredients";
 import {
-    openIngredientsModal, RESET_MODAL_DATA, resetModalData,
+    RESET_MODAL_DATA,
     SET_INGREDIENTS_MODAL_OPEN,
     SET_MODAL_CLOSE, SET_MODAL_DATA,
-    SET_ORDER_MODAL_OPEN, setModalData
+    SET_ORDER_MODAL_OPEN
 } from "./services/actions/modal";
-import {SET_ORDER_FETCH_ERROR, setOrderFetchError} from "./services/actions/order";
+import {SET_ORDER_FETCH_ERROR } from "./services/actions/order";
+import {
+    RESET_USER_DATA,
+    SET_RECOVER_PASS_ERROR,
+    SET_RECOVER_PASS_IS_FETCHING,
+    SET_RECOVER_PASS_IS_SUCCESS,
+    SET_REGISTER_ERROR,
+    SET_REGISTER_IS_FETCHING,
+    SET_REGISTER_IS_SUCCESS,
+    SET_RESET_PASS_ERROR,
+    SET_RESET_PASS_IS_FETCHING,
+    SET_RESET_PASS_IS_SUCCESS, SET_USER_DATA, SET_USER_LOGIN_ERROR,
+    SET_USER_LOGIN_IS_FETCHING, SET_USER_LOGIN_IS_SUCCESS,
+} from "./services/actions/profile";
 
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -232,7 +245,92 @@ export interface ISetOrderFetchError {
 }
 
 export type TOrderActions =
-    | ISetOrderFetchError
+    | ISetOrderFetchError;
+
+export interface ISetRegisterIsFetching {
+    readonly type: typeof SET_REGISTER_IS_FETCHING;
+    readonly isRegisterFetching: boolean;
+}
+
+export interface ISetRegisterIsSuccess {
+    readonly type: typeof SET_REGISTER_IS_SUCCESS;
+    readonly isRegisterSuccess: boolean;
+}
+
+export interface ISetRegisterError {
+    readonly type: typeof SET_REGISTER_ERROR;
+    readonly setRegisterError: boolean;
+}
+
+export interface ISetRecoverPassIsFetching {
+    readonly type: typeof SET_RECOVER_PASS_IS_FETCHING;
+    readonly isRecoverPassFetching: boolean;
+}
+
+export interface ISetRecoverPassIsSuccess {
+    readonly type: typeof SET_RECOVER_PASS_IS_SUCCESS;
+    readonly isRecoverPassSuccess: boolean;
+}
+
+export interface ISetRecoverPassError {
+    readonly type: typeof SET_RECOVER_PASS_ERROR;
+    readonly recoverPassError: boolean;
+}
+
+export interface ISetResetPassIsFetching {
+    readonly type: typeof SET_RESET_PASS_IS_FETCHING;
+    readonly isResetPassFetching: boolean;
+}
+
+export interface ISetResetPassIsSuccess {
+    readonly type: typeof SET_RESET_PASS_IS_SUCCESS;
+    readonly isResetPassSuccess: boolean;
+}
+
+export interface ISetResetPassError {
+    readonly type: typeof SET_RESET_PASS_ERROR;
+    readonly resetPassError: boolean;
+}
+
+export interface ISetLoginUserIsFetching {
+    readonly type: typeof SET_USER_LOGIN_IS_FETCHING;
+    readonly isUserLoginFetching: boolean;
+}
+
+export interface ISetLoginUserIsSuccess {
+    readonly type: typeof SET_USER_LOGIN_IS_SUCCESS;
+    readonly isUserLoginSuccess: boolean;
+}
+
+export interface ISetLoginUserError {
+    readonly type: typeof SET_USER_LOGIN_ERROR;
+    readonly userLoginError: boolean;
+}
+
+export interface IResetUserName {
+    readonly type: typeof RESET_USER_DATA;
+}
+
+export interface ISetUserData {
+    readonly type: typeof SET_USER_DATA;
+    readonly user: any;
+}
+
+export type TProfileActions =
+    | ISetRegisterIsFetching
+    | ISetRegisterIsSuccess
+    | ISetRegisterError
+    | ISetRecoverPassIsFetching
+    | ISetRecoverPassIsSuccess
+    | ISetRecoverPassError
+    | ISetResetPassIsFetching
+    | ISetResetPassIsSuccess
+    | ISetResetPassError
+    | ISetLoginUserIsFetching
+    | ISetLoginUserIsSuccess
+    | ISetLoginUserError
+    | IResetUserName
+    | ISetUserData
     ;
 
 
@@ -241,4 +339,5 @@ export type TApplicationActions =
     | TIngredientsActions
     | TModalActions
     | TOrderActions
+    | TProfileActions
     ;
