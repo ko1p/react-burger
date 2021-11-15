@@ -1,3 +1,17 @@
+import { ThunkAction } from 'redux-thunk';
+import { Action, ActionCreator } from 'redux';
+import { store } from './services/store';
+import {
+    ADD_CONSTRUCTOR_INGREDIENT, REMOVE_CONSTRUCTOR_INGREDIENT, SET_CONSTRUCTOR_BUN,
+    UPDATE_INGREDIENTS
+} from "./services/actions/burgerConstructor";
+import {fetchIngredients, SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS} from "./services/actions/ingredients";
+
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<ReturnType, Action, RootState, TApplicationActions>>;
+
 export interface IIngredient {
     _id: string,
     name: string,
@@ -131,3 +145,51 @@ export type TOrder = {
         "number": number
     }
 }
+
+export interface IAddConstructorIngredient {
+    readonly type: typeof ADD_CONSTRUCTOR_INGREDIENT;
+    readonly uuid: string;
+}
+
+export interface IUpdateIngredients {
+    readonly type: typeof UPDATE_INGREDIENTS;
+    readonly ingredients: IIngredient[];
+}
+
+export interface IRemoveConstructorIngredient {
+    readonly type: typeof REMOVE_CONSTRUCTOR_INGREDIENT;
+    readonly ingredient: IIngredient;
+}
+
+export interface ISetConstructorBun {
+    readonly type: typeof SET_CONSTRUCTOR_BUN;
+    readonly bun: IIngredient;
+}
+
+export type TBurgerConstructor =
+    | IAddConstructorIngredient
+    | IUpdateIngredients
+    | IRemoveConstructorIngredient
+    | ISetConstructorBun;
+
+export interface ISuccessFetchIngredients {
+    readonly type: typeof SET_INGREDIENTS_SUCCESS;
+    readonly ingredients: IIngredient[];
+}
+
+export interface IFailedFetchIngredients {
+    readonly type: typeof SET_INGREDIENTS_ERROR;
+}
+
+export interface IFetchIngredients {
+    readonly type: typeof SET_INGREDIENTS_ERROR;
+}
+
+export type TIngredients =
+    | ISuccessFetchIngredients
+    | IFailedFetchIngredients;
+
+
+export type TApplicationActions =
+    | TBurgerConstructor
+    | TIngredients;
