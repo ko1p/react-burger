@@ -6,6 +6,12 @@ import {
     UPDATE_INGREDIENTS
 } from "./services/actions/burgerConstructor";
 import {fetchIngredients, SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS} from "./services/actions/ingredients";
+import {
+    openIngredientsModal, RESET_MODAL_DATA, resetModalData,
+    SET_INGREDIENTS_MODAL_OPEN,
+    SET_MODAL_CLOSE, SET_MODAL_DATA,
+    SET_ORDER_MODAL_OPEN, setModalData
+} from "./services/actions/modal";
 
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -187,9 +193,40 @@ export interface IFetchIngredients {
 
 export type TIngredients =
     | ISuccessFetchIngredients
-    | IFailedFetchIngredients;
+    | IFailedFetchIngredients
+    | IFetchIngredients;
+
+export interface IOpenIngredientsModal {
+    readonly type: typeof SET_INGREDIENTS_MODAL_OPEN;
+}
+
+export interface IOpenOrderModal {
+    readonly type: typeof SET_ORDER_MODAL_OPEN;
+}
+
+export interface ICloseModal {
+    readonly type: typeof SET_MODAL_CLOSE;
+}
+
+export interface ISetModalData {
+    readonly type: typeof SET_MODAL_DATA;
+    readonly data: TOrder;
+}
+
+export interface IResetModalData {
+    readonly type: typeof RESET_MODAL_DATA;
+}
+
+export type TModal =
+    | IOpenIngredientsModal
+    | IOpenOrderModal
+    | ICloseModal
+    | ISetModalData
+    | IResetModalData
+;
 
 
 export type TApplicationActions =
     | TBurgerConstructor
-    | TIngredients;
+    | TIngredients
+    | TModal;
