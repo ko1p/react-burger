@@ -313,7 +313,7 @@ export interface IResetUserName {
 
 export interface ISetUserData {
     readonly type: typeof SET_USER_DATA;
-    readonly user: any;
+    readonly user: {email: string, name: string};
 }
 
 export type TProfileActions =

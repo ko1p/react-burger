@@ -69,7 +69,7 @@ export const setRegisterError = (registerError: boolean) => (
     }
 )
 
-export const setUserData = (user: any) => ( // TODO удрать эни
+export const setUserData = (user: {email: string, name: string}) => (
     {
         type: SET_USER_DATA,
         user
