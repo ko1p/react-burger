@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
 import { ingredients } from './ingredients'
 import { modal } from './modal'
 import { order } from './order'

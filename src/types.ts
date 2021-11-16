@@ -45,19 +45,20 @@ export interface IIngredient {
     image_mobile: string,
     image_large: string,
     __v: number,
+    uuid?: string,
 }
 
-export interface IIngredientWithUuid extends IIngredient {
-    uuid: string,
-}
+// export interface IIngredientWithUuid extends IIngredient {
+//     uuid: string,
+// }
 
-export interface IOrderList {
-    id: string,
-    date: string,
-    name: string,
-    ingredients: IIngredientWithUuid[],
-    price: number,
-}
+// export interface IOrderList {
+//     id: string,
+//     date: string,
+//     name: string,
+//     ingredients: IIngredientWithUuid[],
+//     price: number,
+// }
 
 export interface IUserInfo {
     email: string,
@@ -80,7 +81,7 @@ export interface IStore {
         }
     },
     burgerConstructor: {
-        ingredients: IIngredientWithUuid[],
+        ingredients: IIngredient[], //IIngredientWithUuid[]
         bun: IIngredient,
     }
     order: {
@@ -119,7 +120,7 @@ export interface IConstructorItemProps {
     id: string,
     index: number,
     moveCard: (dragIndex: number, hoverIndex: number) => void,
-    card: IIngredientWithUuid
+    card: IIngredient
 }
 
 export interface IIngredientCardProps {
@@ -168,7 +169,7 @@ export type TOrder = {
 
 export interface IAddConstructorIngredient {
     readonly type: typeof ADD_CONSTRUCTOR_INGREDIENT;
-    readonly uuid: string;
+    readonly ingredient: IIngredient
 }
 
 export interface IUpdateIngredients {
@@ -178,7 +179,7 @@ export interface IUpdateIngredients {
 
 export interface IRemoveConstructorIngredient {
     readonly type: typeof REMOVE_CONSTRUCTOR_INGREDIENT;
-    readonly ingredient: IIngredient;
+    readonly ingredients: IIngredient;
 }
 
 export interface ISetConstructorBun {
