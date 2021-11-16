@@ -5,8 +5,7 @@ import {
     SET_MODAL_DATA,
     SET_ORDER_MODAL_OPEN
 } from "../actions/modal";
-import {TModalActions} from "../../types";
-
+import { TModalActions } from "../../types"
 
 type TModalState = {
     isOpen: boolean;
