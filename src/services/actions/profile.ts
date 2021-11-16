@@ -37,6 +37,7 @@ export const fetchRefreshToken = () => {
                 if (res && res.success) {
                     setCookie('accessToken', res.accessToken);
                     setCookie('refreshToken', res.refreshToken);
+                    // @ts-ignore
                     dispatch(fetchUserInfo())
                 } else {
                     throw new Error(`Произошла ошибка`)
@@ -123,7 +124,7 @@ export const setRecoverPassIsSuccess = (isRecoverPassSuccess: boolean) => (
     }
 )
 
-export const setRecoverPassError = (recoverPassError: boolean) => (
+export const setRecoverPassError = (recoverPassError: string) => (
     {
         type: SET_RECOVER_PASS_ERROR,
         recoverPassError

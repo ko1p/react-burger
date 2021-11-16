@@ -14,6 +14,7 @@ import {
 } from "./services/actions/modal";
 import {SET_ORDER_FETCH_ERROR } from "./services/actions/order";
 import {
+    fetchRefreshToken,
     RESET_USER_DATA,
     SET_RECOVER_PASS_ERROR,
     SET_RECOVER_PASS_IS_FETCHING,
@@ -260,7 +261,7 @@ export interface ISetRegisterIsSuccess {
 
 export interface ISetRegisterError {
     readonly type: typeof SET_REGISTER_ERROR;
-    readonly setRegisterError: boolean;
+    readonly registerError: string;
 }
 
 export interface ISetRecoverPassIsFetching {
@@ -275,7 +276,7 @@ export interface ISetRecoverPassIsSuccess {
 
 export interface ISetRecoverPassError {
     readonly type: typeof SET_RECOVER_PASS_ERROR;
-    readonly recoverPassError: boolean;
+    readonly recoverPassError: string;
 }
 
 export interface ISetResetPassIsFetching {
@@ -290,7 +291,7 @@ export interface ISetResetPassIsSuccess {
 
 export interface ISetResetPassError {
     readonly type: typeof SET_RESET_PASS_ERROR;
-    readonly resetPassError: boolean;
+    readonly resetPassError: string;
 }
 
 export interface ISetLoginUserIsFetching {
@@ -305,7 +306,7 @@ export interface ISetLoginUserIsSuccess {
 
 export interface ISetLoginUserError {
     readonly type: typeof SET_USER_LOGIN_ERROR;
-    readonly userLoginError: boolean;
+    readonly userLoginError: string;
 }
 
 export interface IResetUserName {
@@ -314,7 +315,10 @@ export interface IResetUserName {
 
 export interface ISetUserData {
     readonly type: typeof SET_USER_DATA;
-    readonly user: {email: string, name: string};
+    readonly user: {
+        email: string,
+        name: string,
+    };
 }
 
 export type TProfileActions =
