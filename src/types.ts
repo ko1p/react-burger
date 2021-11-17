@@ -1,4 +1,4 @@
-import { ThunkAction } from 'redux-thunk';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
 import { store } from './services/store';
 import {
@@ -14,7 +14,6 @@ import {
 } from "./services/actions/modal";
 import {SET_ORDER_FETCH_ERROR } from "./services/actions/order";
 import {
-    fetchRefreshToken,
     RESET_USER_DATA,
     SET_RECOVER_PASS_ERROR,
     SET_RECOVER_PASS_IS_FETCHING,

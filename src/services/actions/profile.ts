@@ -37,7 +37,6 @@ export const fetchRefreshToken = () => {
                 if (res && res.success) {
                     setCookie('accessToken', res.accessToken);
                     setCookie('refreshToken', res.refreshToken);
-                    // @ts-ignore
                     dispatch(fetchUserInfo())
                 } else {
                     throw new Error(`Произошла ошибка`)
