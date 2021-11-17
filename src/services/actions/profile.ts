@@ -37,7 +37,7 @@ export const fetchRefreshToken = () => {
                 if (res && res.success) {
                     setCookie('accessToken', res.accessToken);
                     setCookie('refreshToken', res.refreshToken);
-                    dispatch(fetchUserInfo())
+                    dispatch<any>(fetchUserInfo())
                 } else {
                     throw new Error(`Произошла ошибка`)
                 }
@@ -103,7 +103,7 @@ export const fetchRegister = (name: string, email: string, password: string) => 
             })
             .catch(e => {
                 dispatch(setRegisterIsSuccess(false))
-                dispatch(setRegisterError(e))
+                dispatch<any>(setRegisterError(e))
                 console.log(e)
             })
     }
@@ -205,7 +205,7 @@ export const fetchResetPass = (password: string, token: string) => {
             })
             .catch(e => {
                 dispatch(setResetPassIsSuccess(false))
-                dispatch(setResetPassError(e))
+                dispatch<any>(setResetPassError(e))
                 console.log(e)
             })
     }
@@ -259,7 +259,7 @@ export const fetchLoginUser = (email: string, password: string) => {
             })
             .catch(e => {
                 dispatch(setLoginUserIsSuccess(false))
-                dispatch(setLoginUserError(e))
+                dispatch<any>(setLoginUserError(e))
                 console.log(e)
             })
     }
@@ -283,7 +283,7 @@ export const fetchUserInfo = () => {
                 console.log(e)
                 if (e.message === 'jwt expired') {
                     console.log('токен просрочился, обновляю')
-                    dispatch(fetchRefreshToken())
+                    dispatch<any>(fetchRefreshToken())
                 } else {
                     return Promise.reject(e);
                 }
