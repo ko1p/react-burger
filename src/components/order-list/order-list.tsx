@@ -1,8 +1,8 @@
-import React from 'react';
-import styles from './order-list.module.css';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import React from 'react'
+import styles from './order-list.module.css'
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { dataOrders } from '../../utils/constants'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 export const OrderList: React.FC = () => {
 

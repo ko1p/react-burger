@@ -1,5 +1,5 @@
 export const URL = 'https://norma.nomoreparties.space/api';
-export const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
+export const wsUrl = 'wss://norma.nomoreparties.space/orders';
 
 export const dataOrders = [
     {

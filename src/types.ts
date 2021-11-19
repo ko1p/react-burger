@@ -65,6 +65,16 @@ export interface IUserInfo {
     name: string,
 }
 
+export interface IOrderInfo {
+    createdAt: string
+    ingredients: string[]
+    name: string
+    number: number
+    status: string
+    updatedAt: string
+    _id: string
+}
+
 export interface IStore {
     ingredients: {
         list: IIngredient[],
@@ -102,6 +112,17 @@ export interface IStore {
         isUserLoginFetching: boolean,
         isUserLoginSuccess: boolean,
         userLoginError: string,
+    },
+    ws: {
+        connectionIsStart: boolean,
+        connectionSuccess: boolean,
+        connectionIsClosed: boolean,
+        connectionError: string,
+        ordersInfo: {
+            total: number,
+            totalToday: number,
+            orders: IOrderInfo[]
+        }
     }
 }
 
