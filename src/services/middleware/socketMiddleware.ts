@@ -1,6 +1,6 @@
-// import { wsUrl  } from '../../utils/constants';
-import type { Middleware, MiddlewareAPI } from 'redux';
-import type { AppDispatch, RootState } from './index';
+import { getCookie } from "../../utils/cookie"
+import type { Middleware, MiddlewareAPI } from 'redux'
+import type { AppDispatch, RootState } from './index'
 
 import {
     WS_CONNECTION_START,
@@ -19,15 +19,21 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
         return next => (action) => {
             const { dispatch } = store;
             const { type, payload } = action;
+            const accessToken: string | undefined = getCookie('accessToken');
+            const token = accessToken && accessToken.split(" ")[1];
+            console.log(token, token)
+
             if (type === WS_CONNECTION_START) {
-                socket = new WebSocket(wsUrl);
-                // socket = new WebSocket(payload);
+                socket = new WebSocket(`${wsUrl}/all`);
+                // socket = new WebSocket(`${wsUrl}?token=${token}`);
             }
             if (socket) {
                 socket.onopen = (event) => {
+                    console.log(event, 'onOpen event')
                     dispatch({ type: WS_CONNECTION_SUCCESS, payload: event });
                 };
                 socket.onerror = (event) => {
+                    console.log(event, 'onError event')
                     dispatch({ type: WS_CONNECTION_ERROR, payload: event });
                 };
                 socket.onmessage = (event) => {

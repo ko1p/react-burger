@@ -1,9 +1,16 @@
-import React from 'react';
-import styles from './feed.module.css';
-import { OrderList } from '../../components/order-list/order-list';
-import { OrderStat } from '../../components/order-stat/order-stat';
+import React, {useEffect} from 'react'
+import { useDispatch } from "react-redux"
+import styles from './feed.module.css'
+import { OrderList } from '../../components/order-list/order-list'
+import { OrderStat } from '../../components/order-stat/order-stat'
+import { WS_CONNECTION_START } from "../../services/reducers/ws"
 
 export const Feed: React.FC = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch({type: WS_CONNECTION_START})
+    }, [dispatch])
 
     return (
         <div className={`${styles.container} mt-10`}>
