@@ -1,5 +1,5 @@
 .container {
-    max-width: 580px;
+    max-width: 640px;
     display: flex;
     flex-direction: column;
 }
@@ -9,7 +9,7 @@
 }
 
 .work {
-    width: 272px;
+    width: 320px;
     display: flex;
     flex-direction: column;
 }
@@ -19,6 +19,9 @@
     flex-direction: column;
     padding: 0;
     list-style-type: none;
+    width: 320px;
+    height: 242px;
+    flex-wrap: wrap;
 }
 
 .info {
@@ -27,7 +30,9 @@
 }
 
 .text {
+    display: flex;
     color: #00CCCC;
+    margin: 0 6px 0 0;
 }
 
 .number {

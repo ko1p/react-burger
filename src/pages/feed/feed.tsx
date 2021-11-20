@@ -24,3 +24,4 @@ export const Feed: React.FC = () => {
         </div>
     );
 }
+// TODO: перевести OrderStat на WS
