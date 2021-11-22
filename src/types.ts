@@ -27,7 +27,6 @@ import {
     SET_USER_LOGIN_IS_FETCHING, SET_USER_LOGIN_IS_SUCCESS,
 } from "./services/actions/profile";
 
-
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<ReturnType, Action, RootState, TApplicationActions>>;
@@ -130,7 +129,8 @@ export interface ILocation {
     from: {
         pathname: string;
     },
-    ingredientModal: any
+    ingredientModal: any,
+    orderModal: any,
 }
 
 export interface IModalProps {
