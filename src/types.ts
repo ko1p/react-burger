@@ -33,7 +33,6 @@ import {
     WS_CONNECTION_SUCCESS, WS_GET_MESSAGE
 } from "./services/actions/ws";
 
-
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<ReturnType, Action, RootState, TApplicationActions>>;
@@ -136,7 +135,8 @@ export interface ILocation {
     from: {
         pathname: string;
     },
-    ingredientModal: any
+    ingredientModal: any,
+    orderModal: any,
 }
 
 export interface IModalProps {

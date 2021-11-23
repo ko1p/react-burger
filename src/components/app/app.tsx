@@ -31,6 +31,7 @@ export const App: FC = () => {
 
     const action = history.action ==='PUSH' || history.action ==='REPLACE';
     const isModalIngredientOpen = action && location.state && location.state.ingredientModal;
+    const isModalOrderOpen = action && location.state && location.state.orderModal;
 
     const closeModal = () => {
         history.goBack();
@@ -44,7 +45,7 @@ export const App: FC = () => {
     return (
         <>
                 <AppHeader/>
-                <Switch location={isModalIngredientOpen || location}>
+                <Switch location={isModalIngredientOpen || isModalOrderOpen || location}>
                     <Route path='/' exact>
                         { data ? <BurgerMaker/> : <Loader /> }
                     </Route>
@@ -91,6 +92,15 @@ export const App: FC = () => {
                         </Route>
                     )
                 }
+            {
+                isModalOrderOpen && (
+                    <Route path='/feed/:id' exact>
+                        <Modal closeModal={closeModal}>
+                            <OrderDetails />
+                        </Modal>
+                    </Route>
+                )
+            }
         </>
     );
 }

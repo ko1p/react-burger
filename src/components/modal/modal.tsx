@@ -25,3 +25,5 @@ export const Modal: FC<IModalProps> = ({ closeModal, children }) => {
         document.getElementById("modal") as HTMLElement
     )
 }
+
+// TODO: переделать вёрстку модалок
