@@ -5,8 +5,28 @@ import {
     SET_REGISTER_IS_SUCCESS, SET_RESET_PASS_ERROR, SET_RESET_PASS_IS_FETCHING, SET_RESET_PASS_IS_SUCCESS,
     SET_USER_DATA, SET_USER_LOGIN_ERROR, SET_USER_LOGIN_IS_FETCHING, SET_USER_LOGIN_IS_SUCCESS
 } from "../actions/profile";
+import { TProfileActions } from "../../types";
 
-const initialStateProfile = {
+type TProfileState = {
+    user: {
+        name: string,
+        email: string,
+    },
+    isRegisterFetching: boolean,
+    isRegisterSuccess: boolean,
+    registerError: string,
+    isRecoverPassFetching: boolean,
+    isRecoverPassSuccess: boolean,
+    recoverPassError: string,
+    isResetPassFetching: boolean,
+    isResetPassSuccess: boolean,
+    resetPassError: string,
+    isUserLoginFetching: boolean,
+    isUserLoginSuccess: boolean,
+    userLoginError: string,
+}
+
+const initialStateProfile: TProfileState = {
     user: {
         name: '',
         email: '',
@@ -25,7 +45,7 @@ const initialStateProfile = {
     userLoginError: ''
 };
 
-export const profile = (state = initialStateProfile, action) => {
+export const profile = (state = initialStateProfile, action: TProfileActions): TProfileState => {
     switch (action.type) {
         case SET_REGISTER_IS_FETCHING: {
             return {
@@ -46,6 +66,7 @@ export const profile = (state = initialStateProfile, action) => {
             }
         }
         case SET_USER_DATA: {
+            console.log(action.user, 'user')
             return {
                 ...state,
                 user: action.user
@@ -78,7 +99,7 @@ export const profile = (state = initialStateProfile, action) => {
         case SET_RESET_PASS_IS_FETCHING: {
             return {
                 ...state,
-                isResetPassFetching: action.isRecoverPassFetching
+                isResetPassFetching: action.isResetPassFetching
             }
         }
         case SET_RESET_PASS_IS_SUCCESS: {

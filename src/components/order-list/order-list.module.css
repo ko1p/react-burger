@@ -1,0 +1,100 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 8px;
+    margin-left: 8px;
+}
+.scroll::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+.scroll::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
+
+.cards {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    padding: 0;
+    margin-top: 0;
+}
+
+.card {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background-color: #1C1C21;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    text-decoration: none;
+    color: #F2F2F3;
+    list-style: none;
+}
+
+.info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.order {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.images {
+    display: flex;
+    padding: 0;
+}
+
+.radius {
+    width: 64px;
+    height: 64px;
+    background-color: #131316;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    border: solid 2px transparent;
+    background-image: linear-gradient(#131316, #131316), radial-gradient(circle at bottom left, #801AB2,#4C4CFF);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    margin-right: -16px;
+    position: relative;
+}
+
+.blackout:nth-child(6)::before {
+    content: '';
+    background: #2A2C2F;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+}
+
+.image {
+    height: 100%;
+}
+
+.number {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+}

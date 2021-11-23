@@ -5,8 +5,18 @@ import {
     SET_MODAL_DATA,
     SET_ORDER_MODAL_OPEN
 } from "../actions/modal";
+import { TModalActions } from "../../types"
 
-const initialStateModal = {
+type TModalState = {
+    isOpen: boolean;
+    type: {
+        ingredients: boolean;
+        order: boolean;
+    },
+    data: any
+}
+
+const initialStateModal: TModalState = {
     isOpen: false,
     type: {
         ingredients: false,
@@ -15,7 +25,7 @@ const initialStateModal = {
     data: {}
 };
 
-export const modal = (state = initialStateModal, action) => {
+export const modal = (state = initialStateModal, action: TModalActions): TModalState => {
     switch (action.type) {
         case SET_INGREDIENTS_MODAL_OPEN: {
             return {

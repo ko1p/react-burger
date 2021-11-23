@@ -1,9 +1,10 @@
 import { URL } from "../../utils/constants";
+import { IIngredient, AppDispatch } from '../../types'
 
-export const SET_INGREDIENTS_SUCCESS = 'SET_INGREDIENTS_SUCCESS';
-export const SET_INGREDIENTS_ERROR = 'SET_INGREDIENTS_ERROR';
+export const SET_INGREDIENTS_SUCCESS: 'SET_INGREDIENTS_SUCCESS' = 'SET_INGREDIENTS_SUCCESS';
+export const SET_INGREDIENTS_ERROR: 'SET_INGREDIENTS_ERROR' = 'SET_INGREDIENTS_ERROR';
 
-const successFetchIngredients = ingredients => (
+const successFetchIngredients = (ingredients: IIngredient[]) => (
     {
         type: SET_INGREDIENTS_SUCCESS,
         ingredients
@@ -17,11 +18,11 @@ const failedFetchIngredients = () => (
 )
 
 export const fetchIngredients = () => {
-    return dispatch => {
+    return (dispatch: AppDispatch) => {
         fetch(`${URL}/ingredients`)
             .then(res => {
-                if (res.status !== 200) {
-                    throw new Error(res.status)
+                if (res.status !== 200 ) {
+                    throw new Error(`${res.status}`)
                 }
                 return res.json()
             })

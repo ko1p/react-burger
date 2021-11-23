@@ -3,13 +3,19 @@ import {
     REMOVE_CONSTRUCTOR_INGREDIENT,
     SET_CONSTRUCTOR_BUN, UPDATE_INGREDIENTS
 } from "../actions/burgerConstructor";
+import {IIngredient, TBurgerConstructorActions} from "../../types";
 
-const initialStateConstructor = {
+type TBurgerConstructorState = {
+    bun: IIngredient | {};
+    ingredients: IIngredient[];
+}
+
+const initialStateConstructor: TBurgerConstructorState = {
     bun: {},
     ingredients: [],
 };
 
-export const burgerConstructor = (state = initialStateConstructor, action) => {
+export const burgerConstructor = (state = initialStateConstructor, action: TBurgerConstructorActions): TBurgerConstructorState => {
     switch (action.type) {
         case ADD_CONSTRUCTOR_INGREDIENT: {
             return {
@@ -24,7 +30,7 @@ export const burgerConstructor = (state = initialStateConstructor, action) => {
             return {
                 ...state,
                 ingredients: [
-                    ...state.ingredients.filter(ingredient => ingredient.uuid !== action.ingredient.uuid)
+                    ...state.ingredients.filter(ingredient => ingredient.uuid !== action.ingredients.uuid)
                 ]
             }
         }

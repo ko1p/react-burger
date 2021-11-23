@@ -8,8 +8,6 @@ export const RouteProtectedAuthorized: FC<IRouteProps> = ({ children, ...rest })
     const name = useSelector((store: IStore) => store.profile.user.name);
     const cookie = getCookie('accessToken')
 
-    console.log(!!cookie, getCookie('accessToken'), 'cookie', !!name, 'name')
-
     return (
         <Route
             {...rest}

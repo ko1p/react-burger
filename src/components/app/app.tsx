@@ -10,11 +10,13 @@ import { Login } from "../../pages/login/login";
 import { ForgotPassword } from "../../pages/forgot-password/forgot-password";
 import { ResetPassword } from "../../pages/reset-password/reset-password";
 import { Profile } from "../../pages/profile/profile";
+import { Feed } from "../../pages/feed/feed";
 import { RouteProtectedUnauthorized } from "../route-protected-unauthorized/route-protected-unauthorized";
 import { RouteProtectedReset } from "../route-protected-reset/route-protected-reset";
 import { RouteProtectedAuthorized } from "../route-protected-authorized/route-protected-authorized";
 import { ProfileOrders } from "../../pages/profile-orders/profile-orders";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { OrderDetails } from "../order-details/order-details";
 import { Modal } from "../modal/modal";
 import { Ingredient } from "../../pages/ingredient/ingredient";
 import { fetchUserInfo } from "../../services/actions/profile";
@@ -29,7 +31,8 @@ export const App: FC = () => {
 
     const action = history.action ==='PUSH' || history.action ==='REPLACE';
     const isModalIngredientOpen = action && location.state && location.state.ingredientModal;
-    console.log(location.state, `location`)
+    const isModalOrderOpen = action && location.state && location.state.orderModal;
+
     const closeModal = () => {
         history.goBack();
     }
@@ -42,7 +45,7 @@ export const App: FC = () => {
     return (
         <>
                 <AppHeader/>
-                <Switch location={isModalIngredientOpen || location}>
+                <Switch location={isModalIngredientOpen || isModalOrderOpen || location}>
                     <Route path='/' exact>
                         { data ? <BurgerMaker/> : <Loader /> }
                     </Route>
@@ -65,17 +68,17 @@ export const App: FC = () => {
                         <ProfileOrders />
                     </RouteProtectedAuthorized>
                     <RouteProtectedAuthorized path='/profile/orders/:order' exact>
-                        {/*<Order />*/}
+                        <OrderDetails />
                     </RouteProtectedAuthorized>
                     <Route path='/ingredients/:id' exact>
                         <Ingredient />
                     </Route>
-                    <Route path='/feed' exact>
-                        <p>Здесь будет страница с фидами</p>
-                    </Route>
-                    <Route path='/feed/:id' exact>
-                        <p>Здесь будет страница фида</p>
-                    </Route>
+                    <RouteProtectedAuthorized path='/feed' exact>
+                        <Feed />
+                    </RouteProtectedAuthorized>
+                    <RouteProtectedAuthorized path='/feed/:id' exact>
+                        <OrderDetails />
+                    </RouteProtectedAuthorized>
                     <Route path='*'>
                         <PageNotFound />
                     </Route>
@@ -89,6 +92,15 @@ export const App: FC = () => {
                         </Route>
                     )
                 }
+            {
+                isModalOrderOpen && (
+                    <Route path='/feed/:id' exact>
+                        <Modal closeModal={closeModal}>
+                            <OrderDetails />
+                        </Modal>
+                    </Route>
+                )
+            }
         </>
     );
 }

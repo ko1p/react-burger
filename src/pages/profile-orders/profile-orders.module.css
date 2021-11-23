@@ -1,5 +1,5 @@
 .container {
-    width: 885px;
+    width: 1240px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -7,4 +7,23 @@
 
 .box {
     display: flex;
+}
+
+
+.orders {
+    width: 100%;
+    margin-top: 40px;
+    overflow-y: auto;
+    height: 86vh;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 8px;
+    margin-left: 8px;
+}
+.scroll::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+.scroll::-webkit-scrollbar-thumb {
+    background: #8585AD;
 }
