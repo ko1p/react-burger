@@ -26,6 +26,12 @@ import {
     SET_RESET_PASS_IS_SUCCESS, SET_USER_DATA, SET_USER_LOGIN_ERROR,
     SET_USER_LOGIN_IS_FETCHING, SET_USER_LOGIN_IS_SUCCESS,
 } from "./services/actions/profile";
+import {
+    WS_CONNECTION_CLOSED,
+    WS_CONNECTION_ERROR,
+    WS_CONNECTION_START,
+    WS_CONNECTION_SUCCESS, WS_GET_MESSAGE
+} from "./services/actions/ws";
 
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -114,14 +120,14 @@ export interface IStore {
         userLoginError: string,
     },
     ws: {
-        connectionIsStart: boolean,
-        connectionSuccess: boolean,
-        connectionIsClosed: boolean,
-        connectionError: string,
+        connectionIsStart: Event | boolean,
+        connectionSuccess: Event | boolean,
+        connectionIsClosed: CloseEvent | boolean,
+        connectionError: Event | string,
         ordersInfo: {
-            total: number,
-            totalToday: number,
-            orders: IOrderInfo[]
+            total?: number,
+            totalToday?: number,
+            orders?: IOrderInfo[]
         }
     }
 }
@@ -356,6 +362,43 @@ export type TProfileActions =
     | ISetLoginUserError
     | IResetUserName
     | ISetUserData
+    ;
+
+export interface ISocketConnectionStart {
+    readonly type: typeof WS_CONNECTION_START;
+}
+
+export interface ISocketConnectionSuccess {
+    readonly type: typeof WS_CONNECTION_SUCCESS;
+    readonly payload: Event
+}
+
+export interface ISocketConnectionError {
+    readonly type: typeof WS_CONNECTION_ERROR;
+    readonly payload: Event
+}
+
+export interface ISocketConnectionClosed {
+    readonly type: typeof WS_CONNECTION_CLOSED;
+    readonly payload: CloseEvent
+}
+
+export interface ISocketConnectionClosed {
+    readonly type: typeof WS_CONNECTION_CLOSED;
+    readonly payload: CloseEvent
+}
+
+export interface ISocketGetMessage {
+    readonly type: typeof WS_GET_MESSAGE;
+    readonly payload: any
+}
+
+export type TWSActions =
+    | ISocketConnectionStart
+    | ISocketConnectionSuccess
+    | ISocketConnectionError
+    | ISocketConnectionClosed
+    | ISocketGetMessage
     ;
 
 
