@@ -21,7 +21,6 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
             const { type, payload } = action;
             const accessToken: string | undefined = getCookie('accessToken');
             const token = accessToken && accessToken.split(" ")[1];
-            console.log(token, token)
 
             if (type === WS_CONNECTION_START) {
                 socket = new WebSocket(`${wsUrl}/all`);

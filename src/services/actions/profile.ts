@@ -274,18 +274,25 @@ export const fetchUserInfo = () => {
                 Authorization: `${getCookie('accessToken')}`
             },
         })
-            .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
+            // .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    throw new Error(`Произошла ошибка авторизации`)
+                }
+            })
             .then(res => {
                 console.log('токен ещё свежий')
                 dispatch(setUserData(res.user))
             })
             .catch(e => {
-                console.log(e)
                 if (e.message === 'jwt expired') {
                     console.log('токен просрочился, обновляю')
                     dispatch<any>(fetchRefreshToken())
                 } else {
-                    return Promise.reject(e);
+                    console.log(e)
+                    // return Promise.reject(e);
                 }
             })
     }

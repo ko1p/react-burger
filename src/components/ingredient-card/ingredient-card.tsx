@@ -25,7 +25,7 @@ export const IngredientCard: FC<IIngredientCardProps> = ({ card }) => {
         return count;
     }
 
-    return <li className={`${styles.item}`}  ref={dragRef}
+    return <li className={`${styles.item}`}  ref={dragRef} data-id={card._id}
                style={{opacity: `${opacity}`}}>
         {counter() > 0 && <Counter count={counter()} size="default"/>}
         <img className="pl-4 pr-4" src={card.image}

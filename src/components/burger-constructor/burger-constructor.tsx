@@ -75,8 +75,8 @@ export const BurgerConstructor: FC = () => {
     }, [ingredients, dispatch]);
 
     return (
-        <div ref={dropTarget} className={`${styles.box} mt-25`}>
-            <div className="ml-10 pl-9">
+        <div ref={dropTarget} className={`${styles.box} mt-25`} data-ref='dnd-container'>
+            <div className="ml-10 pl-9" data-ref='bun-container-1'>
                 {bun._id &&
                 <ConstructorElement
                     type="top"
@@ -88,7 +88,7 @@ export const BurgerConstructor: FC = () => {
             </div>
 
             {ingredients.length >= 1 ?
-                <ul className={`${styles.container} ${styles.scroll} mt-4 mb-4`}>
+                <ul className={`${styles.container} ${styles.scroll} mt-4 mb-4`} data-ref='ing-container'>
                     {ingredients.map((card, index) =>{
                         return <ConstructorItem
                             moveCard={moveCard}
@@ -104,7 +104,7 @@ export const BurgerConstructor: FC = () => {
              </p>
             }
 
-            <div className="ml-10 pl-9">
+            <div className="ml-10 pl-9" data-ref='bun-container-2'>
                 {bun._id && <ConstructorElement
                     type="bottom"
                     isLocked={true}
