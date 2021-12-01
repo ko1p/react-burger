@@ -25,5 +25,16 @@ describe('Tests for burger-maker pages:', function () {
             .should($children => {
                 expect($children).to.have.length(1)
             })
+        cy.contains('Оформить заказ').click();
+    })
+    it('should be login', function () {
+        cy.contains('E-mail').click().type('ex@example.com');
+        cy.contains('Пароль').click().type('123456789');
+        cy.contains('Войти').click();
+    })
+    it('should be order', function () {
+        cy.contains('Оформить заказ').click();
+        cy.wait(4000);
+        cy.get('#close-button').click();
     })
 })

@@ -16,8 +16,8 @@ export const Modal: FC<IModalProps> = ({ closeModal, children }) => {
         <>
             <ModalOverlay closeModal={closeModal} />
             <section className={styles.modal}>
-                <div className={styles.icon} onClick={closeModal}>
-                    <CloseIcon type="primary" />
+                <div className={styles.icon} onClick={closeModal} id='close-button'>
+                    <CloseIcon type="primary"/>
                 </div>
                 {children}
             </section>
