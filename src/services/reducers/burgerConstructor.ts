@@ -5,12 +5,12 @@ import {
 } from "../actions/burgerConstructor";
 import {IIngredient, TBurgerConstructorActions} from "../../types";
 
-type TBurgerConstructorState = {
+export type TBurgerConstructorState = {
     bun: IIngredient | {};
     ingredients: IIngredient[];
 }
 
-const initialStateConstructor: TBurgerConstructorState = {
+export const initialStateConstructor: TBurgerConstructorState = {
     bun: {},
     ingredients: [],
 };
