@@ -274,7 +274,6 @@ export const fetchUserInfo = () => {
                 Authorization: `${getCookie('accessToken')}`
             },
         })
-            // .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
             .then(res => {
                 if (res.ok) {
                     return res.json()

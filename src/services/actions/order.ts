@@ -11,14 +11,6 @@ export const setOrderFetchError = (hasError: boolean) => (
     }
 )
 
-// export const setOrderInfo = info => {
-//     console.log(info)
-//     return {
-//         type: SET_ORDER_INFO,
-//         info
-//     }
-// }
-
 export const fetchOrderData = (url: string, orderIds: string[]) => {
     return (dispatch: AppDispatch) => {
         fetch(`${url}/orders`, {
