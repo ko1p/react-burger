@@ -1,7 +1,5 @@
 import * as types from "../actions/burgerConstructor"
-import { burgerConstructor } from "./burgerConstructor"
-import { v4 as uuidv4 } from 'uuid'
-import {ADD_CONSTRUCTOR_INGREDIENT, REMOVE_CONSTRUCTOR_INGREDIENT} from "../actions/burgerConstructor";
+import { burgerConstructor, initialStateConstructor } from "./burgerConstructor"
 
 describe('constructor reducer', () => {
     const ingOne = {
@@ -33,12 +31,8 @@ describe('constructor reducer', () => {
         image_large: "https://code.s3.yandex.net/react/code/sauce-04-large.png",
         __v: 0,
         uuid: '80316158-2406-425e-9f86-c4a52c4a16eb'
-    }
-
-    const initialStateConstructor = {
-        ingredients: [],
-        bun: {}
     };
+
     const initialStateConstructorDel = {
         ingredients: [ingOne, ingTwo],
         bun: {}
