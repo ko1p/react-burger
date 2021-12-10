@@ -1,8 +1,7 @@
 import { setModalData } from "./modal"
 import { AppDispatch } from "../../types"
 
-// export const SET_ORDER_INFO: 'SET_ORDER_INFO' = 'SET_ORDER_INFO';
-export const SET_ORDER_FETCH_ERROR: 'SET_ORDER_FETCH_ERROR' = 'SET_ORDER_FETCH_ERROR';
+export const SET_ORDER_FETCH_ERROR: 'SET_ORDER_FETCH_ERROR' = 'SET_ORDER_FETCH_ERROR'
 
 export const setOrderFetchError = (hasError: boolean) => (
     {

@@ -6,7 +6,7 @@ type TOrderState = {
     hasError: boolean;
 }
 
-const initialStateOrder = {
+export const initialStateOrder = {
     isRequesting: false,
     hasError: false
 };
