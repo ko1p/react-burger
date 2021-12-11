@@ -26,7 +26,7 @@ type TProfileState = {
     userLoginError: string,
 }
 
-const initialStateProfile: TProfileState = {
+export const initialStateProfile: TProfileState = {
     user: {
         name: '',
         email: '',

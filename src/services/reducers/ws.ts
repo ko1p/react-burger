@@ -19,7 +19,7 @@ type TWSState = {
     }
 }
 
-const initialStateWS: TWSState = {
+export const initialStateWS: TWSState = {
     connectionIsStart: false,
     connectionSuccess: false,
     connectionIsClosed: false,
