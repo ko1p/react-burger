@@ -66,7 +66,6 @@ export const profile = (state = initialStateProfile, action: TProfileActions): T
             }
         }
         case SET_USER_DATA: {
-            console.log(action.user, 'user')
             return {
                 ...state,
                 user: action.user

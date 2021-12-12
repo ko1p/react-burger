@@ -62,7 +62,7 @@ export const setRegisterIsSuccess = (isRegisterSuccess: boolean) => (
     }
 )
 
-export const setRegisterError = (registerError: boolean) => (
+export const setRegisterError = (registerError: string) => (
     {
         type: SET_REGISTER_ERROR,
         registerError
