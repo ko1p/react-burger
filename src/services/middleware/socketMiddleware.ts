@@ -1,9 +1,10 @@
 import { getCookie } from "../../utils/cookie"
 import type { Middleware, MiddlewareAPI } from 'redux'
-import type { AppDispatch, RootState } from './index'
+import type { AppDispatch, RootState } from '../../types'
 
 import {
-    WS_CONNECTION_START,
+    WS_CONNECTION_ALL_START,
+    WS_CONNECTION_USER_START,
     WS_CONNECTION_SUCCESS,
     WS_CONNECTION_ERROR,
     WS_CONNECTION_CLOSED,
@@ -22,9 +23,11 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
             const accessToken: string | undefined = getCookie('accessToken');
             const token = accessToken && accessToken.split(" ")[1];
 
-            if (type === WS_CONNECTION_START) {
+            if (type === WS_CONNECTION_ALL_START) {
                 socket = new WebSocket(`${wsUrl}/all`);
-                // socket = new WebSocket(`${wsUrl}?token=${token}`);
+            }
+            if (type === WS_CONNECTION_USER_START) {
+                socket = new WebSocket(`${wsUrl}?token=${token}`);
             }
             if (socket) {
                 socket.onopen = (event) => {
