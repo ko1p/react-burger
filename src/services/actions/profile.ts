@@ -278,6 +278,7 @@ export const fetchUserInfo = () => {
                 if (res.ok) {
                     return res.json()
                 } else {
+                    console.log(res)
                     throw new Error(`Произошла ошибка авторизации`)
                 }
             })

@@ -1,5 +1,6 @@
 import { setModalData } from "./modal"
 import { AppDispatch } from "../../types"
+import { getCookie } from "../../utils/cookie"
 
 export const SET_ORDER_FETCH_ERROR: 'SET_ORDER_FETCH_ERROR' = 'SET_ORDER_FETCH_ERROR'
 
@@ -15,7 +16,8 @@ export const fetchOrderData = (url: string, orderIds: string[]) => {
         fetch(`${url}/orders`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': 'application/json;charset=utf-8',
+                "authorization": getCookie('accessToken') || 'null'
             },
             body: JSON.stringify({"ingredients": orderIds})
         })
