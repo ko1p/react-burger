@@ -61,15 +61,10 @@ export const ws = (state = initialStateWS, action: TWSActions): TWSState => {
             }
         }
         // case WS_SEND_MESSAGE: {
-        //     console.log(action.payload)
+        //     console.log(action.payload, 'посылаю данные о заказе')
         //     return {
-        //         ...state
-        //     }
-        // }
-        // case WS_CONNECTION_CLOSE: {
-        //     console.log(action.payload)
-        //     return {
-        //         ...state
+        //         ...state,
+        //         ordersInfo: action.payload
         //     }
         // }
         default:
