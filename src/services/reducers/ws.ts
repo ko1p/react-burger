@@ -29,12 +29,6 @@ export const initialStateWS: TWSState = {
 
 export const ws = (state = initialStateWS, action: TWSActions): TWSState => {
     switch (action.type) {
-        // case WS_CONNECTION_START: {
-        //     return {
-        //         ...state,
-        //         connectionIsStart: action.connectionIsStart
-        //     }
-        // }
         case WS_CONNECTION_SUCCESS: {
             return {
                 ...state,
@@ -60,13 +54,6 @@ export const ws = (state = initialStateWS, action: TWSActions): TWSState => {
                 ordersInfo: action.payload
             }
         }
-        // case WS_SEND_MESSAGE: {
-        //     console.log(action.payload, 'посылаю данные о заказе')
-        //     return {
-        //         ...state,
-        //         ordersInfo: action.payload
-        //     }
-        // }
         default:
             return state
     }

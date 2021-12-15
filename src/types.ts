@@ -1,18 +1,18 @@
-import { store } from "./services/store"
-import { Action, ActionCreator } from "redux"
-import { ThunkAction } from "redux-thunk"
+import {store} from "./services/store"
+import {Action, ActionCreator} from "redux"
+import {ThunkAction} from "redux-thunk"
 import {
     ADD_CONSTRUCTOR_INGREDIENT, REMOVE_CONSTRUCTOR_INGREDIENT, SET_CONSTRUCTOR_BUN,
     UPDATE_INGREDIENTS
 } from "./services/actions/burgerConstructor"
-import { SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS } from "./services/actions/ingredients"
+import {SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS} from "./services/actions/ingredients"
 import {
     RESET_MODAL_DATA,
     SET_INGREDIENTS_MODAL_OPEN,
     SET_MODAL_CLOSE, SET_MODAL_DATA,
     SET_ORDER_MODAL_OPEN
 } from "./services/actions/modal"
-import {SET_ORDER_FETCH_ERROR } from "./services/actions/order"
+import {SET_ORDER_FETCH_ERROR} from "./services/actions/order"
 import {
     RESET_USER_DATA,
     SET_RECOVER_PASS_ERROR,
@@ -55,18 +55,6 @@ export interface IIngredient {
     uuid?: string,
 }
 
-// export interface IIngredientWithUuid extends IIngredient {
-//     uuid: string,
-// }
-
-// export interface IOrderList {
-//     id: string,
-//     date: string,
-//     name: string,
-//     ingredients: IIngredientWithUuid[],
-//     price: number,
-// }
-
 export interface IUserInfo {
     email: string,
     name: string,
@@ -98,7 +86,7 @@ export interface IStore {
         }
     },
     burgerConstructor: {
-        ingredients: IIngredient[], //IIngredientWithUuid[]
+        ingredients: IIngredient[],
         bun: IIngredient,
     }
     order: {
@@ -267,7 +255,7 @@ export type TModalActions =
     | ICloseModal
     | ISetModalData
     | IResetModalData
-;
+    ;
 
 export interface ISetOrderFetchError {
     readonly type: typeof SET_ORDER_FETCH_ERROR;
