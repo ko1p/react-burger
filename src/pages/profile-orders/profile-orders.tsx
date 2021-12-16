@@ -3,7 +3,7 @@ import styles from './profile-orders.module.css'
 import { ProfileNav } from "../../components/profile-nav/profile-nav"
 import { OrderList } from "../../components/order-list/order-list"
 import { useDispatch, useSelector } from "react-redux"
-import { WS_CONNECTION_USER_START } from "../../services/actions/ws"
+import {WS_CONNECTION_CLOSE, WS_CONNECTION_USER_START} from "../../services/actions/ws"
 import { IStore } from "../../types"
 
 export const ProfileOrders: FC = () => {
@@ -12,6 +12,9 @@ export const ProfileOrders: FC = () => {
 
     useEffect(() => {
         dispatch({type: WS_CONNECTION_USER_START})
+        return () => {
+            dispatch({type: WS_CONNECTION_CLOSE})
+        }
     }, [dispatch])
 
 
