@@ -35,8 +35,8 @@ export const fetchRefreshToken = () => {
             })
             .then(res => {
                 if (res && res.success) {
-                    setCookie('accessToken', res.accessToken);
-                    setCookie('refreshToken', res.refreshToken);
+                    setCookie('accessToken', res.accessToken)
+                    setCookie('refreshToken', res.refreshToken)
                     dispatch<any>(fetchUserInfo())
                 } else {
                     throw new Error(`Произошла ошибка`)
@@ -98,8 +98,8 @@ export const fetchRegister = (name: string, email: string, password: string) => 
             .then(res => {
                 console.log(res)
                 dispatch(setUserData(res.user))
-                setCookie('accessToken', res.accessToken);
-                setCookie('refreshToken', res.refreshToken);
+                setCookie('accessToken', res.accessToken)
+                setCookie('refreshToken', res.refreshToken)
             })
             .catch(e => {
                 dispatch(setRegisterIsSuccess(false))
@@ -292,7 +292,6 @@ export const fetchUserInfo = () => {
                     dispatch<any>(fetchRefreshToken())
                 } else {
                     console.log(e)
-                    // return Promise.reject(e);
                 }
             })
     }
@@ -316,8 +315,8 @@ export const fetchLogoutUser = () => {
             .then(res => res.json())
             .then(res => {
                 if (res && res.success) {
-                    setCookie('accessToken', '');
-                    setCookie('refreshToken', '');
+                    setCookie('accessToken', '')
+                    setCookie('refreshToken', '')
                     dispatch(resetUserName())
                 } else {
                     throw new Error(`Произошла ошибка`)
