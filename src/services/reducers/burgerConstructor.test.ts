@@ -67,4 +67,19 @@ describe('constructor reducer', () => {
             },
         )
     });
+    it("should handle RESET_INGREDIENT", () => {
+        expect(
+            burgerConstructor(
+                initialStateConstructorDel,
+                {
+                    type: types.RESET_INGREDIENTS,
+                }
+            )
+        ).toEqual(
+            {
+                bun: {},
+                ingredients: []
+            },
+        )
+    });
 })
