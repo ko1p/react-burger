@@ -1,6 +1,7 @@
 import { setModalData } from "./modal"
 import { AppDispatch } from "../../types"
 import { getCookie } from "../../utils/cookie"
+import { resetConstructor } from "./burgerConstructor"
 
 export const SET_ORDER_FETCH_ERROR: 'SET_ORDER_FETCH_ERROR' = 'SET_ORDER_FETCH_ERROR'
 
@@ -28,6 +29,7 @@ export const fetchOrderData = (url: string, orderIds: string[]) => {
                 return res.json()
             })
             .then(info => {
+                dispatch(resetConstructor())
                 dispatch(setOrderFetchError(false))
                 dispatch(setModalData(info))
             })

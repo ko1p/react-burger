@@ -33,21 +33,24 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
                 socket.onopen = (event) => {
                     console.log(event, 'onOpen event')
                     dispatch({ type: WS_CONNECTION_SUCCESS, payload: event })
-                };
+                }
+
                 socket.onerror = (event) => {
                     console.log(event, 'onError event')
                     dispatch({ type: WS_CONNECTION_ERROR, payload: event })
-                };
+                }
+
                 socket.onmessage = (event) => {
                     const { data } = event
                     const parsedData = JSON.parse(data)
                     console.log(parsedData, 'data from ws')
                     const { success, ...restParsedData } = parsedData
                     dispatch({ type: WS_GET_MESSAGE, payload: restParsedData })
-                };
+                }
+
                 socket.onclose = (event) => {
                     dispatch({ type: WS_CONNECTION_CLOSED, payload: event })
-                };
+                }
 
                 if (type === WS_SEND_MESSAGE) {
                     const message = payload
@@ -59,7 +62,7 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
                 }
             }
             next(action)
-        };
-    };
-};
+        }
+    }
+}
 

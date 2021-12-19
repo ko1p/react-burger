@@ -253,8 +253,8 @@ export const fetchLoginUser = (email: string, password: string) => {
             })
             .then(res => {
                 console.log(res)
-                setCookie('accessToken', res.accessToken);
-                setCookie('refreshToken', res.refreshToken);
+                setCookie('accessToken', res.accessToken)
+                setCookie('refreshToken', res.refreshToken)
                 dispatch(setUserData(res.user))
             })
             .catch(e => {

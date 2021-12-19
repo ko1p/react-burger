@@ -3,7 +3,7 @@ import {Action, ActionCreator} from "redux"
 import {ThunkAction} from "redux-thunk"
 import {
     ADD_CONSTRUCTOR_INGREDIENT, REMOVE_CONSTRUCTOR_INGREDIENT, SET_CONSTRUCTOR_BUN,
-    UPDATE_INGREDIENTS
+    UPDATE_INGREDIENTS, RESET_INGREDIENTS
 } from "./services/actions/burgerConstructor"
 import {SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS} from "./services/actions/ingredients"
 import {
@@ -204,11 +204,16 @@ export interface ISetConstructorBun {
     readonly bun: IIngredient;
 }
 
+export interface IResetConstructor {
+    readonly type: typeof RESET_INGREDIENTS
+}
+
 export type TBurgerConstructorActions =
     | IAddConstructorIngredient
     | IUpdateIngredients
     | IRemoveConstructorIngredient
-    | ISetConstructorBun;
+    | ISetConstructorBun
+    | IResetConstructor;
 
 export interface ISuccessFetchIngredients {
     readonly type: typeof SET_INGREDIENTS_SUCCESS;
