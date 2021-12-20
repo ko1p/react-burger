@@ -1,8 +1,8 @@
-import { URL } from "../../utils/constants";
+import { URL } from "../../utils/constants"
 import { IIngredient, AppDispatch } from '../../types'
 
-export const SET_INGREDIENTS_SUCCESS: 'SET_INGREDIENTS_SUCCESS' = 'SET_INGREDIENTS_SUCCESS';
-export const SET_INGREDIENTS_ERROR: 'SET_INGREDIENTS_ERROR' = 'SET_INGREDIENTS_ERROR';
+export const SET_INGREDIENTS_SUCCESS: 'SET_INGREDIENTS_SUCCESS' = 'SET_INGREDIENTS_SUCCESS'
+export const SET_INGREDIENTS_ERROR: 'SET_INGREDIENTS_ERROR' = 'SET_INGREDIENTS_ERROR'
 
 const successFetchIngredients = (ingredients: IIngredient[]) => (
     {

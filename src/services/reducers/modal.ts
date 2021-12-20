@@ -16,7 +16,7 @@ type TModalState = {
     data: any
 }
 
-const initialStateModal: TModalState = {
+export const initialStateModal: TModalState = {
     isOpen: false,
     type: {
         ingredients: false,
@@ -32,7 +32,6 @@ export const modal = (state = initialStateModal, action: TModalActions): TModalS
                 ...state,
                 isOpen: true,
                 type: {
-                    ...state.type,
                     ingredients: true,
                     order: false
                 }
@@ -43,7 +42,6 @@ export const modal = (state = initialStateModal, action: TModalActions): TModalS
                 ...state,
                 isOpen: true,
                 type: {
-                    ...state.type,
                     ingredients: false,
                     order: true
                 }
@@ -54,7 +52,6 @@ export const modal = (state = initialStateModal, action: TModalActions): TModalS
                 ...state,
                 isOpen: false,
                 type: {
-                    ...state.type,
                     ingredients: false,
                     order: false
                 }

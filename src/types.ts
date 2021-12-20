@@ -1,18 +1,18 @@
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { Action, ActionCreator } from 'redux';
-import { store } from './services/store';
+import {store} from "./services/store"
+import {Action, ActionCreator} from "redux"
+import {ThunkAction} from "redux-thunk"
 import {
     ADD_CONSTRUCTOR_INGREDIENT, REMOVE_CONSTRUCTOR_INGREDIENT, SET_CONSTRUCTOR_BUN,
-    UPDATE_INGREDIENTS
-} from "./services/actions/burgerConstructor";
-import { SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS } from "./services/actions/ingredients";
+    UPDATE_INGREDIENTS, RESET_INGREDIENTS
+} from "./services/actions/burgerConstructor"
+import {SET_INGREDIENTS_ERROR, SET_INGREDIENTS_SUCCESS} from "./services/actions/ingredients"
 import {
     RESET_MODAL_DATA,
     SET_INGREDIENTS_MODAL_OPEN,
     SET_MODAL_CLOSE, SET_MODAL_DATA,
     SET_ORDER_MODAL_OPEN
-} from "./services/actions/modal";
-import {SET_ORDER_FETCH_ERROR } from "./services/actions/order";
+} from "./services/actions/modal"
+import {SET_ORDER_FETCH_ERROR} from "./services/actions/order"
 import {
     RESET_USER_DATA,
     SET_RECOVER_PASS_ERROR,
@@ -25,16 +25,18 @@ import {
     SET_RESET_PASS_IS_FETCHING,
     SET_RESET_PASS_IS_SUCCESS, SET_USER_DATA, SET_USER_LOGIN_ERROR,
     SET_USER_LOGIN_IS_FETCHING, SET_USER_LOGIN_IS_SUCCESS,
-} from "./services/actions/profile";
+} from "./services/actions/profile"
 import {
+    WS_CONNECTION_ALL_START,
+    WS_CONNECTION_USER_START,
     WS_CONNECTION_CLOSED,
     WS_CONNECTION_ERROR,
-    WS_CONNECTION_START,
-    WS_CONNECTION_SUCCESS, WS_GET_MESSAGE
-} from "./services/actions/ws";
+    WS_CONNECTION_SUCCESS,
+    WS_GET_MESSAGE
+} from "./services/actions/ws"
 
-export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<ReturnType, Action, RootState, TApplicationActions>>;
 
 export interface IIngredient {
@@ -52,18 +54,6 @@ export interface IIngredient {
     __v: number,
     uuid?: string,
 }
-
-// export interface IIngredientWithUuid extends IIngredient {
-//     uuid: string,
-// }
-
-// export interface IOrderList {
-//     id: string,
-//     date: string,
-//     name: string,
-//     ingredients: IIngredientWithUuid[],
-//     price: number,
-// }
 
 export interface IUserInfo {
     email: string,
@@ -96,7 +86,7 @@ export interface IStore {
         }
     },
     burgerConstructor: {
-        ingredients: IIngredient[], //IIngredientWithUuid[]
+        ingredients: IIngredient[],
         bun: IIngredient,
     }
     order: {
@@ -214,11 +204,16 @@ export interface ISetConstructorBun {
     readonly bun: IIngredient;
 }
 
+export interface IResetConstructor {
+    readonly type: typeof RESET_INGREDIENTS
+}
+
 export type TBurgerConstructorActions =
     | IAddConstructorIngredient
     | IUpdateIngredients
     | IRemoveConstructorIngredient
-    | ISetConstructorBun;
+    | ISetConstructorBun
+    | IResetConstructor;
 
 export interface ISuccessFetchIngredients {
     readonly type: typeof SET_INGREDIENTS_SUCCESS;
@@ -265,7 +260,7 @@ export type TModalActions =
     | ICloseModal
     | ISetModalData
     | IResetModalData
-;
+    ;
 
 export interface ISetOrderFetchError {
     readonly type: typeof SET_ORDER_FETCH_ERROR;
@@ -364,8 +359,12 @@ export type TProfileActions =
     | ISetUserData
     ;
 
-export interface ISocketConnectionStart {
-    readonly type: typeof WS_CONNECTION_START;
+export interface ISocketConnectionAllStart {
+    readonly type: typeof WS_CONNECTION_ALL_START;
+}
+
+export interface ISocketConnectionUserStart {
+    readonly type: typeof WS_CONNECTION_USER_START;
 }
 
 export interface ISocketConnectionSuccess {
@@ -394,7 +393,8 @@ export interface ISocketGetMessage {
 }
 
 export type TWSActions =
-    | ISocketConnectionStart
+    | ISocketConnectionAllStart
+    | ISocketConnectionUserStart
     | ISocketConnectionSuccess
     | ISocketConnectionError
     | ISocketConnectionClosed

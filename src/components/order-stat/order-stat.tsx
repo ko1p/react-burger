@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './order-stat.module.css'
 import { useSelector } from "react-redux"
-import { IStore } from "../../types";
+import { IStore } from "../../types"
 
 export const OrderStat: React.FC = () => {
 

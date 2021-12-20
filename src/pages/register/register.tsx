@@ -1,17 +1,17 @@
 import React, { FC, SyntheticEvent, useRef, useState } from 'react'
 import { Link  } from 'react-router-dom'
 import styles from './register.module.css'
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
-import { fetchRegister } from "../../services/actions/profile";
+import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useDispatch } from "react-redux"
+import { fetchRegister } from "../../services/actions/profile"
 
 export const Register: FC = () => {
     const dispatch = useDispatch()
     const passwordRef = useRef<HTMLInputElement>(null)
-    const [userName, setUserName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isPassHide, setIsPassHide] = useState(true);
+    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [isPassHide, setIsPassHide] = useState(true)
 
     const passwordHider = () => {
         let input = passwordRef.current

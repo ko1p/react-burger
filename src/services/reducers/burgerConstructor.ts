@@ -1,16 +1,18 @@
 import {
     ADD_CONSTRUCTOR_INGREDIENT,
     REMOVE_CONSTRUCTOR_INGREDIENT,
-    SET_CONSTRUCTOR_BUN, UPDATE_INGREDIENTS
+    SET_CONSTRUCTOR_BUN,
+    UPDATE_INGREDIENTS,
+    RESET_INGREDIENTS
 } from "../actions/burgerConstructor";
 import {IIngredient, TBurgerConstructorActions} from "../../types";
 
-type TBurgerConstructorState = {
+export type TBurgerConstructorState = {
     bun: IIngredient | {};
     ingredients: IIngredient[];
 }
 
-const initialStateConstructor: TBurgerConstructorState = {
+export const initialStateConstructor: TBurgerConstructorState = {
     bun: {},
     ingredients: [],
 };
@@ -40,12 +42,18 @@ export const burgerConstructor = (state = initialStateConstructor, action: TBurg
                 bun: action.bun
             }
         }
-        case UPDATE_INGREDIENTS:
+        case UPDATE_INGREDIENTS: {
             return {
                 ...state,
                 ingredients: action.ingredients
-            };
-
+            }
+        }
+        case RESET_INGREDIENTS: {
+            return {
+                bun: {},
+                ingredients: [],
+            }
+        }
         default:
             return state;
     }

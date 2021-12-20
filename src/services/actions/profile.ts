@@ -35,8 +35,8 @@ export const fetchRefreshToken = () => {
             })
             .then(res => {
                 if (res && res.success) {
-                    setCookie('accessToken', res.accessToken);
-                    setCookie('refreshToken', res.refreshToken);
+                    setCookie('accessToken', res.accessToken)
+                    setCookie('refreshToken', res.refreshToken)
                     dispatch<any>(fetchUserInfo())
                 } else {
                     throw new Error(`Произошла ошибка`)
@@ -62,7 +62,7 @@ export const setRegisterIsSuccess = (isRegisterSuccess: boolean) => (
     }
 )
 
-export const setRegisterError = (registerError: boolean) => (
+export const setRegisterError = (registerError: string) => (
     {
         type: SET_REGISTER_ERROR,
         registerError
@@ -98,8 +98,8 @@ export const fetchRegister = (name: string, email: string, password: string) => 
             .then(res => {
                 console.log(res)
                 dispatch(setUserData(res.user))
-                setCookie('accessToken', res.accessToken);
-                setCookie('refreshToken', res.refreshToken);
+                setCookie('accessToken', res.accessToken)
+                setCookie('refreshToken', res.refreshToken)
             })
             .catch(e => {
                 dispatch(setRegisterIsSuccess(false))
@@ -253,8 +253,8 @@ export const fetchLoginUser = (email: string, password: string) => {
             })
             .then(res => {
                 console.log(res)
-                setCookie('accessToken', res.accessToken);
-                setCookie('refreshToken', res.refreshToken);
+                setCookie('accessToken', res.accessToken)
+                setCookie('refreshToken', res.refreshToken)
                 dispatch(setUserData(res.user))
             })
             .catch(e => {
@@ -274,18 +274,24 @@ export const fetchUserInfo = () => {
                 Authorization: `${getCookie('accessToken')}`
             },
         })
-            .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    console.log(res)
+                    throw new Error(`Произошла ошибка авторизации`)
+                }
+            })
             .then(res => {
                 console.log('токен ещё свежий')
                 dispatch(setUserData(res.user))
             })
             .catch(e => {
-                console.log(e)
                 if (e.message === 'jwt expired') {
                     console.log('токен просрочился, обновляю')
                     dispatch<any>(fetchRefreshToken())
                 } else {
-                    return Promise.reject(e);
+                    console.log(e)
                 }
             })
     }
@@ -309,8 +315,8 @@ export const fetchLogoutUser = () => {
             .then(res => res.json())
             .then(res => {
                 if (res && res.success) {
-                    setCookie('accessToken', '');
-                    setCookie('refreshToken', '');
+                    setCookie('accessToken', '')
+                    setCookie('refreshToken', '')
                     dispatch(resetUserName())
                 } else {
                     throw new Error(`Произошла ошибка`)

@@ -6,17 +6,17 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchRecoverPass } from "../../services/actions/profile"
-import { IStore } from "../../types";
+import { IStore } from "../../types"
 
 export const ForgotPassword: FC = () => {
     const dispatch = useDispatch()
     const isPasswordRecoverySuccessfull = useSelector((store: IStore) => store.profile.isRecoverPassSuccess)
     const history = useHistory()
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('')
 
     useEffect(() => {
         if (isPasswordRecoverySuccessfull) {
-            history.replace('/reset-password');
+            history.replace('/reset-password')
         }
     }, [history, isPasswordRecoverySuccessfull])
 

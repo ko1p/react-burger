@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 import { closeModal, resetModalData } from "../../services/actions/modal"
-import { IStore } from "../../types";
+import { IStore } from "../../types"
 
 export const BurgerMaker: FC = () => {
     const dispatch = useDispatch()

@@ -18,7 +18,7 @@
 }
 
 .cards {
-    width: 100%;
+    width: 95%;
     display: flex;
     gap: 16px;
     flex-direction: column;
