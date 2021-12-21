@@ -1,29 +1,19 @@
-import React, { useEffect, FC } from 'react'
-import ReactDOM from "react-dom"
+import React, { FC, SyntheticEvent } from 'react'
 import styles from './modal.module.css'
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ModalOverlay } from '../modal-overlay/modal-overlay'
-import { IModalProps } from "../../types"
+import { ICloseModalProps } from "../../types"
 
-export const Modal: FC<IModalProps> = ({ closeModal, children }) => {
-    useEffect(() => {
-        document.addEventListener('keydown', closeModal)
-        return () => {
-            document.removeEventListener('keydown', closeModal)
+export const Modal: FC<ICloseModalProps> = ({ closeModal, children }) => {
+
+    const modalCloseHandler = (e: SyntheticEvent) => {
+        e.preventDefault()
+        if (e.target === e.currentTarget) {
+            closeModal()
         }
-    })
-    return ReactDOM.createPortal(
-        <>
-            <ModalOverlay closeModal={closeModal} />
-            <section className={styles.modal}>
-                <div className={styles.icon} onClick={closeModal} id='close-button'>
-                    <CloseIcon type="primary"/>
-                </div>
-                {children}
-            </section>
-        </>,
-        document.getElementById("modal") as HTMLElement
+    }
+
+    return (
+        <div className={styles.overlay} onClick={modalCloseHandler}>
+            { children }
+        </div>
     )
 }
-
-// TODO: переделать вёрстку модалок

@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import styles from './order-info.module.css';
+import React, { FC } from 'react'
+import styles from './order-info.module.css'
 import orderAccepted from '../../images/order-accepted.gif'
-import { useSelector } from "react-redux";
-import { IStore, Info } from "../../types";
+import { useSelector } from "react-redux"
+import { IStore, Info } from "../../types"
 
 export const OrderInfo: FC = () => {
     const info = useSelector<IStore>(store => store.modal.data) as Info
