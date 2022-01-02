@@ -14,6 +14,12 @@
     z-index: 21;
 }
 
+.icon {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
 .shadow {
     text-shadow: 0 0 16px rgba(51, 51, 255, 0.25), 0 0 8px rgba(51, 51, 255, 0.25), 0 4px 32px rgba(51, 51, 255, 0.5);
 }
