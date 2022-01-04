@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 650px;
+    min-width: 650px;
     margin: 0 auto;
     padding: 25px;
 }
@@ -19,7 +19,6 @@
     flex-direction: column;
     overflow-y: auto;
     max-height: 350px;
-    overflow-y: auto;
 }
 
 .scroll::-webkit-scrollbar {

@@ -17,11 +17,12 @@ import { RouteProtectedAuthorized } from "../route-protected-authorized/route-pr
 import { ProfileOrders } from "../../pages/profile-orders/profile-orders";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
-import { Modal } from "../modal/modal";
+// import { Modal } from "../modal/modal";
 import { Ingredient } from "../../pages/ingredient/ingredient";
 import { fetchUserInfo } from "../../services/actions/profile";
 import { fetchIngredients } from "../../services/actions/ingredients";
 import { ILocation, IStore } from "../../types";
+import { ModalOverlay } from "../modal-overlay/modal-overlay";
 
 export const App: FC = () => {
     const dispatch = useDispatch()
@@ -86,18 +87,18 @@ export const App: FC = () => {
                 {
                     isModalIngredientOpen && (
                         <Route path='/ingredients/:id' exact>
-                            <Modal closeModal={closeModal}>
+                            <ModalOverlay closeModal={closeModal}>
                                 <IngredientDetails />
-                            </Modal>
+                            </ModalOverlay>
                         </Route>
                     )
                 }
             {
                 isModalOrderOpen && (
                     <Route path='/feed/:id' exact>
-                        <Modal closeModal={closeModal}>
+                        <ModalOverlay closeModal={closeModal}>
                             <OrderDetails />
-                        </Modal>
+                        </ModalOverlay>
                     </Route>
                 )
             }

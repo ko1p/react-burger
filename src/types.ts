@@ -145,7 +145,7 @@ export interface IIngredientCardProps {
     card: IIngredient
 }
 
-export interface IModalOverlayProps {
+export interface ICloseModalProps {
     closeModal: () => void,
 }
 

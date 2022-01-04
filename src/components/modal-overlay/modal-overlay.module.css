@@ -1,11 +1,22 @@
 .overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+}
+
+.modal {
+    position: relative;
+    display: flex;
+    background-color: #1C1C21;
+    border: 1px solid rgba(76, 76, 255, 0.2);
+    box-sizing: border-box;
+    min-height: 450px;
+    box-shadow: 0 24px 32px rgba(0, 0, 0, 0.04), 0 16px 24px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    z-index: 21;
+}
+
+.icon {
     z-index: 1;
-    background-color: #000;
-    opacity: .6;
-    z-index: 20;
+    position: absolute;
+    right: 35px;
+    top: 35px;
 }
