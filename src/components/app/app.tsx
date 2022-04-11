@@ -17,7 +17,6 @@ import { RouteProtectedAuthorized } from "../route-protected-authorized/route-pr
 import { ProfileOrders } from "../../pages/profile-orders/profile-orders";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
-// import { Modal } from "../modal/modal";
 import { Ingredient } from "../../pages/ingredient/ingredient";
 import { fetchUserInfo } from "../../services/actions/profile";
 import { fetchIngredients } from "../../services/actions/ingredients";
